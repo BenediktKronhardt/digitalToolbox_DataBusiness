@@ -229,7 +229,7 @@ plot(pressure, type = 'b', pch = 19)
 
 \linespread{1}\begin{figure}
 
-{\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BorgeMeyer_files/figure-latex/nice-fig-1} 
+{\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/nice-fig-1} 
 
 }
 
@@ -587,11 +587,11 @@ datasummary_skim(df1, output = 'kableExtra', booktabs = TRUE,
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BorgeMeyer/group1_BenediktKronhardt_BorgeMeyer_files/figure-latex/hist_542c2df2a08.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BorgeMeyer/group1_BenediktKronhardt_BorgeMeyer_files/figure-latex/hist_542c638bd3b.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BorgeMeyer/group1_BenediktKronhardt_BorgeMeyer_files/figure-latex/hist_542c5afc1934.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BorgeMeyer/group1_BenediktKronhardt_BorgeMeyer_files/figure-latex/hist_542c7893135.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BorgeMeyer/group1_BenediktKronhardt_BorgeMeyer_files/figure-latex/hist_542c5a16dd3.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5786b6257ec.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5782eef69d.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_57839da3a86.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5786388170a.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5784daf25c7.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -752,16 +752,16 @@ test1
 #> 	Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -3.3958, df = 98, p-value = 0.0009897
+#> t = -4.0128, df = 98, p-value = 0.0001174
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -5.811927 -1.524531
+#>  -6.470517 -2.188397
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>              50.24124              53.90946
+#>              49.94616              54.27562
 ```
 
-This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-3.67$ between class A ($M = 50.24$, $SD = 5.67$) and class B ($M = 53.91$, $SD = 5.11$) in this case, $t(98)~=~-3.396,~p~=~0.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
+This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-4.33$ between class A ($M = 49.95$, $SD = 4.65$) and class B ($M = 54.28$, $SD = 6.05$) in this case, $t(98)~=~-4.013,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
 
 
 ### $\chi^2$-test
@@ -1479,7 +1479,7 @@ plot(eff1) + labs(x = "Passenger Class", y = "Probability of Survival",
 
 \linespread{1}\begin{figure}[H]
 
-{\centering \includegraphics{group1_BenediktKronhardt_BorgeMeyer_files/figure-latex/pclass-ggeffects-1} 
+{\centering \includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/pclass-ggeffects-1} 
 
 }
 
@@ -1502,7 +1502,7 @@ plot(eff2) + labs(x = "Age", y = "Probability of Survival",
 
 \linespread{1}\begin{figure}[H]
 
-{\centering \includegraphics{group1_BenediktKronhardt_BorgeMeyer_files/figure-latex/sex-age-ggeffects-1} 
+{\centering \includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/sex-age-ggeffects-1} 
 
 }
 
@@ -1549,7 +1549,7 @@ m1_year_plot + m1_cyl_plot + m1_displ_plot + m1_year_cyl_plot +
 
 \linespread{1}\begin{figure}[H]
 
-{\centering \includegraphics{group1_BenediktKronhardt_BorgeMeyer_files/figure-latex/patchwork-plot-1} 
+{\centering \includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/patchwork-plot-1} 
 
 }
 
@@ -1561,4 +1561,43 @@ m1_year_plot + m1_cyl_plot + m1_displ_plot + m1_year_cyl_plot +
 
 
 <!--chapter:end:09-appendix.Rmd-->
+
+
+# Data-set
+\linespread{1}
+
+```r
+library(tidyverse) # This includes readr!
+library(xtable) # For displaying LaTeX tables
+library(modelsummary) # For displaying regression models in tables
+library(stargazer) # For displaying regression models in tables
+library(jtools) # For displaying regression models in tables
+library(kableExtra) # For displaying or changing tables
+library(gt) # For displaying tables
+library(gtsummary) # For model reporting inline and in tables
+library(broom) # For working with statistical models
+library(car) # For type-III anova tests
+library(report) # For automated text-based model reporting
+library(effects) # For working with statistical models / visualize effects
+library(ggeffects) # For working with statistical models / visualize effects
+library(patchwork) # For putting different visualizations in one figure
+
+dataset <- read_csv("02-data/cost-of-living-2017.csv", lazy= FALSE)
+```
+
+
+
+\linespread{1}
+
+```
+#> Rows: 511 Columns: 1
+#> -- Column specification ------------------
+#> Delimiter: ","
+#> chr (1): City	State	Country	Cost of Living Plus Rent Ind...
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+<!--chapter:end:10-dataSet.Rmd-->
 
