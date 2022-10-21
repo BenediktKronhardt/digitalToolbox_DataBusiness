@@ -1,4 +1,4 @@
-book_filename: "group1_BenediktKronhardt_BorgeMeyer"
+book_filename: "group1_BenediktKronhardt_BoergeMeyer"
 
 new_session: false
 before_chapter_script: _common.R
