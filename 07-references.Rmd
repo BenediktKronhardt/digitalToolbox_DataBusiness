@@ -1,0 +1,15 @@
+<!-- For documentclass "article": Remove this pagebreak -->
+<!-- command if you don't want the list of references to -->
+<!-- start on a new page! -->
+<!-- For documentclass "book" it should have no effect! -->
+<!-- Change title of this "chapter" according to the language you are using! -->
+
+\pagebreak
+
+<!-- Use the appropriate language for the reference heading: -->
+# References {-}
+<!-- # Literaturverzeichnis {-} -->
+
+<div id="refs"></div>
+\newpage
+

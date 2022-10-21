@@ -1,0 +1,179 @@
+--- 
+title: |
+  Digital Tool Box -- Project Report
+subtitle: | 
+  Project work as part of the Bachelor of Science (B.Sc.) in  
+  Media Management & Communication and Business Informatics
+author: 
+  - Tania Testperson (XXXX)
+  - Max Mustermann (XXXX)
+# If you don't need the abstract, just comment it out here completely. If you want to 
+# use it, just overwrite it:
+abstract: |
+  The present specialized bookdown project template you are using now is intended as the basis for a report or thesis at the Hamburg School of Business Administration (HSBA). Compared to the original project template coming with the bookdown package, it generates PDF output only, using a slightly customized LaTeX template based on the original Pandoc-template, which is adapted to the requirements of the HSBA for theses and reports. The main notable differences are an appropriate title page, an automatic word count function, a list of acronyms, an adapted page numbering, the use of the appropriate Chicago Manual of Style citation style (17th edition, CSL-based) and an additional chapter with a basic declaration of honor at the end. In addition, several additional folders are used to demonstrate a basic project structure, as well as a slightly modified file organization to show the use of other R packages in addition to the bookdown basics. The contents of the original bookdown template can be found in the following chapters, the additional code examples in the appendix. For more information about this template, please refer to the file 'README.md'.
+# Here you can use standard LaTeX-classes, i.e., article, book, report or letter, or you 
+# can choose from the KOMA-script-classes, i.e., scrartcl, scrbook, scrreprt or scrlttr2:
+documentclass: scrbook
+# Add other options for the documentclass, but NOT fontsize or papersize, which are
+# already listed below as extra options. Suitable options can be one of "oneside" / "twoside"
+# or one of "openleft" / "openright" / "openany":
+classoption: 
+  - twoside
+# Main language of the report: "en" / "de". The naming scheme of chapters or the 
+# abstract should change correctly to the designated language, e.g., "Kapitel", 
+# "Zusammenfassung" etc. The only headings that needs manual adjustment, are the 
+# the name of the references section in file "07-references.Rmd" (e.g., 
+# "Literaturverzeichnis") and the variable "acronyms" (e.g.,"Abkürzungsverzeichnis") 
+# below. The reference heading only changes automatically if biblatex is used as
+# the citation engine, not the default CSL-engine (see README.md).
+lang: "en"
+# Either comment out this option or use "singlespacing", "onehalfspacing" or "doublespacing".
+# This option only works well for fontsizes 10pt, 11pt or 12pt.
+linespacing: "doublespacing"
+# Change the overall fontsize of the document if necessary (10pt, 11pt or 12pt):
+fontsize: 11pt
+# For the fontfamily, use either "mathptmx" for a serif font, "cmbright" for sans serif, 
+# or comment it out for the LaTeX-default:
+fontfamily: cmbright
+# Here, only the font for code blocks (i.e., a chunk with option 'echo=TRUE') is set:
+monofont: "Source Code Pro"
+monofontoptions: "Scale=0.9"
+# You can change this to the wanted format, e.g., "A4", "letter", or "A5":
+papersize: "A4"
+# What should be the margin of the page? Either a single value like "margin=1in" or 
+# repeat for multiple options:
+# geometry: margin=1in
+geometry:
+  - top=30mm
+  - bottom=30mm
+  - left=25mm
+  - right=25mm
+# Should a titlepage be included in the document?
+titlepage: true
+# Textcolour of title and subtitle etc. (as a hex-color, i.e., "000000" = black,
+# "002668" = blue from the HSBA logo):
+titlepage-text-color: |
+  000000
+# Open this file and add information as needed:
+title-page-infos: "./00-template/title-page-infos.tex"
+# Value in cm to be added as space above the logo:
+titlepage-top-space: 5
+# Relative path to the chosen logo:
+titlepage-logo: "./01-images/HSBA-Logo-quadratic-version-1.jpg"
+# logo-width between 0 and 1 (the ratio of available textwidth on the titlepage):
+logo-width: 0.6
+# How much cm between logo and title on the titlepage?
+logo-space-after: 1.5
+# Should the table of contents be on its own page?
+toc-own-page: true
+# How many header levels should be printed in the table of contents?
+toc-depth: 3
+# Should a list of figures be included in the document?
+lof: true
+# Page break after the list of figures? Has no effect if documentclass is "book" and book is set to true:
+lof-own-page: false
+# Should a list of tables be included in the document?
+lot: true
+# Page break after the list of tables? Has no effect if documentclass is "book" and book is set to true:
+lot-own-page: true
+# Should the automatic word count be added to the titlepage information?
+add-wordcount: true
+site: bookdown::bookdown_site
+graphics: true
+# Here, linestrech is only used to make the custom "single-spacing" code-chunk option
+# work, so that you can use "linestrech=1" in a code-chunk to save space (which is also
+# set as thze default). See code-chunk "enable-single-line-spacing-code-chunks" below.
+# If you want to change the line spacing for the text itself, use option "linespacing" above!
+linestretch: "`r (lstr <- 1.5)`" 
+# List every bib-file in here where you want to manage your citations. 
+# These files must be present in the current working directory.
+# The packages.bib file is automatically generate in the code chunk named
+# "generate-packages-bib" below.
+bibliography: [book.bib, packages.bib]
+# If you want some extra space between the different bib entries, specify it here,
+# otherwise comment this option out so that the CSL-style will take care of the
+# spacing:
+csl-bib-entries-extra-vertical-space: 5pt
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+# For a page break after the list of references in case of documentclass "article"
+# look into "06-references.Rmd" and the command pagebreak.
+#
+# List here every citation that is not directly included 
+# in the text but should be listed in the references:
+no-cite: |
+  @R-base, @R-rmarkdown
+# Here, one can define the name of the list of acronyms used in the frontmatter. 
+# If this variable is used, then you can define the needed acronyms in the file 
+# 'abbreviations.tex'. A short description of how to do this is included in the 
+# comment in this file, and a short example of the use of acronyms in the text is
+# included in the appendix.
+# Important: If you change the language of the document (see variable "lang" above),
+# you must also change the variable "acronyms" to the appropriate value, e.g.,
+# "Abkürzungsverzeichnis".
+# If you don't want to use acronyms, comment this variable out.
+acronyms: "Acronyms"
+---
+
+
+```{r}
+#| label = "wordcount",
+#| include = FALSE
+
+### Guessing the path to the final md-file:
+list_files_book <- list.files("./_book/", full.names = TRUE)
+final_pdf <- list_files_book[which(grepl("\\.tex$", list_files_book))]
+
+if (length(final_pdf) > 1) {
+  
+  stop(paste0("More than one tex-file exist in directory './_book/'!\n Cannot guess which one to use for the wordcount!\nUse option 'Clean All' from the build pane, then rebuild the book!"))
+  
+}
+
+if (length(final_pdf) == 1) {
+
+  wordcount <- system2(command = rmarkdown::pandoc_exec(), 
+                       args = c("--lua-filter ./00-template/wordcount.lua ", final_pdf), 
+                       stdout = TRUE)
+  write(paste0("Wordcount & ", wordcount, "\n\\end{tabular}"), file = "./00-template/wordcount.tex")
+  
+} else if (length(final_pdf) == 0) {
+  
+  write(paste0("\\end{tabular}\n\\begin{center}\n  \\textbf{Wordcount was not possible because no tex source}\\\\\n",
+               "\\textbf{file was found -- Rebuild the book with option}\\\\\n",
+               "\\textbf{keep\\_tex: yes}\n\\end{center}"), 
+        file = "./00-template/wordcount.tex")
+}
+
+```
+
+
+```{r}
+#| label = "enable-single-line-spacing-code-chunks",
+#| include = FALSE
+def.source.hook  <- knitr::knit_hooks$get("source")
+knitr::knit_hooks$set(source = function(x, options) {
+    x <- def.source.hook(x, options)  # apply default source hook
+    ifelse(!is.null(options$linestretch),  # if linestretch is not NULL, apply linestretch
+           paste0("\\linespread{", options$linestretch,"}\n", x, "\n\n\\linespread{1}"),  # reset linestretch after the chunk!
+           x)
+})
+
+knitr::opts_chunk$set(
+  linestretch = 1
+)
+
+```
+
+
+```{r}
+#| label = "generate-packages-bib",
+#| include = FALSE
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

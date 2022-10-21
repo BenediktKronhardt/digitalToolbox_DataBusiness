@@ -1,0 +1,14 @@
+bookdown::pdf_book:
+  template: "./00-template/hsba_20220601.tex"
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  fig_caption: yes
+  fig_height: 3.8
+  fig_width: 6.3
+  number_sections: yes
+  # citation_package: biblatex
+  citation_package: default
+  pandoc_args: [ "--csl", "./00-template/chicago-author-date.csl" ]
+  keep_tex: yes
+  keep_md: yes

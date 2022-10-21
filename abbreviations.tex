@@ -1,0 +1,50 @@
+% Comment out the examples and define your own acronyms here following this pattern:
+%
+% \acro{code}[Short Name]{Long Name}
+%
+% The acronyms must be sorted by hand, they appear in the list of acronyms in the
+% order the are listed here.
+%
+% In the text, then use \ac{code} everywhere in the text where you want to use
+% the acronym / abbreviation. When used for the first time, the long name followed
+% by the acronym in parenthesis will be inserted, after that the acronym only.
+%
+% Another example (from the documentation of LaTeX package 'acronym'):
+%
+% \acro{H2O}[$\mathrm{H_2O}$]{water}
+%
+% Then \acs{H2O} gets “H2O” and \acl{H2O} prints “water”.
+%
+% You can use \acp{code} in the text to use an automatic plural (s is added to
+% automatically the short or long name). If the plural is not standard, use an
+% additional line for the acronym definition, where the code is the same but
+% short and long name is adjusted to the plural form:
+%
+% \acrodefplural{code}[Short Names]{Long Names}
+%
+% Other example commands that can be used in the text:
+%
+% \Ac{code}  % Works in the same way as \ac, but starts the long form with an
+%            % upper case
+%
+% \acf{code} % If later in the text again the Full Name of the acronym should be
+%            % printed, use the command
+%
+% \acp{code} % Works in the same way as \ac, but makes the short and/or long forms
+%            % into plurals.
+%
+% \Acp{code} % Works in the same way as \acp, but starts the long form with an
+%            % upper case letter.
+%
+% See the manual for a complete description:
+%
+% https://ctan.org/pkg/acronym?lang=en
+%
+\acro{cran}[CRAN]{Comprehensive R Archive Network}
+% This example does not work while using the flextable package. If you use this
+% package for displaying tables, then make sure you do not use the math environment
+% inside of abbreviations:
+\acro{H2O}[$\mathrm{H_2O}$]{water}
+\acro{ide}[IDE]{integrated development environment}
+\acrodefplural{ide}[IDEs]{integrated development environments}
+\acro{glm}[GLM]{generalized linear model}
