@@ -1,12 +1,11 @@
 --- 
 title: |
-  Digital Tool Box -- Project Report
+  Digital Tool Box Data Business -- Project Report
 subtitle: | 
-  Project work as part of the Bachelor of Science (B.Sc.) in  
-  Media Management & Communication and Business Informatics
+  Project work as part of the Bachelor of Science (B.Sc.) in Business Informatics
 author: 
-  - Tania Testperson (XXXX)
-  - Max Mustermann (XXXX)
+  - Börge Meyer (5076)
+  - Benedikt Kronhardt (5089)
 # If you don't need the abstract, just comment it out here completely. If you want to 
 # use it, just overwrite it:
 abstract: |
