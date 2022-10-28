@@ -1,0 +1,7 @@
+# Methods
+
+3. Methods, for example:
+- Descriptive statistics
+- Variable distributions
+- Statements about variances and co-variance and missing values
+- Chosen analytical procedures to answer the research question

@@ -4,12 +4,12 @@ title: |
 subtitle: | 
   Project work as part of the Bachelor of Science (B.Sc.) in Business Informatics
 author: 
-  - Börge Meyer (5076)
   - Benedikt Kronhardt (5089)
+  - Börge Meyer (5076)
 # If you don't need the abstract, just comment it out here completely. If you want to 
 # use it, just overwrite it:
-abstract: |
-  The present specialized bookdown project template you are using now is intended as the basis for a report or thesis at the Hamburg School of Business Administration (HSBA). Compared to the original project template coming with the bookdown package, it generates PDF output only, using a slightly customized LaTeX template based on the original Pandoc-template, which is adapted to the requirements of the HSBA for theses and reports. The main notable differences are an appropriate title page, an automatic word count function, a list of acronyms, an adapted page numbering, the use of the appropriate Chicago Manual of Style citation style (17th edition, CSL-based) and an additional chapter with a basic declaration of honor at the end. In addition, several additional folders are used to demonstrate a basic project structure, as well as a slightly modified file organization to show the use of other R packages in addition to the bookdown basics. The contents of the original bookdown template can be found in the following chapters, the additional code examples in the appendix. For more information about this template, please refer to the file 'README.md'.
+# abstract: |
+#  The present specialized bookdown project template you are using now is intended as the basis for a report or thesis at the Hamburg School of Business Administration (HSBA). Compared to the original project template coming with the bookdown package, it generates PDF output only, using a slightly customized LaTeX template based on the original Pandoc-template, which is adapted to the requirements of the HSBA for theses and reports. The main notable differences are an appropriate title page, an automatic word count function, a list of acronyms, an adapted page numbering, the use of the appropriate Chicago Manual of Style citation style (17th edition, CSL-based) and an additional chapter with a basic declaration of honor at the end. In addition, several additional folders are used to demonstrate a basic project structure, as well as a slightly modified file organization to show the use of other R packages in addition to the bookdown basics. The contents of the original bookdown template can be found in the following chapters, the additional code examples in the appendix. For more information about this template, please refer to the file 'README.md'.
 # Here you can use standard LaTeX-classes, i.e., article, book, report or letter, or you 
 # can choose from the KOMA-script-classes, i.e., scrartcl, scrbook, scrreprt or scrlttr2:
 documentclass: scrbook
@@ -130,258 +130,45 @@ acronyms: "Acronyms"
 <!--chapter:end:index.Rmd-->
 
 
-# About
+# Introduction
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+kurze Einleitung über die Aufgabenstellung (ggf. die Rollen und Aufgabenverteilung im Team)
 
-## Usage
 
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
+<!--chapter:end:00-introduction.Rmd-->
 
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
 
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
+# Theoretical background
 
-## Render book
+2. Theoretical background concluding with the research question
 
-You can render the HTML version of this example book without changing anything:
 
-1. Find the **Build** pane in the RStudio IDE, and
+<!--chapter:end:01-theoretical-background.Rmd-->
 
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
 
-Or build the book from the R console:
+# Methods
 
-\linespread{1}
+3. Methods, for example:
+- Descriptive statistics
+- Variable distributions
+- Statements about variances and co-variance and missing values
+- Chosen analytical procedures to answer the research question
 
-```r
-bookdown::render_book()
-```
+<!--chapter:end:02-methods.Rmd-->
 
 
+# Results
 
-\linespread{1}
+4. Results
 
-To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
+<!--chapter:end:03-results.Rmd-->
 
-## Preview book
 
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
+# Discussion
 
-\linespread{1}
+5. Diskussion
 
-```r
-bookdown::serve_book()
-```
-
-
-
-\linespread{1}
-
-<!--chapter:end:00-index-intro.Rmd-->
-
-
-# Hello bookdown 
-
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (`#`) per .Rmd file.
-
-## A section
-
-All chapter sections start with a second-level (`##`) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
-
-### An unnumbered section {-}
-
-Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
-
-<!--chapter:end:01-intro.Rmd-->
-
-
-# Cross-references {#cross}
-
-Cross-references make it easier for your readers to find and link to elements in your book.
-
-## Chapters and sub-chapters
-
-There are two steps to cross-reference any heading:
-
-1. Label the heading: `# Hello world {#nice-label}`. 
-    - Leave the label off if you like the automated heading generated based on your heading title: for example, `# Hello world` = `# Hello world {#hello-world}`.
-    - To label an un-numbered heading, use: `# Hello world {-#nice-label}` or `{# Hello world .unnumbered}`.
-
-1. Next, reference the labeled heading anywhere in the text using `\@ref(nice-label)`; for example, please see Chapter \@ref(cross). 
-    - If you prefer text as the link instead of a numbered reference use: [any text you want can go here](#cross).
-
-## Captioned figures and tables
-
-Figures and tables *with captions* can also be cross-referenced from elsewhere in your book using `\@ref(fig:chunk-label)` and `\@ref(tab:chunk-label)`, respectively.
-
-See Figure \@ref(fig:nice-fig).
-
-\linespread{1}
-
-```r
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
-```
-
-
-
-\linespread{1}\begin{figure}
-
-{\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/nice-fig-1} 
-
-}
-
-\caption{Here is a nice figure!}(\#fig:nice-fig)
-\end{figure}
-
-Don't miss Table \@ref(tab:nice-tab).
-
-\linespread{1}
-
-```r
-knitr::kable(
-  head(pressure, 10), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
-```
-
-
-
-\linespread{1}\begin{table}
-
-\caption{(\#tab:nice-tab)Here is a nice table!}
-\centering
-\begin{tabular}[t]{rr}
-\toprule
-temperature & pressure\\
-\midrule
-0 & 0.0002\\
-20 & 0.0012\\
-40 & 0.0060\\
-60 & 0.0300\\
-80 & 0.0900\\
-\addlinespace
-100 & 0.2700\\
-120 & 0.7500\\
-140 & 1.8500\\
-160 & 4.2000\\
-180 & 8.8000\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-<!--chapter:end:02-cross-refs.Rmd-->
-
-
-# Parts
-
-You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file. 
-
-Add a numbered part: `# (PART) Act one {-}` (followed by `# A chapter`)
-
-Add an unnumbered part: `# (PART\*) Act one {-}` (followed by `# A chapter`)
-
-Add an appendix as a special kind of un-numbered part: `# (APPENDIX) Other stuff {-}` (followed by `# A chapter`). Chapters in an appendix are prepended with letters instead of numbers.
-
-
-
-
-<!--chapter:end:03-parts.Rmd-->
-
-
-# Footnotes and citations 
-
-## Footnotes
-
-Footnotes are put inside the square brackets after a caret `^[]`. Like this one ^[This is a footnote.]. 
-
-## Citations
-
-Reference items in your bibliography file(s) using `@key`.
-
-For example, we are using the **bookdown** package [@R-bookdown] (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and **knitr** [@xie2015] (this citation was added manually in an external file book.bib). 
-Note that the `.bib` files need to be listed in the index.Rmd with the YAML `bibliography` key.
-
-
-The RStudio Visual Markdown Editor can also make it easier to insert citations: <https://rstudio.github.io/visual-markdown-editing/#/citations>
-
-<!--chapter:end:04-citations.Rmd-->
-
-
-# Blocks
-
-## Equations
-
-Here is an equation.
-
-\begin{equation} 
-  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
-  (\#eq:binom)
-\end{equation} 
-
-You may refer to using `\@ref(eq:binom)`, like see Equation \@ref(eq:binom).
-
-
-## Theorems and proofs
-
-Labeled theorems can be referenced in text using `\@ref(thm:tri)`, for example, check out this smart theorem \@ref(thm:tri).
-
-::: {.theorem #tri}
-For a right triangle, if $c$ denotes the *length* of the hypotenuse
-and $a$ and $b$ denote the lengths of the **other** two sides, we have
-$$a^2 + b^2 = c^2$$
-:::
-
-Read more here <https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html>.
-
-## Callout blocks
-
-
-The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html
-
-<!--chapter:end:05-blocks.Rmd-->
-
-
-# Sharing your book
-
-## Publishing
-
-HTML books can be published online, see: https://bookdown.org/yihui/bookdown/publishing.html
-
-## 404 pages
-
-By default, users will be directed to a 404 page if they try to access a webpage that cannot be found. If you'd like to customize your 404 page instead of using the default, you may add either a `_404.Rmd` or `_404.md` file to your project root and use code and/or Markdown syntax.
-
-## Metadata for sharing
-
-Bookdown HTML books will provide HTML metadata for social sharing on platforms like Twitter, Facebook, and LinkedIn, using information you provide in the `index.Rmd` YAML. To setup, set the `url` for your book and the path to your `cover-image` file. Your book's `title` and `description` are also used.
-
-
-
-This `gitbook` uses the same social sharing data across all chapters in your book- all links shared will look the same.
-
-Specify your book's source repository on GitHub using the `edit` key under the configuration options in the `_output.yml` file, which allows users to suggest an edit by linking to a chapter's source file. 
-
-Read more about the features of this output format here:
-
-https://pkgs.rstudio.com/bookdown/reference/gitbook.html
-
-Or use:
-
-\linespread{1}
-
-```r
-?bookdown::gitbook
-```
-
-
-
-\linespread{1}
-
-
-
-<!--chapter:end:06-share.Rmd-->
+<!--chapter:end:04-discussion.Rmd-->
 
 
 <!-- For documentclass "article": Remove this pagebreak -->
@@ -400,7 +187,7 @@ Or use:
 \newpage
 
 
-<!--chapter:end:07-references.Rmd-->
+<!--chapter:end:05-references.Rmd-->
 
 
 # Declaration of Honor {-}
@@ -425,7 +212,156 @@ Hamburg, dd.mm.yyyy
 
 aaaaa, bbbbbb
 
-<!--chapter:end:08-declaration.Rmd-->
+<!--chapter:end:06-declaration.Rmd-->
+
+
+# Data-set
+\linespread{1}
+
+```r
+library(tidyverse) # This includes readr!
+```
+
+
+
+\linespread{1}
+
+```
+#> -- Attaching packages --------------------
+#> v ggplot2 3.3.6      v purrr   0.3.5 
+#> v tibble  3.1.8      v dplyr   1.0.10
+#> v tidyr   1.2.1      v stringr 1.4.1 
+#> v readr   2.1.3      v forcats 0.5.2 
+#> -- Conflicts ---- tidyverse_conflicts() --
+#> x dplyr::filter() masks stats::filter()
+#> x dplyr::lag()    masks stats::lag()
+```
+
+\linespread{1}
+
+```r
+library(xtable) # For displaying LaTeX tables
+library(modelsummary) # For displaying regression models in tables
+library(stargazer) # For displaying regression models in tables
+```
+
+
+
+\linespread{1}
+
+```
+#> 
+#> Please cite as: 
+#> 
+#>  Hlavac, Marek (2022). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+#>  R package version 5.2.3. https://CRAN.R-project.org/package=stargazer
+```
+
+\linespread{1}
+
+```r
+library(jtools) # For displaying regression models in tables
+library(kableExtra) # For displaying or changing tables
+```
+
+
+
+\linespread{1}
+
+```
+#> 
+#> Attache Paket: 'kableExtra'
+#> 
+#> Das folgende Objekt ist maskiert 'package:dplyr':
+#> 
+#>     group_rows
+```
+
+\linespread{1}
+
+```r
+library(gt) # For displaying tables
+```
+
+
+
+\linespread{1}
+
+```
+#> 
+#> Attache Paket: 'gt'
+#> 
+#> Das folgende Objekt ist maskiert 'package:modelsummary':
+#> 
+#>     escape_latex
+```
+
+\linespread{1}
+
+```r
+library(gtsummary) # For model reporting inline and in tables
+library(broom) # For working with statistical models
+library(car) # For type-III anova tests
+```
+
+
+
+\linespread{1}
+
+```
+#> Lade nötiges Paket: carData
+#> 
+#> Attache Paket: 'car'
+#> 
+#> Das folgende Objekt ist maskiert 'package:dplyr':
+#> 
+#>     recode
+#> 
+#> Das folgende Objekt ist maskiert 'package:purrr':
+#> 
+#>     some
+```
+
+\linespread{1}
+
+```r
+library(report) # For automated text-based model reporting
+library(effects) # For working with statistical models / visualize effects
+```
+
+
+
+\linespread{1}
+
+```
+#> lattice theme set by effectsTheme()
+#> See ?effectsTheme for details.
+```
+
+\linespread{1}
+
+```r
+library(ggeffects) # For working with statistical models / visualize effects
+library(patchwork) # For putting different visualizations in one figure
+
+dataset <- read_csv("02-data/cost-of-living-2017.csv", lazy= FALSE)
+```
+
+
+
+\linespread{1}
+
+```
+#> Rows: 511 Columns: 1
+#> -- Column specification ------------------
+#> Delimiter: ","
+#> chr (1): City	State	Country	Cost of Living Plus Rent Ind...
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+<!--chapter:end:07-dataSet.Rmd-->
 
 ---
 output: html_document
@@ -586,11 +522,11 @@ datasummary_skim(df1, output = 'kableExtra', booktabs = TRUE,
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_1ca06d6b4bca.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_1ca024eb38fe.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_1ca0218c23d9.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_1ca078595787.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_1ca060001854.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e0291c372b.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e05a8f4cbc.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e068296129.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e014f221cc.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e017273c93.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -630,7 +566,7 @@ datasummary_correlation(df1_footnote, output = 'kableExtra',
 year\textsuperscript{*} & \num{.15} & 1 & . & . & .\\
 \cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{\num{.93}} & \cellcolor{gray!6}{\num{.12}} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{.} & \cellcolor{gray!6}{.}\\
 cty & \num{-.80} & \num{-.04} & \num{-.81} & 1 & .\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{\num{-.77}} & \cellcolor{gray!6}{\num{.00}} & \cellcolor{gray!6}{\num{-.76}} & \cellcolor{gray!6}{\num{.96}} & \cellcolor{gray!6}{1}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{\num{-.77}} & \cellcolor{gray!6}{\num{.002}} & \cellcolor{gray!6}{\num{-.76}} & \cellcolor{gray!6}{\num{.96}} & \cellcolor{gray!6}{1}\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -751,16 +687,16 @@ test1
 #> 	Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -4.3847, df = 98, p-value = 2.923e-05
+#> t = -3.041, df = 98, p-value = 0.003025
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -7.047496 -2.655862
+#>  -5.132689 -1.079045
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>              50.71553              55.56720
+#>              50.62572              53.73159
 ```
 
-This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-4.85$ between class A ($M = 50.72$, $SD = 5.78$) and class B ($M = 55.57$, $SD = 5.27$) in this case, $t(98)~=~-4.385,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
+This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-3.11$ between class A ($M = 50.63$, $SD = 4.96$) and class B ($M = 53.73$, $SD = 5.25$) in this case, $t(98)~=~-3.041,~p~=~0.003$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
 
 
 ### $\chi^2$-test
@@ -1559,44 +1495,182 @@ m1_year_plot + m1_cyl_plot + m1_displ_plot + m1_year_cyl_plot +
 > This is the end! Good luck with writing your own report or thesis using this template!
 
 
-<!--chapter:end:09-appendix.Rmd-->
+<!--chapter:end:08-appendix.Rmd-->
 
 
-# Data-set
+# Tipps and explanations about RBookdown
+
+## Introduction
+
+### Usage
+
+math equation $a^2 + b^2 = c^2$.
+
+Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
+
+Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
+
+The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
+
+### Render book
+
+You can render the HTML version of this example book without changing anything:
+
+1. Find the **Build** pane in the RStudio IDE, and
+
+1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
+
+Or build the book from the R console:
+
 \linespread{1}
 
 ```r
-library(tidyverse) # This includes readr!
-library(xtable) # For displaying LaTeX tables
-library(modelsummary) # For displaying regression models in tables
-library(stargazer) # For displaying regression models in tables
-library(jtools) # For displaying regression models in tables
-library(kableExtra) # For displaying or changing tables
-library(gt) # For displaying tables
-library(gtsummary) # For model reporting inline and in tables
-library(broom) # For working with statistical models
-library(car) # For type-III anova tests
-library(report) # For automated text-based model reporting
-library(effects) # For working with statistical models / visualize effects
-library(ggeffects) # For working with statistical models / visualize effects
-library(patchwork) # For putting different visualizations in one figure
-
-dataset <- read_csv("02-data/cost-of-living-2017.csv", lazy= FALSE)
+bookdown::render_book()
 ```
 
 
 
 \linespread{1}
 
-```
-#> Rows: 511 Columns: 1
-#> -- Column specification ------------------
-#> Delimiter: ","
-#> chr (1): City	State	Country	Cost of Living Plus Rent Ind...
-#> 
-#> i Use `spec()` to retrieve the full column specification for this data.
-#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
+
+## Preview book
+
+As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
+
+\linespread{1}
+
+```r
+bookdown::serve_book()
 ```
 
-<!--chapter:end:10-dataSet.Rmd-->
+
+
+\linespread{1}
+
+### Hello bookdown 
+
+
+All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (`#`) per .Rmd file.
+
+### A section
+
+All chapter sections start with a second-level (`##`) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
+
+#### An unnumbered section {-}
+
+Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
+
+
+## Cross-references {#cross}
+
+Cross-references make it easier for your readers to find and link to elements in your book.
+
+### Chapters and sub-chapters
+
+There are two steps to cross-reference any heading:
+
+1. Label the heading: `# Hello world {#nice-label}`. 
+    - Leave the label off if you like the automated heading generated based on your heading title: for example, `# Hello world` = `# Hello world {#hello-world}`.
+    - To label an un-numbered heading, use: `# Hello world {-#nice-label}` or `{# Hello world .unnumbered}`.
+
+1. Next, reference the labeled heading anywhere in the text using `\@ref(nice-label)`; for example, please see Chapter \@ref(cross). 
+    - If you prefer text as the link instead of a numbered reference use: [any text you want can go here](#cross).
+
+### Captioned figures and tables
+
+Figures and tables *with captions* can also be cross-referenced from elsewhere in your book using `\@ref(fig:chunk-label)` and `\@ref(tab:chunk-label)`, respectively.
+
+See Figure \@ref(fig:nice-fig).
+
+\linespread{1}
+
+```r
+par(mar = c(4, 4, .1, .1))
+plot(pressure, type = 'b', pch = 19)
+```
+
+
+
+\linespread{1}\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/nice-fig-1} 
+
+}
+
+\caption{Here is a nice figure!}(\#fig:nice-fig)
+\end{figure}
+
+Don't miss Table \@ref(tab:nice-tab).
+
+\linespread{1}
+
+```r
+knitr::kable(
+  head(pressure, 10), caption = 'Here is a nice table!',
+  booktabs = TRUE
+)
+```
+
+
+
+\linespread{1}\begin{table}
+
+\caption{(\#tab:nice-tab)Here is a nice table!}
+\centering
+\begin{tabular}[t]{rr}
+\toprule
+temperature & pressure\\
+\midrule
+0 & 0.0002\\
+20 & 0.0012\\
+40 & 0.0060\\
+60 & 0.0300\\
+80 & 0.0900\\
+\addlinespace
+100 & 0.2700\\
+120 & 0.7500\\
+140 & 1.8500\\
+160 & 4.2000\\
+180 & 8.8000\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+## Parts
+
+You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file. 
+
+Add a numbered part: `# (PART) Act one {-}` (followed by `# A chapter`)
+
+Add an unnumbered part: `# (PART\*) Act one {-}` (followed by `# A chapter`)
+
+Add an appendix as a special kind of un-numbered part: `# (APPENDIX) Other stuff {-}` (followed by `# A chapter`). Chapters in an appendix are prepended with letters instead of numbers.
+
+## Footnotes
+
+Footnotes are put inside the square brackets after a caret `^[]`. Like this one ^[This is a footnote.]. 
+
+### Citations
+
+Reference items in your bibliography file(s) using `@key`.
+
+For example, we are using the **bookdown** package [@R-bookdown] (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and **knitr** [@xie2015] (this citation was added manually in an external file book.bib). 
+Note that the `.bib` files need to be listed in the index.Rmd with the YAML `bibliography` key.
+
+
+The RStudio Visual Markdown Editor can also make it easier to insert citations: <https://rstudio.github.io/visual-markdown-editing/#/citations>
+
+
+
+<!--chapter:end:09-explanations-and-tipps.Rmd-->
+
+
+# Discussion
+
+Mal schauen, ob diese Datei funktioniert
+
+<!--chapter:end:10-test.Rmd-->
 
