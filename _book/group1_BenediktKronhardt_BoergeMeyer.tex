@@ -223,7 +223,15 @@
 \usepackage{makecell}
 \usepackage{xcolor}
 \usepackage{siunitx}
-\newcolumntype{d}{S[input-symbols = ()]}
+
+  \newcolumntype{d}{S[
+    input-open-uncertainty=,
+    input-close-uncertainty=,
+    parse-numbers = false,
+    table-align-text-pre=false,
+    table-align-text-post=false
+  ]}
+  
 \usepackage{caption}
 \usepackage{graphicx}
 \usepackage{siunitx}
@@ -243,42 +251,24 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={Digital Tool Box -- Project Report},
-  pdfauthor={Tania Testperson (XXXX); Max Mustermann (XXXX)},
+  pdftitle={Digital Tool Box Data Business -- Project Report},
+  pdfauthor={Benedikt Kronhardt (5089); Börge Meyer (5076)},
   pdflang={en},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
-\title{Digital Tool Box -- Project Report}
+\title{Digital Tool Box Data Business -- Project Report}
 \usepackage{etoolbox}
 \makeatletter
 \providecommand{\subtitle}[1]{% add subtitle to \maketitle
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
-\subtitle{Project work as part of the Bachelor of Science (B.Sc.) in\\
-Media Management \& Communication and Business Informatics}
-\author{Tania Testperson (XXXX) \and Max Mustermann (XXXX)}
+\subtitle{Project work as part of the Bachelor of Science (B.Sc.) in Business Informatics}
+\author{Benedikt Kronhardt (5089) \and Börge Meyer (5076)}
 \date{}
 
 
-\usepackage{amsthm}
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{lemma}{Lemma}[chapter]
-\newtheorem{corollary}{Corollary}[chapter]
-\newtheorem{proposition}{Proposition}[chapter]
-\newtheorem{conjecture}{Conjecture}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[chapter]
-\theoremstyle{definition}
-\newtheorem{example}{Example}[chapter]
-\theoremstyle{definition}
-\newtheorem{exercise}{Exercise}[chapter]
-\theoremstyle{definition}
-\newtheorem{hypothesis}{Hypothesis}[chapter]
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-\newtheorem*{solution}{Solution}
 \begin{document}
 
 %%
@@ -304,16 +294,15 @@ Media Management \& Communication and Business Informatics}
 	\end{center}
 	\vskip 1.5cm
 		\begin{center}
-		{\huge \textbf{\textsf{Digital Tool Box -- Project Report}}}
+		{\huge \textbf{\textsf{Digital Tool Box Data Business -- Project Report}}}
 	\end{center}
 		\vskip 1em
 	\begin{center}
-		{\Large \textsf{Project work as part of the Bachelor of Science (B.Sc.) in\\
-Media Management \& Communication and Business Informatics}}
+		{\Large \textsf{Project work as part of the Bachelor of Science (B.Sc.) in Business Informatics}}
 	\end{center}
 		\vskip 2em
 	\begin{center}
-		{\Large \textsf{Tania Testperson (XXXX)\\Max Mustermann (XXXX)}}
+		{\Large \textsf{Benedikt Kronhardt (5089)\\Börge Meyer (5076)}}
 	\end{center}
 	\vskip 2em
 		\noindent
@@ -343,12 +332,6 @@ Media Management \& Communication and Business Informatics}}
 
 
 
-	\phantomsection
-	\addcontentsline{toc}{chapter}{\abstractname}
-	\begin{abstract}
-	    \doublespacing
-		The present specialized bookdown project template you are using now is intended as the basis for a report or thesis at the Hamburg School of Business Administration (HSBA). Compared to the original project template coming with the bookdown package, it generates PDF output only, using a slightly customized LaTeX template based on the original Pandoc-template, which is adapted to the requirements of the HSBA for theses and reports. The main notable differences are an appropriate title page, an automatic word count function, a list of acronyms, an adapted page numbering, the use of the appropriate Chicago Manual of Style citation style (17th edition, CSL-based) and an additional chapter with a basic declaration of honor at the end. In addition, several additional folders are used to demonstrate a basic project structure, as well as a slightly modified file organization to show the use of other R packages in addition to the bookdown basics. The contents of the original bookdown template can be found in the following chapters, the additional code examples in the appendix. For more information about this template, please refer to the file `README.md'.
-	\end{abstract}
 
 
 {
@@ -388,275 +371,66 @@ Media Management \& Communication and Business Informatics}}
 
 \doublespacing
 
-\hypertarget{about}{%
-\chapter{About}\label{about}}
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
 
-This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports; for example, a math equation \(a^2 + b^2 = c^2\).
+kurze Einleitung über die Aufgabenstellung (ggf. die Rollen und Aufgabenverteilung im Team)
 
-\hypertarget{usage}{%
-\section{Usage}\label{usage}}
-
-Each \textbf{bookdown} chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter \emph{must} start with a first-level heading: \texttt{\#\ A\ good\ chapter}, and can contain one (and only one) first-level heading.
-
-Use second-level and higher headings within chapters like: \texttt{\#\#\ A\ short\ section} or \texttt{\#\#\#\ An\ even\ shorter\ section}.
-
-The \texttt{index.Rmd} file is required, and is also your first book chapter. It will be the homepage when you render the book.
-
-\hypertarget{render-book}{%
-\section{Render book}\label{render-book}}
-
-You can render the HTML version of this example book without changing anything:
+\hypertarget{theoretical-background}{%
+\chapter{Theoretical background}\label{theoretical-background}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\item
-  Find the \textbf{Build} pane in the RStudio IDE, and
-\item
-  Click on \textbf{Build Book}, then select your output format, or select ``All formats'' if you'd like to use multiple formats from the same book source files.
-\end{enumerate}
-
-Or build the book from the R console:
-
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{bookdown}\SpecialCharTok{::}\FunctionTok{render\_book}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
-To render this example to PDF as a \texttt{bookdown::pdf\_book}, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.org/tinytex/}.
-
-\hypertarget{preview-book}{%
-\section{Preview book}\label{preview-book}}
-
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in ``Preview book'', or from the R console:
-
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{bookdown}\SpecialCharTok{::}\FunctionTok{serve\_book}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
-\hypertarget{hello-bookdown}{%
-\chapter{Hello bookdown}\label{hello-bookdown}}
-
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (\texttt{\#}) per .Rmd file.
-
-\hypertarget{a-section}{%
-\section{A section}\label{a-section}}
-
-All chapter sections start with a second-level (\texttt{\#\#}) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
-
-\hypertarget{an-unnumbered-section}{%
-\subsection*{An unnumbered section}\label{an-unnumbered-section}}
-\addcontentsline{toc}{subsection}{An unnumbered section}
-
-Chapters and sections are numbered by default. To un-number a heading, add a \texttt{\{.unnumbered\}} or the shorter \texttt{\{-\}} at the end of the heading, like in this section.
-
-\hypertarget{cross}{%
-\chapter{Cross-references}\label{cross}}
-
-Cross-references make it easier for your readers to find and link to elements in your book.
-
-\hypertarget{chapters-and-sub-chapters}{%
-\section{Chapters and sub-chapters}\label{chapters-and-sub-chapters}}
-
-There are two steps to cross-reference any heading:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
 \tightlist
 \item
-  Label the heading: \texttt{\#\ Hello\ world\ \{\#nice-label\}}.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Leave the label off if you like the automated heading generated based on your heading title: for example, \texttt{\#\ Hello\ world} = \texttt{\#\ Hello\ world\ \{\#hello-world\}}.
-  \item
-    To label an un-numbered heading, use: \texttt{\#\ Hello\ world\ \{-\#nice-label\}} or \texttt{\{\#\ Hello\ world\ .unnumbered\}}.
-  \end{itemize}
-\item
-  Next, reference the labeled heading anywhere in the text using \texttt{\textbackslash{}@ref(nice-label)}; for example, please see Chapter \ref{cross}.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    If you prefer text as the link instead of a numbered reference use: \protect\hyperlink{cross}{any text you want can go here}.
-  \end{itemize}
+  Theoretical background concluding with the research question
 \end{enumerate}
 
-\hypertarget{captioned-figures-and-tables}{%
-\section{Captioned figures and tables}\label{captioned-figures-and-tables}}
+\hypertarget{methods}{%
+\chapter{Methods}\label{methods}}
 
-Figures and tables \emph{with captions} can also be cross-referenced from elsewhere in your book using \texttt{\textbackslash{}@ref(fig:chunk-label)} and \texttt{\textbackslash{}@ref(tab:chunk-label)}, respectively.
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Methods, for example:
+\end{enumerate}
 
-See Figure \ref{fig:nice-fig}.
+\begin{itemize}
+\tightlist
+\item
+  Descriptive statistics
+\item
+  Variable distributions
+\item
+  Statements about variances and co-variance and missing values
+\item
+  Chosen analytical procedures to answer the research question
+\end{itemize}
 
-\linespread{1}
+\hypertarget{results}{%
+\chapter{Results}\label{results}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Results
+\end{enumerate}
 
-\linespread{1}
+\hypertarget{discussion}{%
+\chapter{Discussion}\label{discussion}}
 
-\begin{figure}
-
-{\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/nice-fig-1} 
-
-}
-
-\caption{Here is a nice figure!}\label{fig:nice-fig}
-\end{figure}
-
-Don't miss Table \ref{tab:nice-tab}.
-
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-  \FunctionTok{head}\NormalTok{(pressure, }\DecValTok{10}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
-  \AttributeTok{booktabs =} \ConstantTok{TRUE}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
-\begin{table}
-
-\caption{\label{tab:nice-tab}Here is a nice table!}
-\centering
-\begin{tabular}[t]{rr}
-\toprule
-temperature & pressure\\
-\midrule
-0 & 0.0002\\
-20 & 0.0012\\
-40 & 0.0060\\
-60 & 0.0300\\
-80 & 0.0900\\
-\addlinespace
-100 & 0.2700\\
-120 & 0.7500\\
-140 & 1.8500\\
-160 & 4.2000\\
-180 & 8.8000\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\hypertarget{parts}{%
-\chapter{Parts}\label{parts}}
-
-You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file.
-
-Add a numbered part: \texttt{\#\ (PART)\ Act\ one\ \{-\}} (followed by \texttt{\#\ A\ chapter})
-
-Add an unnumbered part: \texttt{\#\ (PART\textbackslash{}*)\ Act\ one\ \{-\}} (followed by \texttt{\#\ A\ chapter})
-
-Add an appendix as a special kind of un-numbered part: \texttt{\#\ (APPENDIX)\ Other\ stuff\ \{-\}} (followed by \texttt{\#\ A\ chapter}). Chapters in an appendix are prepended with letters instead of numbers.
-
-\hypertarget{footnotes-and-citations}{%
-\chapter{Footnotes and citations}\label{footnotes-and-citations}}
-
-\hypertarget{footnotes}{%
-\section{Footnotes}\label{footnotes}}
-
-Footnotes are put inside the square brackets after a caret \texttt{\^{}{[}{]}}. Like this one \footnote{This is a footnote.}.
-
-\hypertarget{citations}{%
-\section{Citations}\label{citations}}
-
-Reference items in your bibliography file(s) using \texttt{@key}.
-
-For example, we are using the \textbf{bookdown} package (\protect\hyperlink{ref-R-bookdown}{Xie 2022}) (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and \textbf{knitr} (\protect\hyperlink{ref-xie2015}{Xie 2015}) (this citation was added manually in an external file book.bib).
-Note that the \texttt{.bib} files need to be listed in the index.Rmd with the YAML \texttt{bibliography} key.
-
-The RStudio Visual Markdown Editor can also make it easier to insert citations: \url{https://rstudio.github.io/visual-markdown-editing/\#/citations}
-
-\hypertarget{blocks}{%
-\chapter{Blocks}\label{blocks}}
-
-\hypertarget{equations}{%
-\section{Equations}\label{equations}}
-
-Here is an equation.
-
-\begin{equation} 
-  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
-  \label{eq:binom}
-\end{equation}
-
-You may refer to using \texttt{\textbackslash{}@ref(eq:binom)}, like see Equation \eqref{eq:binom}.
-
-\hypertarget{theorems-and-proofs}{%
-\section{Theorems and proofs}\label{theorems-and-proofs}}
-
-Labeled theorems can be referenced in text using \texttt{\textbackslash{}@ref(thm:tri)}, for example, check out this smart theorem \ref{thm:tri}.
-
-\begin{theorem}
-\protect\hypertarget{thm:tri}{}\label{thm:tri}For a right triangle, if \(c\) denotes the \emph{length} of the hypotenuse
-and \(a\) and \(b\) denote the lengths of the \textbf{other} two sides, we have
-\[a^2 + b^2 = c^2\]
-\end{theorem}
-
-Read more here \url{https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html}.
-
-\hypertarget{callout-blocks}{%
-\section{Callout blocks}\label{callout-blocks}}
-
-The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: \url{https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html}
-
-\hypertarget{sharing-your-book}{%
-\chapter{Sharing your book}\label{sharing-your-book}}
-
-\hypertarget{publishing}{%
-\section{Publishing}\label{publishing}}
-
-HTML books can be published online, see: \url{https://bookdown.org/yihui/bookdown/publishing.html}
-
-\hypertarget{pages}{%
-\section{404 pages}\label{pages}}
-
-By default, users will be directed to a 404 page if they try to access a webpage that cannot be found. If you'd like to customize your 404 page instead of using the default, you may add either a \texttt{\_404.Rmd} or \texttt{\_404.md} file to your project root and use code and/or Markdown syntax.
-
-\hypertarget{metadata-for-sharing}{%
-\section{Metadata for sharing}\label{metadata-for-sharing}}
-
-Bookdown HTML books will provide HTML metadata for social sharing on platforms like Twitter, Facebook, and LinkedIn, using information you provide in the \texttt{index.Rmd} YAML. To setup, set the \texttt{url} for your book and the path to your \texttt{cover-image} file. Your book's \texttt{title} and \texttt{description} are also used.
-
-This \texttt{gitbook} uses the same social sharing data across all chapters in your book- all links shared will look the same.
-
-Specify your book's source repository on GitHub using the \texttt{edit} key under the configuration options in the \texttt{\_output.yml} file, which allows users to suggest an edit by linking to a chapter's source file.
-
-Read more about the features of this output format here:
-
-\url{https://pkgs.rstudio.com/bookdown/reference/gitbook.html}
-
-Or use:
-
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{?bookdown}\SpecialCharTok{::}\NormalTok{gitbook}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Diskussion
+\end{enumerate}
 
 \pagebreak
 
@@ -749,6 +523,154 @@ We accept that the HSBA may check the originality of our work using a range of m
 Hamburg, dd.mm.yyyy
 
 aaaaa, bbbbbb
+
+\hypertarget{data-set}{%
+\chapter{Data-set}\label{data-set}}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse) }\CommentTok{\# This includes readr!}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> -- Attaching packages --------------------
+#> v ggplot2 3.3.6      v purrr   0.3.5 
+#> v tibble  3.1.8      v dplyr   1.0.10
+#> v tidyr   1.2.1      v stringr 1.4.1 
+#> v readr   2.1.3      v forcats 0.5.2 
+#> -- Conflicts ---- tidyverse_conflicts() --
+#> x dplyr::filter() masks stats::filter()
+#> x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(xtable) }\CommentTok{\# For displaying LaTeX tables}
+\FunctionTok{library}\NormalTok{(modelsummary) }\CommentTok{\# For displaying regression models in tables}
+\FunctionTok{library}\NormalTok{(stargazer) }\CommentTok{\# For displaying regression models in tables}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> 
+#> Please cite as: 
+#> 
+#>  Hlavac, Marek (2022). stargazer: Well-Formatted Regression and Summary Statistics Tables.
+#>  R package version 5.2.3. https://CRAN.R-project.org/package=stargazer
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(jtools) }\CommentTok{\# For displaying regression models in tables}
+\FunctionTok{library}\NormalTok{(kableExtra) }\CommentTok{\# For displaying or changing tables}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> 
+#> Attache Paket: 'kableExtra'
+#> 
+#> Das folgende Objekt ist maskiert 'package:dplyr':
+#> 
+#>     group_rows
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(gt) }\CommentTok{\# For displaying tables}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> 
+#> Attache Paket: 'gt'
+#> 
+#> Das folgende Objekt ist maskiert 'package:modelsummary':
+#> 
+#>     escape_latex
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(gtsummary) }\CommentTok{\# For model reporting inline and in tables}
+\FunctionTok{library}\NormalTok{(broom) }\CommentTok{\# For working with statistical models}
+\FunctionTok{library}\NormalTok{(car) }\CommentTok{\# For type{-}III anova tests}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> Lade nötiges Paket: carData
+#> 
+#> Attache Paket: 'car'
+#> 
+#> Das folgende Objekt ist maskiert 'package:dplyr':
+#> 
+#>     recode
+#> 
+#> Das folgende Objekt ist maskiert 'package:purrr':
+#> 
+#>     some
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(report) }\CommentTok{\# For automated text{-}based model reporting}
+\FunctionTok{library}\NormalTok{(effects) }\CommentTok{\# For working with statistical models / visualize effects}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> lattice theme set by effectsTheme()
+#> See ?effectsTheme for details.
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggeffects) }\CommentTok{\# For working with statistical models / visualize effects}
+\FunctionTok{library}\NormalTok{(patchwork) }\CommentTok{\# For putting different visualizations in one figure}
+
+\NormalTok{dataset }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"02{-}data/cost{-}of{-}living{-}2017.csv"}\NormalTok{, }\AttributeTok{lazy=} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> Rows: 511 Columns: 1
+#> -- Column specification ------------------
+#> Delimiter: ","
+#> chr (1): City    State   Country Cost of Living Plus Rent Ind...
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
 
 \hypertarget{appendix-appendix}{%
 \appendix}
@@ -909,11 +831,11 @@ The data set is part of the \href{https://cran.r-project.org/web/packages/ggplot
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5786b6257ec.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5782eef69d.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_57839da3a86.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5786388170a.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5784daf25c7.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e0291c372b.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e05a8f4cbc.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e068296129.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e014f221cc.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e017273c93.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -954,7 +876,7 @@ Another useful table can be produced by using the function \texttt{datasummary\_
 year\textsuperscript{*} & \num{.15} & 1 & . & . & .\\
 \cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{\num{.93}} & \cellcolor{gray!6}{\num{.12}} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{.} & \cellcolor{gray!6}{.}\\
 cty & \num{-.80} & \num{-.04} & \num{-.81} & 1 & .\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{\num{-.77}} & \cellcolor{gray!6}{\num{.00}} & \cellcolor{gray!6}{\num{-.76}} & \cellcolor{gray!6}{\num{.96}} & \cellcolor{gray!6}{1}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{\num{-.77}} & \cellcolor{gray!6}{\num{.002}} & \cellcolor{gray!6}{\num{-.76}} & \cellcolor{gray!6}{\num{.96}} & \cellcolor{gray!6}{1}\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}
@@ -1078,16 +1000,16 @@ Once the \(t\)-test statistic value is calculated, one uses the critical value o
 #>  Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -4.0128, df = 98, p-value = 0.0001174
+#> t = -3.041, df = 98, p-value = 0.003025
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -6.470517 -2.188397
+#>  -5.132689 -1.079045
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>              49.94616              54.27562
+#>              50.62572              53.73159
 \end{verbatim}
 
-This console output is not very pleasant and should not be reported as this. Better to use the package \texttt{broom} and its function \texttt{broom::glance()} to extract everything you need using inline code chunks, which gives you a significant difference of \(\approx~-4.33\) between class A (\(M = 49.95\), \(SD = 4.65\)) and class B (\(M = 54.28\), \(SD = 6.05\)) in this case, \(t(98)~=~-4.013,~p~<~.001\). You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output.
+This console output is not very pleasant and should not be reported as this. Better to use the package \texttt{broom} and its function \texttt{broom::glance()} to extract everything you need using inline code chunks, which gives you a significant difference of \(\approx~-3.11\) between class A (\(M = 50.63\), \(SD = 4.96\)) and class B (\(M = 53.73\), \(SD = 5.25\)) in this case, \(t(98)~=~-3.041,~p~=~0.003\). You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output.
 
 \hypertarget{chi2-test}{%
 \subsection{\texorpdfstring{\(\chi^2\)-test}{\textbackslash chi\^{}2-test}}\label{chi2-test}}
@@ -1915,43 +1837,209 @@ Coming back to the multiple regression model from above (see section \ref{reg-mo
 This is the end! Good luck with writing your own report or thesis using this template!
 \end{quote}
 
-\hypertarget{data-set}{%
-\chapter{Data-set}\label{data-set}}
+\hypertarget{tipps-and-explanations-about-rbookdown}{%
+\chapter{Tipps and explanations about RBookdown}\label{tipps-and-explanations-about-rbookdown}}
+
+\hypertarget{introduction-1}{%
+\section{Introduction}\label{introduction-1}}
+
+\hypertarget{usage}{%
+\subsection{Usage}\label{usage}}
+
+math equation \(a^2 + b^2 = c^2\).
+
+Each \textbf{bookdown} chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter \emph{must} start with a first-level heading: \texttt{\#\ A\ good\ chapter}, and can contain one (and only one) first-level heading.
+
+Use second-level and higher headings within chapters like: \texttt{\#\#\ A\ short\ section} or \texttt{\#\#\#\ An\ even\ shorter\ section}.
+
+The \texttt{index.Rmd} file is required, and is also your first book chapter. It will be the homepage when you render the book.
+
+\hypertarget{render-book}{%
+\subsection{Render book}\label{render-book}}
+
+You can render the HTML version of this example book without changing anything:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Find the \textbf{Build} pane in the RStudio IDE, and
+\item
+  Click on \textbf{Build Book}, then select your output format, or select ``All formats'' if you'd like to use multiple formats from the same book source files.
+\end{enumerate}
+
+Or build the book from the R console:
 
 \linespread{1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(tidyverse) }\CommentTok{\# This includes readr!}
-\FunctionTok{library}\NormalTok{(xtable) }\CommentTok{\# For displaying LaTeX tables}
-\FunctionTok{library}\NormalTok{(modelsummary) }\CommentTok{\# For displaying regression models in tables}
-\FunctionTok{library}\NormalTok{(stargazer) }\CommentTok{\# For displaying regression models in tables}
-\FunctionTok{library}\NormalTok{(jtools) }\CommentTok{\# For displaying regression models in tables}
-\FunctionTok{library}\NormalTok{(kableExtra) }\CommentTok{\# For displaying or changing tables}
-\FunctionTok{library}\NormalTok{(gt) }\CommentTok{\# For displaying tables}
-\FunctionTok{library}\NormalTok{(gtsummary) }\CommentTok{\# For model reporting inline and in tables}
-\FunctionTok{library}\NormalTok{(broom) }\CommentTok{\# For working with statistical models}
-\FunctionTok{library}\NormalTok{(car) }\CommentTok{\# For type{-}III anova tests}
-\FunctionTok{library}\NormalTok{(report) }\CommentTok{\# For automated text{-}based model reporting}
-\FunctionTok{library}\NormalTok{(effects) }\CommentTok{\# For working with statistical models / visualize effects}
-\FunctionTok{library}\NormalTok{(ggeffects) }\CommentTok{\# For working with statistical models / visualize effects}
-\FunctionTok{library}\NormalTok{(patchwork) }\CommentTok{\# For putting different visualizations in one figure}
-
-\NormalTok{dataset }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"02{-}data/cost{-}of{-}living{-}2017.csv"}\NormalTok{, }\AttributeTok{lazy=} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{bookdown}\SpecialCharTok{::}\FunctionTok{render\_book}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 \linespread{1}
 
-\begin{verbatim}
-#> Rows: 511 Columns: 1
-#> -- Column specification ------------------
-#> Delimiter: ","
-#> chr (1): City    State   Country Cost of Living Plus Rent Ind...
-#> 
-#> i Use `spec()` to retrieve the full column specification for this data.
-#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-\end{verbatim}
+To render this example to PDF as a \texttt{bookdown::pdf\_book}, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.org/tinytex/}.
+
+\hypertarget{preview-book}{%
+\section{Preview book}\label{preview-book}}
+
+As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in ``Preview book'', or from the R console:
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bookdown}\SpecialCharTok{::}\FunctionTok{serve\_book}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\hypertarget{hello-bookdown}{%
+\subsection{Hello bookdown}\label{hello-bookdown}}
+
+All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (\texttt{\#}) per .Rmd file.
+
+\hypertarget{a-section}{%
+\subsection{A section}\label{a-section}}
+
+All chapter sections start with a second-level (\texttt{\#\#}) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
+
+\hypertarget{an-unnumbered-section}{%
+\subsubsection*{An unnumbered section}\label{an-unnumbered-section}}
+\addcontentsline{toc}{subsubsection}{An unnumbered section}
+
+Chapters and sections are numbered by default. To un-number a heading, add a \texttt{\{.unnumbered\}} or the shorter \texttt{\{-\}} at the end of the heading, like in this section.
+
+\hypertarget{cross}{%
+\section{Cross-references}\label{cross}}
+
+Cross-references make it easier for your readers to find and link to elements in your book.
+
+\hypertarget{chapters-and-sub-chapters}{%
+\subsection{Chapters and sub-chapters}\label{chapters-and-sub-chapters}}
+
+There are two steps to cross-reference any heading:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Label the heading: \texttt{\#\ Hello\ world\ \{\#nice-label\}}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Leave the label off if you like the automated heading generated based on your heading title: for example, \texttt{\#\ Hello\ world} = \texttt{\#\ Hello\ world\ \{\#hello-world\}}.
+  \item
+    To label an un-numbered heading, use: \texttt{\#\ Hello\ world\ \{-\#nice-label\}} or \texttt{\{\#\ Hello\ world\ .unnumbered\}}.
+  \end{itemize}
+\item
+  Next, reference the labeled heading anywhere in the text using \texttt{\textbackslash{}@ref(nice-label)}; for example, please see Chapter \ref{cross}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If you prefer text as the link instead of a numbered reference use: \protect\hyperlink{cross}{any text you want can go here}.
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{captioned-figures-and-tables}{%
+\subsection{Captioned figures and tables}\label{captioned-figures-and-tables}}
+
+Figures and tables \emph{with captions} can also be cross-referenced from elsewhere in your book using \texttt{\textbackslash{}@ref(fig:chunk-label)} and \texttt{\textbackslash{}@ref(tab:chunk-label)}, respectively.
+
+See Figure \ref{fig:nice-fig}.
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/nice-fig-1} 
+
+}
+
+\caption{Here is a nice figure!}\label{fig:nice-fig}
+\end{figure}
+
+Don't miss Table \ref{tab:nice-tab}.
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
+  \FunctionTok{head}\NormalTok{(pressure, }\DecValTok{10}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
+  \AttributeTok{booktabs =} \ConstantTok{TRUE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{table}
+
+\caption{\label{tab:nice-tab}Here is a nice table!}
+\centering
+\begin{tabular}[t]{rr}
+\toprule
+temperature & pressure\\
+\midrule
+0 & 0.0002\\
+20 & 0.0012\\
+40 & 0.0060\\
+60 & 0.0300\\
+80 & 0.0900\\
+\addlinespace
+100 & 0.2700\\
+120 & 0.7500\\
+140 & 1.8500\\
+160 & 4.2000\\
+180 & 8.8000\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\hypertarget{parts}{%
+\section{Parts}\label{parts}}
+
+You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file.
+
+Add a numbered part: \texttt{\#\ (PART)\ Act\ one\ \{-\}} (followed by \texttt{\#\ A\ chapter})
+
+Add an unnumbered part: \texttt{\#\ (PART\textbackslash{}*)\ Act\ one\ \{-\}} (followed by \texttt{\#\ A\ chapter})
+
+Add an appendix as a special kind of un-numbered part: \texttt{\#\ (APPENDIX)\ Other\ stuff\ \{-\}} (followed by \texttt{\#\ A\ chapter}). Chapters in an appendix are prepended with letters instead of numbers.
+
+\hypertarget{footnotes}{%
+\section{Footnotes}\label{footnotes}}
+
+Footnotes are put inside the square brackets after a caret \texttt{\^{}{[}{]}}. Like this one \footnote{This is a footnote.}.
+
+\hypertarget{citations}{%
+\subsection{Citations}\label{citations}}
+
+Reference items in your bibliography file(s) using \texttt{@key}.
+
+For example, we are using the \textbf{bookdown} package (\protect\hyperlink{ref-R-bookdown}{Xie 2022}) (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and \textbf{knitr} (\protect\hyperlink{ref-xie2015}{Xie 2015}) (this citation was added manually in an external file book.bib).
+Note that the \texttt{.bib} files need to be listed in the index.Rmd with the YAML \texttt{bibliography} key.
+
+The RStudio Visual Markdown Editor can also make it easier to insert citations: \url{https://rstudio.github.io/visual-markdown-editing/\#/citations}
+
+\hypertarget{discussion-1}{%
+\chapter{Discussion}\label{discussion-1}}
+
+Mal schauen, ob diese Datei funktioniert
 
 
 
