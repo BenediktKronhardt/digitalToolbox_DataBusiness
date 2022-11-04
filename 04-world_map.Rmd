@@ -8,13 +8,16 @@ library(ggplot2)
 library(maps)
 library(janitor)
 
+#developed and developing countries data
+developed_and_developing_countries <- read_delim("02-data/developed_and_developing_countries.csv", 
+                                  delim = ";", escape_double = FALSE,
+                                  trim_ws = TRUE)
+developed_and_developing_countries <- janitor::clean_names(developed_and_developing_countries)
+
 #Initial data
 rawData <- read_delim("02-data/cost-of-living-2017.csv", 
                                   delim = "\t", escape_double = FALSE, 
                                   trim_ws = TRUE)
-
-
-head(rawData)
 rawData <- janitor::clean_names(rawData)
 
 manipulatedData <- rawData[,3:4] %>% group_by(country) %>% summarise(average = mean(cost_of_living_plus_rent_index))
@@ -43,6 +46,14 @@ worldCLI <- ggplot(data = worldSubset, mapping = aes(x = long, y = lat, group = 
   geom_polygon(aes(fill = average)) +
   scale_fill_distiller(palette ="RdBu", direction = 1) + # or direction=1
   ggtitle("Average Cost of Living + Rent Index") +
+  plain
+worldCLI
+
+worldDD <- ggplot(data = worldSubset, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.3) +
+  geom_polygon(aes(fill = average)) +
+  scale_fill_distiller(palette ="RdBu", direction = 1) + # or direction=1
+  ggtitle("Test") +
   plain
 worldCLI
 
