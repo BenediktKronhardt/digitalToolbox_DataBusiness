@@ -1,4 +1,10 @@
 # Data-set
+
+## Boxplot wie viele Städte liegen über/unter dem Durchschnittlichen CLI
+
+
+
+
 ```{r}
 library(tidyverse) # This includes readr!
 library(xtable) # For displaying LaTeX tables
@@ -15,5 +21,31 @@ library(effects) # For working with statistical models / visualize effects
 library(ggeffects) # For working with statistical models / visualize effects
 library(patchwork) # For putting different visualizations in one figure
 
-dataset <- read_csv("02-data/cost-of-living-2017.csv", lazy= FALSE)
-```
+dataset <- read_delim("02-data/cost-of-living-2017.csv", 
+                                  delim = "\t", escape_double = FALSE, 
+                                  trim_ws = TRUE)
+continents <- read_csv("02-data/continents2.csv")
+
+head(dataset)
+
+dataset <- janitor::clean_names(dataset)
+
+#Die Spalte region bei Dataset hinzufügen; Kosovo muss separat hinzugefügt werden, ist nicht vorhanden bei continents
+manipulated_continents <- rename(continents, country=name)
+
+manipulated_data <- left_join(dataset, select(manipulated_continents, country, region), by="country")
+
+#Prüfen, ob eine Region na ist -> Ergebnis: Kosovo ist na
+filter(manipulated_data, is.na(region))
+#Da Kosovo na ist, die Zelle in "Europe" ändern
+manipulated_data[486, 12] <- "Europe"
+
+
+#Output nach Regionen und Anzahl an Datensätzen anzeigen
+ggplot(data = manipulated_data, aes(x = region)) +
+  geom_bar() +
+  ggtitle("Region - Count data") +
+  xlab("Regions") +
+  ylab("Number of Data") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
