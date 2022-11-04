@@ -167,6 +167,7 @@ kurze Einleitung über die Aufgabenstellung (ggf. die Rollen und Aufgabenverteil
 # Discussion
 
 5. Diskussion
+Muss noch überarbeitet werden!
 
 <!--chapter:end:04-discussion.Rmd-->
 
@@ -215,7 +216,14 @@ aaaaa, bbbbbb
 <!--chapter:end:06-declaration.Rmd-->
 
 
+
 # Data-set
+
+## Boxplot wie viele Städte liegen über/unter dem Durchschnittlichen CLI
+
+
+
+
 \linespread{1}
 
 ```r
@@ -227,12 +235,12 @@ library(tidyverse) # This includes readr!
 \linespread{1}
 
 ```
-#> -- Attaching packages --------------------
+#> -- Attaching packages ------------
 #> v ggplot2 3.3.6      v purrr   0.3.5 
 #> v tibble  3.1.8      v dplyr   1.0.10
 #> v tidyr   1.2.1      v stringr 1.4.1 
 #> v readr   2.1.3      v forcats 0.5.2 
-#> -- Conflicts ---- tidyverse_conflicts() --
+#> -- Conflicts ---------------------
 #> x dplyr::filter() masks stats::filter()
 #> x dplyr::lag()    masks stats::lag()
 ```
@@ -344,7 +352,9 @@ library(effects) # For working with statistical models / visualize effects
 library(ggeffects) # For working with statistical models / visualize effects
 library(patchwork) # For putting different visualizations in one figure
 
-dataset <- read_csv("02-data/cost-of-living-2017.csv", lazy= FALSE)
+dataset <- read_delim("02-data/cost-of-living-2017.csv", 
+                                  delim = "\t", escape_double = FALSE, 
+                                  trim_ws = TRUE)
 ```
 
 
@@ -352,13 +362,137 @@ dataset <- read_csv("02-data/cost-of-living-2017.csv", lazy= FALSE)
 \linespread{1}
 
 ```
-#> Rows: 511 Columns: 1
-#> -- Column specification ------------------
-#> Delimiter: ","
-#> chr (1): City	State	Country	Cost of Living Plus Rent Ind...
+#> Rows: 511 Columns: 11
+#> -- Column specification ----------
+#> Delimiter: "\t"
+#> chr (3): City, State, Country
+#> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
 #> 
 #> i Use `spec()` to retrieve the full column specification for this data.
 #> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+\linespread{1}
+
+```r
+continents <- read_csv("02-data/continents2.csv")
+```
+
+
+
+\linespread{1}
+
+```
+#> Rows: 249 Columns: 11
+#> -- Column specification ----------
+#> Delimiter: ","
+#> chr (7): name, alpha-2, alpha-3, iso_3166-2, region, sub...
+#> dbl (4): country-code, region-code, sub-region-code, int...
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+\linespread{1}
+
+```r
+
+head(dataset)
+```
+
+
+
+\linespread{1}
+
+```
+#> # A tibble: 6 x 11
+#>   City   State Country Cost ~1   CLI Rent ~2 Groce~3 Resta~4
+#>   <chr>  <chr> <chr>     <dbl> <dbl>   <dbl>   <dbl>   <dbl>
+#> 1 Zurich <NA>  Switze~   109.   150.    66.8    164.    141.
+#> 2 Hamil~ <NA>  Bermuda   133.   148.   118.     145.    153.
+#> 3 Zug    <NA>  Switze~   106.   143.    67.4    148.    143.
+#> 4 Geneva <NA>  Switze~   107.   142.    70.2    147.    139.
+#> 5 Basel  <NA>  Switze~    97.5  142.    51.5    150.    132.
+#> 6 Bern   <NA>  Switze~    91.1  136.    45.3    146.    122.
+#> # ... with 3 more variables:
+#> #   `Local Purchasing Power Index` <dbl>,
+#> #   `Leverage Model 1` <dbl>, `Leverage Model 2` <dbl>, and
+#> #   abbreviated variable names
+#> #   1: `Cost of Living Plus Rent Index`, 2: `Rent Index`,
+#> #   3: `Groceries Index`, 4: `Restaurant Price Index`
+```
+
+\linespread{1}
+
+```r
+
+dataset <- janitor::clean_names(dataset)
+
+#Die Spalte region bei Dataset hinzufügen; Kosovo muss separat hinzugefügt werden, ist nicht vorhanden bei continents
+manipulated_continents <- rename(continents, country=name)
+
+manipulated_data <- left_join(dataset, select(manipulated_continents, country, region), by="country")
+
+#Prüfen, ob eine Region na ist -> Ergebnis: Kosovo ist na
+filter(manipulated_data, is.na(region))
+```
+
+
+
+\linespread{1}
+
+```
+#> # A tibble: 1 x 12
+#>   city   state country cost_~1   cli rent_~2 groce~3 resta~4
+#>   <chr>  <chr> <chr>     <dbl> <dbl>   <dbl>   <dbl>   <dbl>
+#> 1 Prist~ <NA>  Kosovo~    19.3  29.4     8.9    26.6    22.3
+#> # ... with 4 more variables:
+#> #   local_purchasing_power_index <dbl>,
+#> #   leverage_model_1 <dbl>, leverage_model_2 <dbl>,
+#> #   region <chr>, and abbreviated variable names
+#> #   1: cost_of_living_plus_rent_index, 2: rent_index,
+#> #   3: groceries_index, 4: restaurant_price_index
+```
+
+\linespread{1}
+
+```r
+#Da Kosovo na ist, die Zelle in "Europe" ändern
+manipulated_data[486, 12] <- "Europe"
+
+
+#Output nach Regionen und Anzahl an Datensätzen anzeigen
+ggplot(data = manipulated_data, aes(x = region)) +
+  geom_bar() +
+  ggtitle("Region - Count data") +
+  xlab("Regions") +
+  ylab("Number of Data") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+```
+
+
+
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> \linespread{1}
+
+```r
+
+#Als Tabelle mit Werten:
+manipulated_data %>% count(region)
+```
+
+
+
+\linespread{1}
+
+```
+#> # A tibble: 5 x 2
+#>   region       n
+#>   <chr>    <int>
+#> 1 Africa      18
+#> 2 Americas   195
+#> 3 Asia       105
+#> 4 Europe     178
+#> 5 Oceania     15
 ```
 
 <!--chapter:end:07-dataSet.Rmd-->
@@ -432,7 +566,7 @@ df1 <- read_csv("02-data/mpg_data_as_csv.csv", lazy = FALSE)
 
 ```
 #> Rows: 234 Columns: 11
-#> -- Column specification ------------------
+#> -- Column specification ----------
 #> Delimiter: ","
 #> chr (6): manufacturer, model, trans, drv, fl, class
 #> dbl (5): displ, year, cyl, cty, hwy
@@ -522,11 +656,11 @@ datasummary_skim(df1, output = 'kableExtra', booktabs = TRUE,
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e0291c372b.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e05a8f4cbc.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e068296129.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e014f221cc.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_83e017273c93.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76dc4f731a38.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76dc40b278d2.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76dc14894d8f.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76dc37733f0b.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76dc621762d5.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -687,16 +821,16 @@ test1
 #> 	Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -3.041, df = 98, p-value = 0.003025
+#> t = -5.7637, df = 98, p-value = 9.538e-08
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -5.132689 -1.079045
+#>  -7.996598 -3.900429
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>              50.62572              53.73159
+#>              49.84182              55.79033
 ```
 
-This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-3.11$ between class A ($M = 50.63$, $SD = 4.96$) and class B ($M = 53.73$, $SD = 5.25$) in this case, $t(98)~=~-3.041,~p~=~0.003$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
+This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-5.95$ between class A ($M = 49.84$, $SD = 4.76$) and class B ($M = 55.79$, $SD = 5.53$) in this case, $t(98)~=~-5.764,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
 
 
 ### $\chi^2$-test
@@ -1666,6 +1800,45 @@ The RStudio Visual Markdown Editor can also make it easier to insert citations: 
 
 
 <!--chapter:end:09-explanations-and-tipps.Rmd-->
+
+
+# Data-set
+\linespread{1}
+
+```r
+library(tidyverse) # This includes readr!
+library(xtable) # For displaying LaTeX tables
+library(modelsummary) # For displaying regression models in tables
+library(stargazer) # For displaying regression models in tables
+library(jtools) # For displaying regression models in tables
+library(kableExtra) # For displaying or changing tables
+library(gt) # For displaying tables
+library(gtsummary) # For model reporting inline and in tables
+library(broom) # For working with statistical models
+library(car) # For type-III anova tests
+library(report) # For automated text-based model reporting
+library(effects) # For working with statistical models / visualize effects
+library(ggeffects) # For working with statistical models / visualize effects
+library(patchwork) # For putting different visualizations in one figure
+
+dataset <- read_csv("02-data/cost-of-living-2017.csv", lazy= FALSE)
+```
+
+
+
+\linespread{1}
+
+```
+#> Rows: 511 Columns: 1
+#> -- Column specification ----------
+#> Delimiter: ","
+#> chr (1): City	State	Country	Cost of Living Plus Rent Ind...
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+<!--chapter:end:10-dataSet.Rmd-->
 
 
 # Discussion

@@ -50,4 +50,7 @@ ggplot(data = manipulated_data, aes(x = region)) +
   ylab("Number of Data") +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 
+#Als Tabelle mit Werten:
+manipulated_data %>% count(region)
+
 ```
