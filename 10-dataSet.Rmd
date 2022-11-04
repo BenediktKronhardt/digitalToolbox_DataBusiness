@@ -17,5 +17,3 @@ library(patchwork) # For putting different visualizations in one figure
 
 dataset <- read_csv("02-data/cost-of-living-2017.csv", lazy= FALSE)
 ```
-
-Hallo

@@ -1,0 +1,50 @@
+# Methods
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(maps)
+library(janitor)
+
+#Initial data
+rawData <- read_delim("02-data/cost-of-living-2017.csv", 
+                                  delim = "\t", escape_double = FALSE, 
+                                  trim_ws = TRUE)
+
+
+head(rawData)
+rawData <- janitor::clean_names(rawData)
+
+manipulatedData <- rawData[,3:4] %>% group_by(country) %>% summarise(average = mean(cost_of_living_plus_rent_index))
+
+colnames(manipulatedData)[1] <- "region"
+
+world <- map_data("world")
+
+
+worldSubset <- left_join(manipulatedData, world, by="region")
+worldSubset
+
+plain <- theme(
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  panel.border = element_blank(),
+  panel.grid = element_blank(),
+  axis.title = element_blank(),
+  panel.background = element_rect(fill = "white"),
+  plot.title = element_text(hjust = 0.5)
+)
+
+worldCLI <- ggplot(data = worldSubset, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.3) +
+  geom_polygon(aes(fill = average)) +
+  scale_fill_distiller(palette ="RdBu", direction = 1) + # or direction=1
+  ggtitle("Average Cost of Living + Rent Index") +
+  plain
+worldCLI
+
+
+```
