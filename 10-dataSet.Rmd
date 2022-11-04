@@ -1,0 +1,20 @@
+# Data-set
+```{r}
+library(tidyverse) # This includes readr!
+library(xtable) # For displaying LaTeX tables
+library(modelsummary) # For displaying regression models in tables
+library(stargazer) # For displaying regression models in tables
+library(jtools) # For displaying regression models in tables
+library(kableExtra) # For displaying or changing tables
+library(gt) # For displaying tables
+library(gtsummary) # For model reporting inline and in tables
+library(broom) # For working with statistical models
+library(car) # For type-III anova tests
+library(report) # For automated text-based model reporting
+library(effects) # For working with statistical models / visualize effects
+library(ggeffects) # For working with statistical models / visualize effects
+library(patchwork) # For putting different visualizations in one figure
+
+dataset <- read_csv("02-data/cost-of-living-2017.csv", lazy= FALSE)
+
+```
