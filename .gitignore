@@ -2,6 +2,13 @@
 .Rhistory
 .RData
 .Ruserdata
+<<<<<<< HEAD
+.XX-test_datei_BM
+=======
 test.R
 Correlation_cliPlusRentIndex_localPurchasingPower.R
+<<<<<<< HEAD
 appendix.R
+=======
+>>>>>>> 51d9d9975cd4106a53b4919c7f99bf31d5fce674
+>>>>>>> ae40c0e3b5c4555967843fbd7dc84a5882b06223
