@@ -74,6 +74,8 @@ dataToCorrectLocalPurchasingPowerIndex <- filter(dataWithCategory, is.na(local_p
 dataToCorrectRegion <- filter(dataWithCategory, is.na(region))
 dataToCorrectDevelopment <- filter(dataWithCategory, is.na(development))
 
+#source for data-hange: https://www.laenderdaten.info/entwicklungslaender.php
+
 
 
 #Output nach Regionen und Anzahl an Datensätzen anzeigen
