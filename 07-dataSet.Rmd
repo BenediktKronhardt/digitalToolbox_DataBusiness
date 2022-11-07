@@ -96,4 +96,12 @@ developingCountries <- filter(dataWithCategory, development==0)
 industrialCountries <- filter(dataWithCategory, development==1)
 
 
+# t-Test for difference between developing and industrial countries:
+test1 <- t.test(cost_of_living_plus_rent_index ~ development, data=dataWithCategory, var.equal=TRUE)
+test1_glance <- glance(test1)
+test1
+test1_glance
+
+#TODO: interpret these results
+
 ```
