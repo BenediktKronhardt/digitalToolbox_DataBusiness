@@ -2,3 +2,10 @@
 
 2. Theoretical background concluding with the research question
 
+Inhalt/Aufbau:
+
+  1:Description of the topic, the data set is     focused
+
+  2:What information is critical to know for a    reader of the report to understand the          theoretical background of the data set
+
+  3:research question (describe the question and     the part, developing it)

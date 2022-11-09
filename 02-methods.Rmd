@@ -5,3 +5,12 @@
 - Variable distributions
 - Statements about variances and co-variance and missing values
 - Chosen analytical procedures to answer the research question
+
+
+Inhalt/Aufbau:
+  1:EDA (Exploratory Data Analysis) auf Datenset    anwenden
+    1.1: including information on the variables’ distribution, missing values,
+categories / grouping factors (if applicable) and the relationships between the variables, especially
+regarding the variable in focus, for example, the dependent variable of a applied statistical method (if
+applicable)
+  2:Methoden/statistische Modelle aufstellen

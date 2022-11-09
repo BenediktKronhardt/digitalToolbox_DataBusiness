@@ -1,3 +1,8 @@
 # Results
 
 4. Results
+
+Inhalt:
+
+should comprise all necessary calculations, including checking of assumptions (if
+applicable)
