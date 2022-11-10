@@ -50,19 +50,22 @@ library(maps)
 library(janitor)
 
 #initial country data
-developed_and_developing_countries <- read_delim("02-data/developed_and_developing_countries.csv", 
+dd <- read_delim("02-data/developed_and_developing_countries.csv", 
                                   delim = ";", escape_double = FALSE,
                                   trim_ws = TRUE)
-developed_and_developing_countries <- janitor::clean_names(developed_and_developing_countries)
-developed_and_developing_countries$category[developed_and_developing_countries$category == "developed"] <- 1.0
-developed_and_developing_countries$category[developed_and_developing_countries$category == "developing"] <- 0.0
-developed_and_developing_countries$category <- as.double(developed_and_developing_countries$category)
+dd <- janitor::clean_names(dd)
+dd$category[dd$category == "developed"] <- 1.0
+dd$category[dd$category == "developing"] <- 0.0
+dd$category <- as.double(dd$category)
 
-colnames(developed_and_developing_countries)[1] <- "region"
-colnames(developed_and_developing_countries)[2] <- "development"
+dd$category[dd$category == "developing"] <- 0.0
+dd$country[dd$country == "italy"] <- "Italy"
+
+colnames(dd)[1] <- "region"
+colnames(dd)[2] <- "development"
 
 world <- map_data("world")
-worldSubset <- left_join(developed_and_developing_countries, world, by="region")
+worldSubset <- left_join(dd, world, by="region")
 
 worldSubset
 
