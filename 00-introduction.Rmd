@@ -2,3 +2,6 @@
 
 kurze Einleitung über die Aufgabenstellung (ggf. die Rollen und Aufgabenverteilung im Team)
 
+- Was wurde gemacht?
+- Beschreibung der einzelnen Kapitel
+- Kurze Beschreibung der Thematik
