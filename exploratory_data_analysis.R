@@ -109,7 +109,7 @@ ggplot(dataWithCategory, aes(x = cost_of_living_plus_rent_index)) +
 plot(table(dataWithCategory), type = "h", xlab = "", ylab = "")
 
 
-
+#uninteressant für uns, nur für count Variablen!
 
 
 
@@ -117,8 +117,6 @@ plot(table(dataWithCategory), type = "h", xlab = "", ylab = "")
 
 
 #correlation
-dat <- select(where(is.numeric(dataWithCategory)))
-  corvif(dat)
 datasummary_correlation(dataWithCategory)
 
 #relationship x&y

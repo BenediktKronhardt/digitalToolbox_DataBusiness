@@ -142,6 +142,17 @@ kurze Einleitung über die Aufgabenstellung (ggf. die Rollen und Aufgabenverteil
 
 2. Theoretical background concluding with the research question
 
+Inhalt/Aufbau:
+
+  1:Description of the topic, the data set is     focused
+
+  2:What information is critical to know for a    reader of the report to understand the          theoretical background of the data set
+
+  3:research question (describe the question and     the part, developing it)
+  
+
+Das ist ein Zitat von '@Konus1939'
+  
 
 <!--chapter:end:01-theoretical-background.Rmd-->
 
@@ -154,12 +165,26 @@ kurze Einleitung über die Aufgabenstellung (ggf. die Rollen und Aufgabenverteil
 - Statements about variances and co-variance and missing values
 - Chosen analytical procedures to answer the research question
 
+
+Inhalt/Aufbau:
+  1:EDA (Exploratory Data Analysis) auf Datenset    anwenden
+    1.1: including information on the variables’ distribution, missing values,
+categories / grouping factors (if applicable) and the relationships between the variables, especially
+regarding the variable in focus, for example, the dependent variable of a applied statistical method (if
+applicable)
+  2:Methoden/statistische Modelle aufstellen
+
 <!--chapter:end:02-methods.Rmd-->
 
 
 # Results
 
 4. Results
+
+Inhalt:
+
+should comprise all necessary calculations, including checking of assumptions (if
+applicable)
 
 <!--chapter:end:03-results.Rmd-->
 
@@ -168,6 +193,9 @@ kurze Einleitung über die Aufgabenstellung (ggf. die Rollen und Aufgabenverteil
 
 5. Diskussion
 Muss noch überarbeitet werden!
+
+Inhalt:
+Die vorher dargestellten Results diskutieren in Verbindung mit der Forschungsfrage!
 
 <!--chapter:end:04-discussion.Rmd-->
 
@@ -219,9 +247,6 @@ aaaaa, bbbbbb
 
 # Data-set
 
-## Boxplot wie viele Städte liegen über/unter dem Durchschnittlichen CLI
-
-
 
 
 \linespread{1}
@@ -235,12 +260,12 @@ library(tidyverse) # This includes readr!
 \linespread{1}
 
 ```
-#> -- Attaching packages ------------
+#> -- Attaching packages --- tidyverse 1.3.2 --
 #> v ggplot2 3.3.6      v purrr   0.3.5 
 #> v tibble  3.1.8      v dplyr   1.0.10
 #> v tidyr   1.2.1      v stringr 1.4.1 
 #> v readr   2.1.3      v forcats 0.5.2 
-#> -- Conflicts ---------------------
+#> -- Conflicts ------ tidyverse_conflicts() --
 #> x dplyr::filter() masks stats::filter()
 #> x dplyr::lag()    masks stats::lag()
 ```
@@ -308,6 +333,19 @@ library(gt) # For displaying tables
 
 ```r
 library(gtsummary) # For model reporting inline and in tables
+```
+
+
+
+\linespread{1}
+
+```
+#> #StandWithUkraine
+```
+
+\linespread{1}
+
+```r
 library(broom) # For working with statistical models
 library(car) # For type-III anova tests
 ```
@@ -351,10 +389,29 @@ library(effects) # For working with statistical models / visualize effects
 ```r
 library(ggeffects) # For working with statistical models / visualize effects
 library(patchwork) # For putting different visualizations in one figure
+library(janitor)
+```
+
+
+
+\linespread{1}
+
+```
+#> 
+#> Attache Paket: 'janitor'
+#> 
+#> Die folgenden Objekte sind maskiert von 'package:stats':
+#> 
+#>     chisq.test, fisher.test
+```
+
+\linespread{1}
+
+```r
 
 dataset <- read_delim("02-data/cost-of-living-2017.csv", 
-                                  delim = "\t", escape_double = FALSE, 
-                                  trim_ws = TRUE)
+                      delim = "\t", escape_double = FALSE, 
+                      trim_ws = TRUE)
 ```
 
 
@@ -363,7 +420,7 @@ dataset <- read_delim("02-data/cost-of-living-2017.csv",
 
 ```
 #> Rows: 511 Columns: 11
-#> -- Column specification ----------
+#> -- Column specification --------------------
 #> Delimiter: "\t"
 #> chr (3): City, State, Country
 #> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
@@ -384,7 +441,7 @@ continents <- read_csv("02-data/continents2.csv")
 
 ```
 #> Rows: 249 Columns: 11
-#> -- Column specification ----------
+#> -- Column specification --------------------
 #> Delimiter: ","
 #> chr (7): name, alpha-2, alpha-3, iso_3166-2, region, sub...
 #> dbl (4): country-code, region-code, sub-region-code, int...
@@ -460,6 +517,63 @@ filter(manipulated_data, is.na(region))
 #Da Kosovo na ist, die Zelle in "Europe" ändern
 manipulated_data[486, 12] <- "Europe"
 
+dd <- read_delim("02-data/developed_and_developing_countries.csv",
+                 delim = ";", escape_double = FALSE,
+                 trim_ws = TRUE)
+```
+
+
+
+\linespread{1}
+
+```
+#> Rows: 172 Columns: 2
+#> -- Column specification --------------------
+#> Delimiter: ";"
+#> chr (2): country, category
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+\linespread{1}
+
+```r
+dd <- janitor::clean_names(dd)
+dd$category[dd$category == "developed"] <- 1.0
+dd$category[dd$category == "developing"] <- 0.0
+dd$category <- as.double(dd$category)
+
+
+dd$category[dd$category == "developing"] <- 0.0
+dd$country[dd$country == "italy"] <- "Italy"
+dd$country[dd$country == "Hong Kong SAR"] <- "Hong Kong"
+dd$country[dd$country == "Taiwan Province of China"] <- "Taiwan"
+dd$country[dd$country == "Russian Federation"] <- "Russia"
+dd$country[dd$country == "Viet Nam"] <- "Vietnam"
+dd$country[dd$country == "Bosnia and Herzegovina"] <- "Bosnia And Herzegovina"
+dd$country[dd$country == "Kosovo"] <- "Kosovo (Disputed Territory)"
+
+
+colnames(dd)[2] <- "development"
+
+dataWithCategory <- left_join(manipulated_data,dd, by="country")
+
+#Prüfen, ob irgendwo ein 'NA' ist
+dataToCorrectCity <- filter(dataWithCategory, is.na(city))
+dataToCorrectCountry <- filter(dataWithCategory, is.na(country))
+dataToCorrectCliPlusRentIndex <- filter(dataWithCategory, is.na(cost_of_living_plus_rent_index))
+dataToCorrectCli <- filter(dataWithCategory, is.na(cli))
+dataToCorrectRentIndex <- filter(dataWithCategory, is.na(rent_index))
+dataToCorrectGroceriesIndex <- filter(dataWithCategory, is.na(groceries_index))
+dataToCorrectRestaurantPriceIndex <- filter(dataWithCategory, is.na(restaurant_price_index))
+dataToCorrectLocalPurchasingPowerIndex <- filter(dataWithCategory, is.na(local_purchasing_power_index))
+dataToCorrectRegion <- filter(dataWithCategory, is.na(region))
+dataToCorrectDevelopment <- filter(dataWithCategory, is.na(development))
+
+#source for data-hange: https://www.laenderdaten.info/entwicklungslaender.php
+
+
 
 #Output nach Regionen und Anzahl an Datensätzen anzeigen
 ggplot(data = manipulated_data, aes(x = region)) +
@@ -494,6 +608,73 @@ manipulated_data %>% count(region)
 #> 4 Europe     178
 #> 5 Oceania     15
 ```
+
+\linespread{1}
+
+```r
+
+
+#Split into two datasets with developing countries and industrial countries
+developingCountries <- filter(dataWithCategory, development==0)
+
+industrialCountries <- filter(dataWithCategory, development==1)
+
+
+# t-Test for difference between developing and industrial countries:
+test1 <- t.test(cost_of_living_plus_rent_index ~ development, data=dataWithCategory, var.equal=TRUE)
+test1_glance <- glance(test1)
+test1
+```
+
+
+
+\linespread{1}
+
+```
+#> 
+#> 	Two Sample t-test
+#> 
+#> data:  cost_of_living_plus_rent_index by development
+#> t = -17.319, df = 509, p-value < 2.2e-16
+#> alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+#> 95 percent confidence interval:
+#>  -26.99355 -21.49325
+#> sample estimates:
+#> mean in group 0 mean in group 1 
+#>        30.41876        54.66216
+```
+
+\linespread{1}
+
+```r
+test1_glance
+```
+
+
+
+\linespread{1}
+
+```
+#> # A tibble: 1 x 10
+#>   estimate estima~1 estim~2 stati~3  p.value param~4 conf.~5
+#>      <dbl>    <dbl>   <dbl>   <dbl>    <dbl>   <dbl>   <dbl>
+#> 1    -24.2     30.4    54.7   -17.3 3.61e-53     509   -27.0
+#> # ... with 3 more variables: conf.high <dbl>, method <chr>,
+#> #   alternative <chr>, and abbreviated variable names
+#> #   1: estimate1, 2: estimate2, 3: statistic, 4: parameter,
+#> #   5: conf.low
+```
+
+\linespread{1}
+
+```r
+
+#TODO: interpret these results
+```
+
+
+
+\linespread{1}
 
 <!--chapter:end:07-dataSet.Rmd-->
 
@@ -566,7 +747,7 @@ df1 <- read_csv("02-data/mpg_data_as_csv.csv", lazy = FALSE)
 
 ```
 #> Rows: 234 Columns: 11
-#> -- Column specification ----------
+#> -- Column specification --------------------
 #> Delimiter: ","
 #> chr (6): manufacturer, model, trans, drv, fl, class
 #> dbl (5): displ, year, cyl, cty, hwy
@@ -656,11 +837,11 @@ datasummary_skim(df1, output = 'kableExtra', booktabs = TRUE,
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76dc4f731a38.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76dc40b278d2.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76dc14894d8f.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76dc37733f0b.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76dc621762d5.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_24586303342b.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_24582343b41.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_245835a527fd.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_24582b6b6572.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_245859815f13.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -821,16 +1002,16 @@ test1
 #> 	Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -5.7637, df = 98, p-value = 9.538e-08
+#> t = -6.8601, df = 98, p-value = 6.239e-10
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -7.996598 -3.900429
+#>  -7.390621 -4.074139
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>              49.84182              55.79033
+#>              49.71902              55.45140
 ```
 
-This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-5.95$ between class A ($M = 49.84$, $SD = 4.76$) and class B ($M = 55.79$, $SD = 5.53$) in this case, $t(98)~=~-5.764,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
+This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-5.73$ between class A ($M = 49.72$, $SD = 4.29$) and class B ($M = 55.45$, $SD = 4.06$) in this case, $t(98)~=~-6.86,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
 
 
 ### $\chi^2$-test
@@ -1044,6 +1225,7 @@ Year = 2008 & \num{1.21} (\num{0.84}) & \num{1.22} (\num{0.50})* & \num{1.04} (\
 \cellcolor{gray!6}{$adj.~R^2$} & \cellcolor{gray!6}{\num{0.61}} & \cellcolor{gray!6}{\num{0.61}} & \cellcolor{gray!6}{\num{0.58}}\\
 $AIC$ & \num{1268.25} & \num{1264.65} & \num{1279.78}\\
 \cellcolor{gray!6}{$RMSE$} & \cellcolor{gray!6}{\num{3.68}} & \cellcolor{gray!6}{\num{3.68}} & \cellcolor{gray!6}{\num{3.82}}\\
+$F$ & \num{59.95} & \num{90.48} & \num{107.07}\\
 \bottomrule
 \multicolumn{4}{l}{\rule{0pt}{1em}{\small \textsl{Notes:}~$+~p~\leq~.1$; $*~p~\leq~.05$; $**~p~\leq~.01$; $***~p~\leq~.001$}}\\
 \end{tabular}
@@ -1830,7 +2012,7 @@ dataset <- read_csv("02-data/cost-of-living-2017.csv", lazy= FALSE)
 
 ```
 #> Rows: 511 Columns: 1
-#> -- Column specification ----------
+#> -- Column specification --------------------
 #> Delimiter: ","
 #> chr (1): City	State	Country	Cost of Living Plus Rent Ind...
 #> 
@@ -1846,4 +2028,529 @@ dataset <- read_csv("02-data/cost-of-living-2017.csv", lazy= FALSE)
 Mal schauen, ob diese Datei funktioniert
 
 <!--chapter:end:10-test.Rmd-->
+
+
+
+\linespread{1}
+
+```r
+
+library(tidyverse)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(maps)
+```
+
+
+
+\linespread{1}
+
+```
+#> Warning: Paket 'maps' wurde unter R Version 4.2.2 erstellt
+#> 
+#> Attache Paket: 'maps'
+#> Das folgende Objekt ist maskiert 'package:purrr':
+#> 
+#>     map
+```
+
+\linespread{1}
+
+```r
+library(janitor)
+
+#Initial data
+rawData <- read_delim("02-data/cost-of-living-2017.csv", 
+                                  delim = "\t", escape_double = FALSE, 
+                                  trim_ws = TRUE)
+```
+
+
+
+\linespread{1}
+
+```
+#> Rows: 511 Columns: 11
+#> -- Column specification --------------------
+#> Delimiter: "\t"
+#> chr (3): City, State, Country
+#> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+\linespread{1}
+
+```r
+rawData <- janitor::clean_names(rawData)
+rawData
+```
+
+
+
+\linespread{1}
+
+```
+#> # A tibble: 511 x 11
+#>    city  state country cost_~1   cli rent_~2 groce~3 resta~4
+#>    <chr> <chr> <chr>     <dbl> <dbl>   <dbl>   <dbl>   <dbl>
+#>  1 Zuri~ <NA>  Switze~   109.   150.    66.8    164.    141.
+#>  2 Hami~ <NA>  Bermuda   133.   148.   118.     145.    153.
+#>  3 Zug   <NA>  Switze~   106.   143.    67.4    148.    143.
+#>  4 Gene~ <NA>  Switze~   107.   142.    70.2    147.    139.
+#>  5 Basel <NA>  Switze~    97.5  142.    51.5    150.    132.
+#>  6 Bern  <NA>  Switze~    91.1  136.    45.3    146.    122.
+#>  7 Laus~ <NA>  Switze~    93.6  131.    54.6    137.    128.
+#>  8 Reyk~ <NA>  Iceland    93.9  131.    55.9    128.    141.
+#>  9 Luga~ <NA>  Switze~    88.6  124.    51.7    121.    128.
+#> 10 Stav~ <NA>  Norway     77.8  117.    37.4    108.    143.
+#> # ... with 501 more rows, 3 more variables:
+#> #   local_purchasing_power_index <dbl>,
+#> #   leverage_model_1 <dbl>, leverage_model_2 <dbl>, and
+#> #   abbreviated variable names
+#> #   1: cost_of_living_plus_rent_index, 2: rent_index,
+#> #   3: groceries_index, 4: restaurant_price_index
+```
+
+\linespread{1}
+
+```r
+
+#Outliers
+sum(is.na(rawData))
+```
+
+
+
+\linespread{1}
+
+```
+#> [1] 383
+```
+
+<!--chapter:end:11-exploratory_data_analysis.Rmd-->
+
+
+
+
+\linespread{1}
+
+```r
+library(tidyverse)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(maps)
+library(janitor)
+
+#Initial data
+rawData <- read_delim("02-data/cost-of-living-2017.csv", 
+                                  delim = "\t", escape_double = FALSE, 
+                                  trim_ws = TRUE)
+```
+
+
+
+\linespread{1}
+
+```
+#> Rows: 511 Columns: 11
+#> -- Column specification --------------------
+#> Delimiter: "\t"
+#> chr (3): City, State, Country
+#> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+\linespread{1}
+
+```r
+rawData <- janitor::clean_names(rawData)
+manipulatedData <- rawData[,3:4] %>% group_by(country) %>% summarise(average = mean(cost_of_living_plus_rent_index))
+
+colnames(manipulatedData)[1] <- "region"
+
+world <- map_data("world")
+worldSubset <- left_join(manipulatedData, world, by="region")
+worldSubset
+```
+
+
+
+\linespread{1}
+
+```
+#> # A tibble: 66,008 x 7
+#>    region  average  long   lat group order subregion
+#>    <chr>     <dbl> <dbl> <dbl> <dbl> <int> <chr>    
+#>  1 Albania    24.4  20.1  42.5     6   770 <NA>     
+#>  2 Albania    24.4  20.1  42.5     6   771 <NA>     
+#>  3 Albania    24.4  20.2  42.4     6   772 <NA>     
+#>  4 Albania    24.4  20.2  42.3     6   773 <NA>     
+#>  5 Albania    24.4  20.3  42.3     6   774 <NA>     
+#>  6 Albania    24.4  20.4  42.3     6   775 <NA>     
+#>  7 Albania    24.4  20.5  42.2     6   776 <NA>     
+#>  8 Albania    24.4  20.5  42.2     6   777 <NA>     
+#>  9 Albania    24.4  20.6  42.0     6   778 <NA>     
+#> 10 Albania    24.4  20.6  41.9     6   779 <NA>     
+#> # ... with 65,998 more rows
+```
+
+\linespread{1}
+
+```r
+
+plain <- theme(
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  panel.border = element_blank(),
+  panel.grid = element_blank(),
+  axis.title = element_blank(),
+  panel.background = element_rect(fill = "white"),
+  plot.title = element_text(hjust = 0.5)
+)
+worldCLI <- ggplot(data = worldSubset, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.3) +
+  geom_polygon(aes(fill = average)) +
+  scale_fill_distiller(palette ="RdBu", direction = 1) + # or direction=1
+  ggtitle("Average Cost of Living + Rent Index") +
+  plain
+worldCLI
+```
+
+
+
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-47-1.pdf)<!-- --> 
+
+
+\linespread{1}
+
+```r
+library(tidyverse)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(maps)
+library(janitor)
+
+#initial country data
+dd <- read_delim("02-data/developed_and_developing_countries.csv", 
+                                  delim = ";", escape_double = FALSE,
+                                  trim_ws = TRUE)
+```
+
+
+
+\linespread{1}
+
+```
+#> Rows: 172 Columns: 2
+#> -- Column specification --------------------
+#> Delimiter: ";"
+#> chr (2): country, category
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+\linespread{1}
+
+```r
+dd <- janitor::clean_names(dd)
+dd$category[dd$category == "developed"] <- 1.0
+dd$category[dd$category == "developing"] <- 0.0
+dd$category <- as.double(dd$category)
+
+dd$category[dd$category == "developing"] <- 0.0
+dd$country[dd$country == "italy"] <- "Italy"
+
+colnames(dd)[1] <- "region"
+colnames(dd)[2] <- "development"
+
+world <- map_data("world")
+worldSubset <- left_join(dd, world, by="region")
+
+worldSubset
+```
+
+
+
+\linespread{1}
+
+```
+#> # A tibble: 71,310 x 7
+#>    region  development  long   lat group order subregion
+#>    <chr>         <dbl> <dbl> <dbl> <dbl> <int> <chr>    
+#>  1 Austria           1  17.0  48.6   181  9108 <NA>     
+#>  2 Austria           1  16.9  48.6   181  9109 <NA>     
+#>  3 Austria           1  16.9  48.6   181  9110 <NA>     
+#>  4 Austria           1  16.9  48.5   181  9111 <NA>     
+#>  5 Austria           1  16.9  48.4   181  9112 <NA>     
+#>  6 Austria           1  16.9  48.4   181  9113 <NA>     
+#>  7 Austria           1  17.0  48.2   181  9114 <NA>     
+#>  8 Austria           1  17.1  48.1   181  9115 <NA>     
+#>  9 Austria           1  17.1  48.0   181  9116 <NA>     
+#> 10 Austria           1  17.1  48.0   181  9117 <NA>     
+#> # ... with 71,300 more rows
+```
+
+\linespread{1}
+
+```r
+
+plain <- theme(
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  panel.border = element_blank(),
+  panel.grid = element_blank(),
+  axis.title = element_blank(),
+  panel.background = element_rect(fill = "white"),
+  plot.title = element_text(hjust = 0.5)
+)
+worldDD <- ggplot(data = worldSubset, mapping = aes(x = long, y = lat, group = group)) +
+  borders("world", fill="grey90",colour="grey") + 
+  coord_fixed(1.3) +
+  geom_polygon(aes(fill = development)) +
+  scale_fill_distiller(palette ="RdBu", direction = 1) + # or direction=1
+  ggtitle("Industrialized and developing countries") +
+  plain
+worldDD
+```
+
+
+
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-48-1.pdf)<!-- --> 
+
+\linespread{1}
+
+```r
+library(tidyverse)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(maps)
+library(janitor)
+
+#Initial data
+rawData <- read_delim("02-data/cost-of-living-2017.csv", 
+                                  delim = "\t", escape_double = FALSE, 
+                                  trim_ws = TRUE)
+```
+
+
+
+\linespread{1}
+
+```
+#> Rows: 511 Columns: 11
+#> -- Column specification --------------------
+#> Delimiter: "\t"
+#> chr (3): City, State, Country
+#> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+\linespread{1}
+
+```r
+rawData <- janitor::clean_names(rawData)
+rawData
+```
+
+
+
+\linespread{1}
+
+```
+#> # A tibble: 511 x 11
+#>    city  state country cost_~1   cli rent_~2 groce~3 resta~4
+#>    <chr> <chr> <chr>     <dbl> <dbl>   <dbl>   <dbl>   <dbl>
+#>  1 Zuri~ <NA>  Switze~   109.   150.    66.8    164.    141.
+#>  2 Hami~ <NA>  Bermuda   133.   148.   118.     145.    153.
+#>  3 Zug   <NA>  Switze~   106.   143.    67.4    148.    143.
+#>  4 Gene~ <NA>  Switze~   107.   142.    70.2    147.    139.
+#>  5 Basel <NA>  Switze~    97.5  142.    51.5    150.    132.
+#>  6 Bern  <NA>  Switze~    91.1  136.    45.3    146.    122.
+#>  7 Laus~ <NA>  Switze~    93.6  131.    54.6    137.    128.
+#>  8 Reyk~ <NA>  Iceland    93.9  131.    55.9    128.    141.
+#>  9 Luga~ <NA>  Switze~    88.6  124.    51.7    121.    128.
+#> 10 Stav~ <NA>  Norway     77.8  117.    37.4    108.    143.
+#> # ... with 501 more rows, 3 more variables:
+#> #   local_purchasing_power_index <dbl>,
+#> #   leverage_model_1 <dbl>, leverage_model_2 <dbl>, and
+#> #   abbreviated variable names
+#> #   1: cost_of_living_plus_rent_index, 2: rent_index,
+#> #   3: groceries_index, 4: restaurant_price_index
+```
+
+\linespread{1}
+
+```r
+
+dd <- read_delim("02-data/developed_and_developing_countries.csv", 
+                                  delim = ";", escape_double = FALSE,
+                                  trim_ws = TRUE)
+```
+
+
+
+\linespread{1}
+
+```
+#> Rows: 172 Columns: 2
+#> -- Column specification --------------------
+#> Delimiter: ";"
+#> chr (2): country, category
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+\linespread{1}
+
+```r
+dd <- janitor::clean_names(dd)
+
+colnames(dd)[2] <- "development"
+dd$development[dd$development == "developed"] <- 1.0
+dd$development[dd$development == "developing"] <- 0.0
+dd$development <- as.double(dd$development)
+
+dd$development[dd$development == "developing"] <- 0.0
+dd$country[dd$country == "italy"] <- "Italy"
+dd
+```
+
+
+
+\linespread{1}
+
+```
+#> # A tibble: 172 x 2
+#>    country    development
+#>    <chr>            <dbl>
+#>  1 Austria              1
+#>  2 Belgium              1
+#>  3 Denmark              1
+#>  4 Finland              1
+#>  5 France               1
+#>  6 Germany              1
+#>  7 Greece               1
+#>  8 Ireland              1
+#>  9 Italy                1
+#> 10 Luxembourg           1
+#> # ... with 162 more rows
+```
+
+\linespread{1}
+
+```r
+
+data <- left_join(dd, rawData, by="country")
+data
+```
+
+
+
+\linespread{1}
+
+```
+#> # A tibble: 566 x 12
+#>    country devel~1 city  state cost_~2   cli rent_~3 groce~4
+#>    <chr>     <dbl> <chr> <chr>   <dbl> <dbl>   <dbl>   <dbl>
+#>  1 Austria       1 Linz  <NA>     58.8  88.4    28.3    86.6
+#>  2 Austria       1 Vien~ <NA>     54.2  76.0    31.7    72.4
+#>  3 Austria       1 Graz  <NA>     49.4  75.0    23.0    72.6
+#>  4 Belgium       1 Antw~ <NA>     56.9  86.2    26.6    79.6
+#>  5 Belgium       1 Gent  <NA>     55.8  85.3    25.3    77.1
+#>  6 Belgium       1 Leuv~ <NA>     56.5  84.4    27.8    85.5
+#>  7 Belgium       1 Brus~ <NA>     58.8  82.7    34.2    74.2
+#>  8 Denmark       1 Cope~ <NA>     73.7  97.1    49.6    78.2
+#>  9 Denmark       1 Aalb~ <NA>     59.2  92.1    25.3    77.3
+#> 10 Denmark       1 Arhus <NA>     59.8  87.1    31.6    67.2
+#> # ... with 556 more rows, 4 more variables:
+#> #   restaurant_price_index <dbl>,
+#> #   local_purchasing_power_index <dbl>,
+#> #   leverage_model_1 <dbl>, leverage_model_2 <dbl>, and
+#> #   abbreviated variable names 1: development,
+#> #   2: cost_of_living_plus_rent_index, 3: rent_index,
+#> #   4: groceries_index
+```
+
+\linespread{1}
+
+```r
+
+plot(data$cost_of_living_plus_rent_index,data$development
+     ,xlab = "Cost of Living plus rent index", ylab = "Development state")
+```
+
+
+
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-49-1.pdf)<!-- --> \linespread{1}
+
+```r
+
+plot(data$groceries_index,data$rent_index
+     ,xlab = "Cost of Living plus rent index", ylab = "Rent Index")
+```
+
+
+
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-49-2.pdf)<!-- --> \linespread{1}
+
+```r
+
+data$development[data$development == 1.0] <- "developed"
+data$development[data$development == 0.0] <- "developing"
+data
+```
+
+
+
+\linespread{1}
+
+```
+#> # A tibble: 566 x 12
+#>    country devel~1 city  state cost_~2   cli rent_~3 groce~4
+#>    <chr>   <chr>   <chr> <chr>   <dbl> <dbl>   <dbl>   <dbl>
+#>  1 Austria develo~ Linz  <NA>     58.8  88.4    28.3    86.6
+#>  2 Austria develo~ Vien~ <NA>     54.2  76.0    31.7    72.4
+#>  3 Austria develo~ Graz  <NA>     49.4  75.0    23.0    72.6
+#>  4 Belgium develo~ Antw~ <NA>     56.9  86.2    26.6    79.6
+#>  5 Belgium develo~ Gent  <NA>     55.8  85.3    25.3    77.1
+#>  6 Belgium develo~ Leuv~ <NA>     56.5  84.4    27.8    85.5
+#>  7 Belgium develo~ Brus~ <NA>     58.8  82.7    34.2    74.2
+#>  8 Denmark develo~ Cope~ <NA>     73.7  97.1    49.6    78.2
+#>  9 Denmark develo~ Aalb~ <NA>     59.2  92.1    25.3    77.3
+#> 10 Denmark develo~ Arhus <NA>     59.8  87.1    31.6    67.2
+#> # ... with 556 more rows, 4 more variables:
+#> #   restaurant_price_index <dbl>,
+#> #   local_purchasing_power_index <dbl>,
+#> #   leverage_model_1 <dbl>, leverage_model_2 <dbl>, and
+#> #   abbreviated variable names 1: development,
+#> #   2: cost_of_living_plus_rent_index, 3: rent_index,
+#> #   4: groceries_index
+```
+
+\linespread{1}
+
+```r
+
+boxplot(data$cost_of_living_plus_rent_index~data$development)
+```
+
+
+
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-49-3.pdf)<!-- --> 
+
+<!--chapter:end:XX-test_datei_BM.Rmd-->
 
