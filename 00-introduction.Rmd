@@ -17,52 +17,33 @@ library(stringr)
 library(ggplot2)
 library(maps)
 library(janitor)
-
-library(tidyverse)
-library(dplyr)
-library(stringr)
-library(ggplot2)
-library(maps)
-library(janitor)
 library(modelsummary)
 library(car)
 library(carData)
 library(gpairs)
 library(GGally)
-#Initial data
-rawData <- read_delim("02-data/cost-of-living-2017.csv", 
+
+#Import initial data
+costOfLiving <- read_delim("02-data/cost-of-living-2017.csv", 
                       delim = "\t", escape_double = FALSE, 
                       trim_ws = TRUE)
-rawData <- janitor::clean_names(rawData)
-rawData
-#
-#
-#
-#exploratoryDataAnalysis
-#
-#
-#
+costOfLiving <- janitor::clean_names(costOfLiving)
 
-#raw
-dataset <- read_delim("02-data/cost-of-living-2017.csv", 
-                      delim = "\t", escape_double = FALSE, 
-                      trim_ws = TRUE)
-continents <- read_csv("02-data/continents2.csv")
+#import list of continents and countries
+manipulated_continents <- read_csv("02-data/continents2.csv")
+manipulated_continents <- janitor::clean_names(dataset)
+manipulated_continents
+#rename attribute 'name' in 'country' to perform a left join.
+#Kosovo as a country has to be added seperately
+manipulated_continents <- rename(manipulated_continents, country = name)
+costOfLivingAndContinents <- left_join(dataset, select(manipulated_continents, country, region), by="country")
 
-head(dataset)
+#Check, if a region has no entry -> Result: Kosovo has no region
+filter(costOfLivingAndContinents, is.na(region))
+#Kosovo has no continent -> changed to "Europe"
+costOfLivingAndContinents[486, 12] <- "Europe"
 
-dataset <- janitor::clean_names(dataset)
-
-#Die Spalte region bei Dataset hinzufügen; Kosovo muss separat hinzugefügt werden, ist nicht vorhanden bei continents
-manipulated_continents <- rename(continents, country=name)
-
-manipulated_data <- left_join(dataset, select(manipulated_continents, country, region), by="country")
-
-#Prüfen, ob eine Region na ist -> Ergebnis: Kosovo ist na
-filter(manipulated_data, is.na(region))
-#Da Kosovo na ist, die Zelle in "Europe" ändern
-manipulated_data[486, 12] <- "Europe"
-
+#import list of Countries and development status
 dd <- read_delim("02-data/developed_and_developing_countries.csv",
                  delim = ";", escape_double = FALSE,
                  trim_ws = TRUE)
@@ -82,5 +63,6 @@ dd$country[dd$country == "Bosnia and Herzegovina"] <- "Bosnia And Herzegovina"
 dd$country[dd$country == "Kosovo"] <- "Kosovo (Disputed Territory)"
 colnames(dd)[2] <- "development"
 
-dataWithCategory <- left_join(manipulated_data,dd, by="country")
+dataWithCategory <- left_join(costOfLivingAndContinents,dd, by="country")
+dataWithCategory
 ````
