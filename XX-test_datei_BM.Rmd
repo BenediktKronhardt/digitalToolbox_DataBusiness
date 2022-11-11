@@ -89,3 +89,47 @@ worldDD <- ggplot(data = worldSubset, mapping = aes(x = long, y = lat, group = g
 worldDD
 ```
 
+```{r}
+library(tidyverse)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(maps)
+library(janitor)
+
+#Initial data
+rawData <- read_delim("02-data/cost-of-living-2017.csv", 
+                                  delim = "\t", escape_double = FALSE, 
+                                  trim_ws = TRUE)
+rawData <- janitor::clean_names(rawData)
+rawData
+
+dd <- read_delim("02-data/developed_and_developing_countries.csv", 
+                                  delim = ";", escape_double = FALSE,
+                                  trim_ws = TRUE)
+dd <- janitor::clean_names(dd)
+
+colnames(dd)[2] <- "development"
+dd$development[dd$development == "developed"] <- 1.0
+dd$development[dd$development == "developing"] <- 0.0
+dd$development <- as.double(dd$development)
+
+dd$development[dd$development == "developing"] <- 0.0
+dd$country[dd$country == "italy"] <- "Italy"
+dd
+
+data <- left_join(dd, rawData, by="country")
+data
+
+plot(data$cost_of_living_plus_rent_index,data$development
+     ,xlab = "Cost of Living plus rent index", ylab = "Development state")
+
+plot(data$groceries_index,data$rent_index
+     ,xlab = "Cost of Living plus rent index", ylab = "Rent Index")
+
+data$development[data$development == 1.0] <- "developed"
+data$development[data$development == 0.0] <- "developing"
+data
+
+boxplot(data$cost_of_living_plus_rent_index~data$development)
+```
