@@ -1,4 +1,25 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Methods
+
+## Exploratory Data Analysis
+
+First of all, we had to check, if there are missing values inside of the data-set. Therefore we used the following code to proof this:
+
+```{r}
+#| echo = TRUE,
+#| message = TRUE
+summary(is.na(dataWithCategory))
+```
+As it can be seen, there were $`r sum(is.na(dataWithCategory$state))`$ missing values inside the column "state".
+
+
+## Folgendes nur zur Übersicht/weiteren Aufbau(Gliederung)
+
+
 
 3. Methods, for example:
 - Descriptive statistics

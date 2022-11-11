@@ -4,12 +4,12 @@
 
 Inhalt/Aufbau:
 
-  1:Description of the topic, the data set is     focused
+  1:Description of the topic, the data set is focused
 
-  2:What information is critical to know for a    reader of the report to understand the          theoretical background of the data set
+  2:What information is critical to know for a reader of the report to understand the theoretical background of the data set
 
-  3:research question (describe the question and     the part, developing it)
+  3:research question (describe the question and the part, developing it)
   
 
-Das ist ein Zitat von '@Konus1939'
+Das ist ein Zitat von @Konus1939
   

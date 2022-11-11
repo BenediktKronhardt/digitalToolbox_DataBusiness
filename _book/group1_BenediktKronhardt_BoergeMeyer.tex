@@ -376,6 +376,296 @@
 
 kurze Einleitung über die Aufgabenstellung (ggf. die Rollen und Aufgabenverteilung im Team)
 
+\begin{itemize}
+\tightlist
+\item
+  Was wurde gemacht?
+\item
+  Beschreibung der einzelnen Kapitel
+\item
+  Kurze Beschreibung der Thematik
+\item
+  code junk mit libary und daten
+\end{itemize}
+
+The standard of living became more and more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> -- Attaching packages -------------------------------------- tidyverse 1.3.2 --
+#> v ggplot2 3.3.6      v purrr   0.3.5 
+#> v tibble  3.1.8      v dplyr   1.0.10
+#> v tidyr   1.2.1      v stringr 1.4.1 
+#> v readr   2.1.3      v forcats 0.5.2 
+#> -- Conflicts ----------------------------------------- tidyverse_conflicts() --
+#> x dplyr::filter() masks stats::filter()
+#> x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(stringr)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(maps)}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> Warning: Paket 'maps' wurde unter R Version 4.2.2 erstellt
+#> 
+#> Attache Paket: 'maps'
+#> 
+#> Das folgende Objekt ist maskiert 'package:purrr':
+#> 
+#>     map
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(janitor)}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> 
+#> Attache Paket: 'janitor'
+#> 
+#> Die folgenden Objekte sind maskiert von 'package:stats':
+#> 
+#>     chisq.test, fisher.test
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(modelsummary)}
+\FunctionTok{library}\NormalTok{(car)}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> Lade nötiges Paket: carData
+#> 
+#> Attache Paket: 'car'
+#> 
+#> Das folgende Objekt ist maskiert 'package:dplyr':
+#> 
+#>     recode
+#> 
+#> Das folgende Objekt ist maskiert 'package:purrr':
+#> 
+#>     some
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(carData)}
+\FunctionTok{library}\NormalTok{(gpairs)}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> Warning: Paket 'gpairs' wurde unter R Version 4.2.2 erstellt
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(GGally)}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> Warning: Paket 'GGally' wurde unter R Version 4.2.2 erstellt
+#> Registered S3 method overwritten by 'GGally':
+#>   method from   
+#>   +.gg   ggplot2
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{\#Import initial data}
+\NormalTok{costOfLiving }\OtherTok{\textless{}{-}} \FunctionTok{read\_delim}\NormalTok{(}\StringTok{"02{-}data/cost{-}of{-}living{-}2017.csv"}\NormalTok{, }
+                      \AttributeTok{delim =} \StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, }\AttributeTok{escape\_double =} \ConstantTok{FALSE}\NormalTok{, }
+                      \AttributeTok{trim\_ws =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> Rows: 511 Columns: 11
+#> -- Column specification -------------------------------------------------------
+#> Delimiter: "\t"
+#> chr (3): City, State, Country
+#> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{costOfLiving }\OtherTok{\textless{}{-}}\NormalTok{ janitor}\SpecialCharTok{::}\FunctionTok{clean\_names}\NormalTok{(costOfLiving)}
+
+\CommentTok{\#import list of continents and countries}
+\NormalTok{manipulated\_continents }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"02{-}data/continents2.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> Rows: 249 Columns: 11
+#> -- Column specification -------------------------------------------------------
+#> Delimiter: ","
+#> chr (7): name, alpha-2, alpha-3, iso_3166-2, region, sub...
+#> dbl (4): country-code, region-code, sub-region-code, int...
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{manipulated\_continents }\OtherTok{\textless{}{-}}\NormalTok{ janitor}\SpecialCharTok{::}\FunctionTok{clean\_names}\NormalTok{(manipulated\_continents)}
+
+\CommentTok{\#rename attribute \textquotesingle{}name\textquotesingle{} in \textquotesingle{}country\textquotesingle{} to perform a left join.}
+\CommentTok{\#Kosovo as a country has to be added seperately}
+\NormalTok{manipulated\_continents }\OtherTok{\textless{}{-}} \FunctionTok{rename}\NormalTok{(manipulated\_continents, }\AttributeTok{country =}\NormalTok{ name)}
+\NormalTok{costOfLivingAndContinents }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(costOfLiving, }\FunctionTok{select}\NormalTok{(manipulated\_continents, country, region), }\AttributeTok{by=}\StringTok{"country"}\NormalTok{)}
+
+\CommentTok{\#Check, if a region has no entry {-}\textgreater{} Result: Kosovo has no region}
+\FunctionTok{filter}\NormalTok{(costOfLivingAndContinents, }\FunctionTok{is.na}\NormalTok{(region))}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> # A tibble: 1 x 12
+#>   city   state country cost_~1   cli rent_~2 groce~3 resta~4
+#>   <chr>  <chr> <chr>     <dbl> <dbl>   <dbl>   <dbl>   <dbl>
+#> 1 Prist~ <NA>  Kosovo~    19.3  29.4     8.9    26.6    22.3
+#> # ... with 4 more variables:
+#> #   local_purchasing_power_index <dbl>,
+#> #   leverage_model_1 <dbl>, leverage_model_2 <dbl>,
+#> #   region <chr>, and abbreviated variable names
+#> #   1: cost_of_living_plus_rent_index, 2: rent_index,
+#> #   3: groceries_index, 4: restaurant_price_index
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Kosovo has no continent {-}\textgreater{} changed to "Europe"}
+\NormalTok{costOfLivingAndContinents[}\DecValTok{486}\NormalTok{, }\DecValTok{12}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Europe"}
+
+\CommentTok{\#import list of Countries and development status}
+\NormalTok{dd }\OtherTok{\textless{}{-}} \FunctionTok{read\_delim}\NormalTok{(}\StringTok{"02{-}data/developed\_and\_developing\_countries.csv"}\NormalTok{,}
+                 \AttributeTok{delim =} \StringTok{";"}\NormalTok{, }\AttributeTok{escape\_double =} \ConstantTok{FALSE}\NormalTok{,}
+                 \AttributeTok{trim\_ws =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> Rows: 172 Columns: 2
+#> -- Column specification -------------------------------------------------------
+#> Delimiter: ";"
+#> chr (2): country, category
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dd }\OtherTok{\textless{}{-}}\NormalTok{ janitor}\SpecialCharTok{::}\FunctionTok{clean\_names}\NormalTok{(dd)}
+\NormalTok{dd}\SpecialCharTok{$}\NormalTok{category[dd}\SpecialCharTok{$}\NormalTok{category }\SpecialCharTok{==} \StringTok{"developed"}\NormalTok{] }\OtherTok{\textless{}{-}} \FloatTok{1.0}
+\NormalTok{dd}\SpecialCharTok{$}\NormalTok{category[dd}\SpecialCharTok{$}\NormalTok{category }\SpecialCharTok{==} \StringTok{"developing"}\NormalTok{] }\OtherTok{\textless{}{-}} \FloatTok{0.0}
+\NormalTok{dd}\SpecialCharTok{$}\NormalTok{category }\OtherTok{\textless{}{-}} \FunctionTok{as.double}\NormalTok{(dd}\SpecialCharTok{$}\NormalTok{category)}
+
+
+\NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"italy"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Italy"}
+\NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Hong Kong SAR"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Hong Kong"}
+\NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Taiwan Province of China"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Taiwan"}
+\NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Russian Federation"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Russia"}
+\NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Viet Nam"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Vietnam"}
+\NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Bosnia and Herzegovina"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Bosnia And Herzegovina"}
+\NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Kosovo"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Kosovo (Disputed Territory)"}
+\FunctionTok{colnames}\NormalTok{(dd)[}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"development"}
+
+\NormalTok{dataWithCategory }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(costOfLivingAndContinents,dd, }\AttributeTok{by=}\StringTok{"country"}\NormalTok{)}
+\NormalTok{dataWithCategory}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#> # A tibble: 511 x 13
+#>    city  state country cost_~1   cli rent_~2 groce~3 resta~4
+#>    <chr> <chr> <chr>     <dbl> <dbl>   <dbl>   <dbl>   <dbl>
+#>  1 Zuri~ <NA>  Switze~   109.   150.    66.8    164.    141.
+#>  2 Hami~ <NA>  Bermuda   133.   148.   118.     145.    153.
+#>  3 Zug   <NA>  Switze~   106.   143.    67.4    148.    143.
+#>  4 Gene~ <NA>  Switze~   107.   142.    70.2    147.    139.
+#>  5 Basel <NA>  Switze~    97.5  142.    51.5    150.    132.
+#>  6 Bern  <NA>  Switze~    91.1  136.    45.3    146.    122.
+#>  7 Laus~ <NA>  Switze~    93.6  131.    54.6    137.    128.
+#>  8 Reyk~ <NA>  Iceland    93.9  131.    55.9    128.    141.
+#>  9 Luga~ <NA>  Switze~    88.6  124.    51.7    121.    128.
+#> 10 Stav~ <NA>  Norway     77.8  117.    37.4    108.    143.
+#> # ... with 501 more rows, 5 more variables:
+#> #   local_purchasing_power_index <dbl>,
+#> #   leverage_model_1 <dbl>, leverage_model_2 <dbl>,
+#> #   region <chr>, development <dbl>, and abbreviated
+#> #   variable names 1: cost_of_living_plus_rent_index,
+#> #   2: rent_index, 3: groceries_index,
+#> #   4: restaurant_price_index
+\end{verbatim}
+
 \hypertarget{theoretical-background}{%
 \chapter{Theoretical background}\label{theoretical-background}}
 
@@ -395,10 +685,53 @@ Inhalt/Aufbau:
 
 3:research question (describe the question and the part, developing it)
 
-Das ist ein Zitat von `Konus (\protect\hyperlink{ref-Konus1939}{1939})'
+Das ist ein Zitat von Konus (\protect\hyperlink{ref-Konus1939}{1939})
 
 \hypertarget{methods}{%
 \chapter{Methods}\label{methods}}
+
+\hypertarget{exploratory-data-analysis}{%
+\section{Exploratory Data Analysis}\label{exploratory-data-analysis}}
+
+First of all, we had to check, if there are missing values inside of the data-set. Therefore we used the following code to proof this:
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(dataWithCategory))}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+\begin{verbatim}
+#>     city           state          country       
+#>  Mode :logical   Mode :logical   Mode :logical  
+#>  FALSE:511       FALSE:128       FALSE:511      
+#>                  TRUE :383                      
+#>  cost_of_living_plus_rent_index    cli         
+#>  Mode :logical                  Mode :logical  
+#>  FALSE:511                      FALSE:511      
+#>                                                
+#>  rent_index      groceries_index restaurant_price_index
+#>  Mode :logical   Mode :logical   Mode :logical         
+#>  FALSE:511       FALSE:511       FALSE:511             
+#>                                                        
+#>  local_purchasing_power_index leverage_model_1
+#>  Mode :logical                Mode :logical   
+#>  FALSE:511                    FALSE:511       
+#>                                               
+#>  leverage_model_2   region        development    
+#>  Mode :logical    Mode :logical   Mode :logical  
+#>  FALSE:511        FALSE:511       FALSE:511      
+#> 
+\end{verbatim}
+
+As it can be seen, there were \(383\) missing values inside the column ``state''.
+
+\hypertarget{folgendes-nur-zur-uxfcbersichtweiteren-aufbaugliederung}{%
+\section{Folgendes nur zur Übersicht/weiteren Aufbau(Gliederung)}\label{folgendes-nur-zur-uxfcbersichtweiteren-aufbaugliederung}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -520,26 +853,6 @@ aaaaa, bbbbbb
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(tidyverse) }\CommentTok{\# This includes readr!}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
-\begin{verbatim}
-#> -- Attaching packages --- tidyverse 1.3.2 --
-#> v ggplot2 3.3.6      v purrr   0.3.5 
-#> v tibble  3.1.8      v dplyr   1.0.10
-#> v tidyr   1.2.1      v stringr 1.4.1 
-#> v readr   2.1.3      v forcats 0.5.2 
-#> -- Conflicts ------ tidyverse_conflicts() --
-#> x dplyr::filter() masks stats::filter()
-#> x dplyr::lag()    masks stats::lag()
-\end{verbatim}
-
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(xtable) }\CommentTok{\# For displaying LaTeX tables}
 \FunctionTok{library}\NormalTok{(modelsummary) }\CommentTok{\# For displaying regression models in tables}
 \FunctionTok{library}\NormalTok{(stargazer) }\CommentTok{\# For displaying regression models in tables}
@@ -550,8 +863,7 @@ aaaaa, bbbbbb
 
 \begin{verbatim}
 #> 
-#> Please cite as: 
-#> 
+#> Please cite as:
 #>  Hlavac, Marek (2022). stargazer: Well-Formatted Regression and Summary Statistics Tables.
 #>  R package version 5.2.3. https://CRAN.R-project.org/package=stargazer
 \end{verbatim}
@@ -570,7 +882,6 @@ aaaaa, bbbbbb
 \begin{verbatim}
 #> 
 #> Attache Paket: 'kableExtra'
-#> 
 #> Das folgende Objekt ist maskiert 'package:dplyr':
 #> 
 #>     group_rows
@@ -589,7 +900,6 @@ aaaaa, bbbbbb
 \begin{verbatim}
 #> 
 #> Attache Paket: 'gt'
-#> 
 #> Das folgende Objekt ist maskiert 'package:modelsummary':
 #> 
 #>     escape_latex
@@ -600,44 +910,8 @@ aaaaa, bbbbbb
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(gtsummary) }\CommentTok{\# For model reporting inline and in tables}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
-\begin{verbatim}
-#> #StandWithUkraine
-\end{verbatim}
-
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(broom) }\CommentTok{\# For working with statistical models}
 \FunctionTok{library}\NormalTok{(car) }\CommentTok{\# For type{-}III anova tests}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
-\begin{verbatim}
-#> Lade nötiges Paket: carData
-#> 
-#> Attache Paket: 'car'
-#> 
-#> Das folgende Objekt ist maskiert 'package:dplyr':
-#> 
-#>     recode
-#> 
-#> Das folgende Objekt ist maskiert 'package:purrr':
-#> 
-#>     some
-\end{verbatim}
-
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(report) }\CommentTok{\# For automated text{-}based model reporting}
 \FunctionTok{library}\NormalTok{(effects) }\CommentTok{\# For working with statistical models / visualize effects}
 \end{Highlighting}
@@ -657,24 +931,6 @@ aaaaa, bbbbbb
 \FunctionTok{library}\NormalTok{(ggeffects) }\CommentTok{\# For working with statistical models / visualize effects}
 \FunctionTok{library}\NormalTok{(patchwork) }\CommentTok{\# For putting different visualizations in one figure}
 \FunctionTok{library}\NormalTok{(janitor)}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
-\begin{verbatim}
-#> 
-#> Attache Paket: 'janitor'
-#> 
-#> Die folgenden Objekte sind maskiert von 'package:stats':
-#> 
-#>     chisq.test, fisher.test
-\end{verbatim}
-
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 
 \NormalTok{dataset }\OtherTok{\textless{}{-}} \FunctionTok{read\_delim}\NormalTok{(}\StringTok{"02{-}data/cost{-}of{-}living{-}2017.csv"}\NormalTok{, }
                       \AttributeTok{delim =} \StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, }\AttributeTok{escape\_double =} \ConstantTok{FALSE}\NormalTok{, }
@@ -686,7 +942,7 @@ aaaaa, bbbbbb
 
 \begin{verbatim}
 #> Rows: 511 Columns: 11
-#> -- Column specification --------------------
+#> -- Column specification -------------------------------------------------------
 #> Delimiter: "\t"
 #> chr (3): City, State, Country
 #> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
@@ -707,7 +963,7 @@ aaaaa, bbbbbb
 
 \begin{verbatim}
 #> Rows: 249 Columns: 11
-#> -- Column specification --------------------
+#> -- Column specification -------------------------------------------------------
 #> Delimiter: ","
 #> chr (7): name, alpha-2, alpha-3, iso_3166-2, region, sub...
 #> dbl (4): country-code, region-code, sub-region-code, int...
@@ -794,7 +1050,7 @@ aaaaa, bbbbbb
 
 \begin{verbatim}
 #> Rows: 172 Columns: 2
-#> -- Column specification --------------------
+#> -- Column specification -------------------------------------------------------
 #> Delimiter: ";"
 #> chr (2): country, category
 #> 
@@ -852,7 +1108,7 @@ aaaaa, bbbbbb
 \end{Highlighting}
 \end{Shaded}
 
-\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-13-1.pdf} \linespread{1}
+\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-15-1.pdf} \linespread{1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1010,7 +1266,7 @@ One of the most common ways to get your data into R is to place them into your p
 
 \begin{verbatim}
 #> Rows: 234 Columns: 11
-#> -- Column specification --------------------
+#> -- Column specification -------------------------------------------------------
 #> Delimiter: ","
 #> chr (6): manufacturer, model, trans, drv, fl, class
 #> dbl (5): displ, year, cyl, cty, hwy
@@ -1101,11 +1357,11 @@ The data set is part of the \href{https://cran.r-project.org/web/packages/ggplot
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_24586303342b.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_24582343b41.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_245835a527fd.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_24582b6b6572.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_245859815f13.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_667c1afb7db5.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_667c4a09694d.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_667c550838c.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_667c5d1343ee.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_667c6da84823.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1270,16 +1526,16 @@ Once the \(t\)-test statistic value is calculated, one uses the critical value o
 #>  Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -6.8601, df = 98, p-value = 6.239e-10
+#> t = -4.1666, df = 98, p-value = 6.667e-05
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -7.390621 -4.074139
+#>  -7.025644 -2.492386
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>              49.71902              55.45140
+#>              49.52447              54.28349
 \end{verbatim}
 
-This console output is not very pleasant and should not be reported as this. Better to use the package \texttt{broom} and its function \texttt{broom::glance()} to extract everything you need using inline code chunks, which gives you a significant difference of \(\approx~-5.73\) between class A (\(M = 49.72\), \(SD = 4.29\)) and class B (\(M = 55.45\), \(SD = 4.06\)) in this case, \(t(98)~=~-6.86,~p~<~.001\). You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output.
+This console output is not very pleasant and should not be reported as this. Better to use the package \texttt{broom} and its function \texttt{broom::glance()} to extract everything you need using inline code chunks, which gives you a significant difference of \(\approx~-4.76\) between class A (\(M = 49.52\), \(SD = 5.62\)) and class B (\(M = 54.28\), \(SD = 5.8\)) in this case, \(t(98)~=~-4.167,~p~<~.001\). You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output.
 
 \hypertarget{chi2-test}{%
 \subsection{\texorpdfstring{\(\chi^2\)-test}{\textbackslash chi\^{}2-test}}\label{chi2-test}}
@@ -2337,7 +2593,7 @@ The RStudio Visual Markdown Editor can also make it easier to insert citations: 
 
 \begin{verbatim}
 #> Rows: 511 Columns: 1
-#> -- Column specification --------------------
+#> -- Column specification -------------------------------------------------------
 #> Delimiter: ","
 #> chr (1): City    State   Country Cost of Living Plus Rent Ind...
 #> 
@@ -2360,24 +2616,6 @@ Mal schauen, ob diese Datei funktioniert
 \FunctionTok{library}\NormalTok{(stringr)}
 \FunctionTok{library}\NormalTok{(ggplot2)}
 \FunctionTok{library}\NormalTok{(maps)}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
-\begin{verbatim}
-#> Warning: Paket 'maps' wurde unter R Version 4.2.2 erstellt
-#> 
-#> Attache Paket: 'maps'
-#> Das folgende Objekt ist maskiert 'package:purrr':
-#> 
-#>     map
-\end{verbatim}
-
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(janitor)}
 
 \CommentTok{\#Initial data}
@@ -2391,7 +2629,7 @@ Mal schauen, ob diese Datei funktioniert
 
 \begin{verbatim}
 #> Rows: 511 Columns: 11
-#> -- Column specification --------------------
+#> -- Column specification -------------------------------------------------------
 #> Delimiter: "\t"
 #> chr (3): City, State, Country
 #> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
@@ -2471,7 +2709,7 @@ Mal schauen, ob diese Datei funktioniert
 
 \begin{verbatim}
 #> Rows: 511 Columns: 11
-#> -- Column specification --------------------
+#> -- Column specification -------------------------------------------------------
 #> Delimiter: "\t"
 #> chr (3): City, State, Country
 #> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
@@ -2539,7 +2777,7 @@ Mal schauen, ob diese Datei funktioniert
 \end{Highlighting}
 \end{Shaded}
 
-\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-47-1.pdf}
+\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-49-1.pdf}
 
 \linespread{1}
 
@@ -2563,7 +2801,7 @@ Mal schauen, ob diese Datei funktioniert
 
 \begin{verbatim}
 #> Rows: 172 Columns: 2
-#> -- Column specification --------------------
+#> -- Column specification -------------------------------------------------------
 #> Delimiter: ";"
 #> chr (2): country, category
 #> 
@@ -2638,7 +2876,7 @@ Mal schauen, ob diese Datei funktioniert
 \end{Highlighting}
 \end{Shaded}
 
-\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-48-1.pdf}
+\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-50-1.pdf}
 
 \linespread{1}
 
@@ -2662,7 +2900,7 @@ Mal schauen, ob diese Datei funktioniert
 
 \begin{verbatim}
 #> Rows: 511 Columns: 11
-#> -- Column specification --------------------
+#> -- Column specification -------------------------------------------------------
 #> Delimiter: "\t"
 #> chr (3): City, State, Country
 #> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
@@ -2719,7 +2957,7 @@ Mal schauen, ob diese Datei funktioniert
 
 \begin{verbatim}
 #> Rows: 172 Columns: 2
-#> -- Column specification --------------------
+#> -- Column specification -------------------------------------------------------
 #> Delimiter: ";"
 #> chr (2): country, category
 #> 
@@ -2808,7 +3046,7 @@ Mal schauen, ob diese Datei funktioniert
 \end{Highlighting}
 \end{Shaded}
 
-\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-49-1.pdf} \linespread{1}
+\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-51-1.pdf} \linespread{1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2818,7 +3056,7 @@ Mal schauen, ob diese Datei funktioniert
 \end{Highlighting}
 \end{Shaded}
 
-\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-49-2.pdf} \linespread{1}
+\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-51-2.pdf} \linespread{1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2863,7 +3101,7 @@ Mal schauen, ob diese Datei funktioniert
 \end{Highlighting}
 \end{Shaded}
 
-\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-49-3.pdf}
+\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-51-3.pdf}
 
 
 
