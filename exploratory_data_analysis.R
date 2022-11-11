@@ -106,8 +106,8 @@ ggplot(dataWithCategory, aes(x = cost_of_living_plus_rent_index)) +
 
 
 #zero trouble Y -> funzt nicht "zu viele Daten"
-plot(table(dataWithCategory), type = "h", xlab = "", ylab = "")
-
+plot(table(dataWithCategory$cost_of_living_plus_rent_index), type = "h", xlab = "", ylab = "")
+range(dataWithCategory$cost_of_living_plus_rent_index)
 
 #uninteressant für uns, nur für count Variablen!
 
@@ -117,6 +117,10 @@ plot(table(dataWithCategory), type = "h", xlab = "", ylab = "")
 
 
 #correlation
+<<<<<<< HEAD
+=======
+dat <- select(where(is.numeric(dataWithCategory)))
+>>>>>>> 28400b8a1e64643093a54476c4ea3a15ce57ab2c
 datasummary_correlation(dataWithCategory)
 
 #relationship x&y
