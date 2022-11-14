@@ -14,12 +14,21 @@ First of all, we had to check, if there are missing values inside of the data-se
 #| message = TRUE
 summary(is.na(dataWithCategory))
 ```
-As it can be seen, there were $`r sum(is.na(dataWithCategory$state))`$ missing values inside the column "state".
+As it can be seen, there were $`r sum(is.na(dataWithCategory$state))`$ missing values inside the column "state". 
+However, since the column has no bearing on our research question, we decided to disregard this column. With the city column we have a more meaningful basis to answer our question.
+To disregard this column, we cut it off. To do this, we used to following R code chunk. Because it is the second column, we can just delete this column.
+```{r}
+#| echo = TRUE,
+#| message = TRUE
+dataWithCategory <- dataWithCategory[-2]
+```
+
 
 
 ## Folgendes nur zur Übersicht/weiteren Aufbau(Gliederung)
 
-
+zu wrangling gehören joining, merging und grouping
+Boxplot gehört zu profiling
 
 3. Methods, for example:
 - Descriptive statistics
