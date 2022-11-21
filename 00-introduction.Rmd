@@ -9,8 +9,10 @@ kurze Einleitung über die Aufgabenstellung (ggf. die Rollen und Aufgabenverteil
 
 The standard of living became more and more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
 
-```{r}
+## Setup
+After the required libraries, which will be worked with in the following, were installed, the libraries still had to be imported in order to be able to use them.
 
+```{r}
 library(tidyverse)
 library(dplyr)
 library(stringr)
@@ -22,27 +24,51 @@ library(car)
 library(carData)
 library(gpairs)
 library(GGally)
+```
 
-#Import initial data
+Subsequently, the data had to be read in. This could be initialized with the following command, after the data set was added as a csv file in the folder "02-data".
+To be able to work better with the names of the columns and the dataset in general, the command "janitor::clean_names" was executed.  With this, for example, the spaces were removed and the names were all written in small letters.
+
+```{r}
 costOfLiving <- read_delim("02-data/cost-of-living-2017.csv", 
                       delim = "\t", escape_double = FALSE, 
                       trim_ws = TRUE)
 costOfLiving <- janitor::clean_names(costOfLiving)
+```
 
+To make it easier to split the data by region, we imported a csv file that shows the names of the countries in this world and their corresponding regions.
+
+First we had to import the dataset, which we named "continents".
+
+```{r}
 #import list of continents and countries
-manipulated_continents <- read_csv("02-data/continents2.csv")
-manipulated_continents <- janitor::clean_names(manipulated_continents)
+continents <- read_csv("02-data/continents2.csv")
+continents <- janitor::clean_names(continents)
+```
 
+To be able to do a join with the raw data, we had to rename the column "name" to "country". After that, a left join could be performed on the renamed column. Since we only needed the column "region", a select for this one column was performed within the join.
+
+```{r}
 #rename attribute 'name' in 'country' to perform a left join.
-#Kosovo as a country has to be added seperately
-manipulated_continents <- rename(manipulated_continents, country = name)
-costOfLivingAndContinents <- left_join(costOfLiving, select(manipulated_continents, country, region), by="country")
+continents <- rename(continents, country = name)
+costOfLivingAndContinents <- left_join(costOfLiving, select(continents, country, region), by="country")
+```
 
-#Check, if a region has no entry -> Result: Kosovo has no region
+Now it was possible to check if a country was not assigned to a region. 
+
+```{r}
 filter(costOfLivingAndContinents, is.na(region))
-#Kosovo has no continent -> changed to "Europe"
-costOfLivingAndContinents[486, 12] <- "Europe"
+```
 
+Since the country Kosovo could not be assigned to a region, this had to be done manually.
+
+```{r}
+costOfLivingAndContinents[486, 12] <- "Europe"
+```
+
+TODO
+
+```{r}
 #import list of Countries and development status
 dd <- read_delim("02-data/developed_and_developing_countries.csv",
                  delim = ";", escape_double = FALSE,

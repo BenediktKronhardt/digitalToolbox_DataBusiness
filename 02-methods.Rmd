@@ -5,40 +5,6 @@ output:
 ---
 # Methods
 
-## Setup
-After the required libraries, which will be worked with in the following, were installed, the libraries still had to be imported in order to be able to use them.
-
-```{r}
-library(tidyverse)
-library(dplyr)
-library(stringr)
-library(ggplot2)
-library(maps)
-library(janitor)
-library(modelsummary)
-library(car)
-library(carData)
-library(gpairs)
-library(GGally)
-```
-
-Subsequently, the data had to be read in. This could be initialized with the following command, after the data set was added as a csv file in the folder "02-data".
-To be able to work better with the names of the columns and the dataset in general, the command "janitor::clean_names" was executed.  With this, for example, the spaces were removed and the names were all written in small letters.
-
-```{r}
-rawData <- read_delim("02-data/cost-of-living-2017.csv", 
-                      delim = "\t", escape_double = FALSE, 
-                      trim_ws = TRUE)
-rawData <- janitor::clean_names(rawData)
-```
-
-continents hinzufügen, damit das Datenset nach Regionen gefiltert werden kann
-
-```{r}
-
-```
-
-
 ## Exploratory Data Analysis
 
 First of all, we had to check, if there are missing values inside of the data-set. Therefore we used the following code to proof this:
