@@ -13,4 +13,12 @@ Inhalt/Aufbau:
 
 Das ist ein Zitat von @Konus1939
 
-test
+Because of different prices, living standards, currencies and other factors, it is not possible to compare the cost of living in different countries properly. 
+
+To be able to compare the cost of living between different countries, the Cost of Living Index is used - also abbreviated as CLI in the following. The cost of living is the financial resources needed to cover, in a given place and in a given period of time, the basic expenses for a given standard of living, such as a shelter, food, medicines and others. The CLI enables the comparison of expenditures between different places in the world and at different times in history. (https://www.investopedia.com/terms/c/cost-of-living.asp)
+
+In economics, the cost-of-living index describes the ratio of the minimum expenditure required to achieve a given indifference curve between two prices. The calculation not only requires two different price groups, but is also dependent on a preference order of the required living goods and on a basic indifference curve describing the utility of two products. 
+Among the two prices needed, e.g., from two different places, one is called the comparison price and the other is called the reference price or the base price. The base price is then used to illustrate on which prices the Cost-Of-Living Index is based and calculated. The calculated index is then dependent on the comparison prices determined. Further, the general logic of the cost-of-living index is best understood when the index is interpreted in the multiple context of temporal and spatial comparisons. 
+(https://books.google.de/books?hl=de&lr=&id=tWzmCwAAQBAJ&oi=fnd&pg=PR9&dq=cost+of+living+index&ots=CcktA8DaTk&sig=uSeHqr0M8ig2QdQWEeUUqqVptGI&redir_esc=y#v=onepage&q=cost%20of%20living%20index&f=false )
+
+
