@@ -33,6 +33,25 @@ dataFinished <- dataFinished[-9]
 dataFinished <- dataFinished[-9]
 ```
 
+To determine if outliers exist within the data set, we chose to draw a boxplot.
+
+```{r}
+dataFinished %>%
+  mutate(across(where(is.factor), as.numeric))
+  
+col = c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')
+boxplot(dataFinished[,c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')])
+```
+
+--> TODO: Abbildung beschriften!
+
+As can be seen from the figure, there are several outliers within the data set. In order not to distort the result, we decided to keep these outliers and to continue working with them.
+
+--> TODO: Text zu Correlation schreiben
+
+```{r}
+datasummary_correlation(dataFinished)
+```
 
 ## Folgendes nur zur Übersicht/weiteren Aufbau(Gliederung)
 

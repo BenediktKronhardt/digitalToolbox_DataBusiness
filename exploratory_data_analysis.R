@@ -67,22 +67,25 @@ colnames(dd)[2] <- "development"
 dataWithCategory <- left_join(manipulated_data,dd, by="country")
 
 sum(is.na(dataWithCategory))
-summary(is.na(dataWithCategory))
+summary(is.na(dataFinished))
 
 #outliers with boxlpot
-dataWithCategory %>%
+dataFinished %>%
   mutate(across(where(is.factor), as.numeric))
   
 col = c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')
-boxplot(dataWithCategory[,c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')])
+boxplot(dataFinished[,c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')])
 
+
+#WARUM HATTEN WIR DAS NOCHMAL GEMACHT?
 #boxplot mit cli und groceries für homogenity
-ggplot(dataWithCategory, aes(x = cli, y = groceries_index)) + 
+ggplot(dataFinished, aes(x = cli, y = groceries_index)) + 
   geom_boxplot() +
   facet_grid(~development)
 
+#BRAUCHEN WIR DAS IM BERICHT?
 #übersicht der Dichte zwischen allen Variablen
-dataWithCategory %>%     
+dataFinished %>%     
   select(where(is.numeric)) %>%     
   pivot_longer(everything(), names_to = "variable", values_to = "num") %>%     
   group_by(variable) %>%     
@@ -94,10 +97,12 @@ dataWithCategory %>%
   facet_wrap(~ variable, scales = "free") +         
   ylab("") + xlab("")
 
+
+#BRAUCHEN WIR DAS IM BERICHT?
 #normality
 #aufspaltung nach industrie und schwellenländer
 #conditional histogram
-ggplot(dataWithCategory, aes(x = cost_of_living_plus_rent_index)) +
+ggplot(dataFinished, aes(x = cost_of_living_plus_rent_index)) +
   geom_density() + 
   facet_grid(~development)
 
@@ -105,27 +110,20 @@ ggplot(dataWithCategory, aes(x = cost_of_living_plus_rent_index)) +
 
 
 
-#zero trouble Y -> funzt nicht "zu viele Daten"
+#zero trouble Y -> funzt nicht "zu viele Daten" -> Egal für Bericht
 plot(table(dataWithCategory$cost_of_living_plus_rent_index), type = "h", xlab = "", ylab = "")
 range(dataWithCategory$cost_of_living_plus_rent_index)
 
 #uninteressant für uns, nur für count Variablen!
 
 
-filter(costOfLivingAndContinents, is.na(region))
-
-
-
 
 #correlation
-<<<<<<< HEAD
-=======
-dat <- select(where(is.numeric(dataWithCategory)))
->>>>>>> 28400b8a1e64643093a54476c4ea3a15ce57ab2c
-datasummary_correlation(dataWithCategory)
+datasummary_correlation(dataFinished)
 
+#BRAUCHEN WIR DAS IN UNSEREM BERICHT?
 #relationship x&y
-dataWithCategory %>%     
+dataFinished %>%     
   mutate(across(where(is.character), as.factor)) %>%     
   mutate(across(where(is.factor), as.numeric)) %>% # select() %>% # De-select variables here if necessary    
   pivot_longer(-cost_of_living_plus_rent_index, names_to = "variable", values_to = "num") %>%     
@@ -136,22 +134,26 @@ dataWithCategory %>%
   ggplot(aes(x = num, y = cost_of_living_plus_rent_index)) + theme_bw() +        
   geom_point(shape = 1, alpha = 0.8,                    
              position = "jitter") +         
-  geom_smooth(se = FALSE, colour = "blue", method = "loess",                     formula = 'y ~ x') +         facet_wrap(~ variable, scales = "free_x") +         ylab("Dependent variable") + xlab("")
+  geom_smooth(se = FALSE, colour = "blue", method = "loess", formula = 'y ~ x') +
+  facet_wrap(~ variable, scales = "free_x") +ylab("Dependent variable") + xlab("")
 
+
+#BRAUCHEN WIR DAS IN UNSEREM BERICHT?
 #collenarity xy -> eins von beiden
-dataWithCategory %>%
+dataFinished %>%
   select(where(is.numeric)) %>% as.data.frame() %>%
   gpairs::gpairs(lower.pars = list(scatter = 'stats'),
                  upper.pars = list(conditional ='boxplot',
                                    scatter = 'loess'),
                  scatter.pars = list(pch = 20))
 
-dataWithCategory %>% select(where(is.numeric)) %>%
+dataFinished %>% select(where(is.numeric)) %>%
   as.data.frame() %>%
   GGally::ggpairs(diag = list(continuous = "barDiag"))
 
+#BRAUCHEN WIR DAS IN UNSEREM BERICHT?
 #interactions
-dataChanged <- dataWithCategory
+dataChanged <- dataFinished
 dataChanged$development[dataChanged$development == 1.0] <- "developed"
 dataChanged$development[dataChanged$development == 0.0] <- "developing"
 coplot(cost_of_living_plus_rent_index ~ groceries_index | region * development ,data = dataChanged,
@@ -164,9 +166,10 @@ coplot(cost_of_living_plus_rent_index ~ groceries_index | region * development ,
 
 #independece Y -> works nicht mit unserem Datensatz
 
+#multiple linear regression:
 
 #model -> ei
-model <- lm(cli ~ + groceries_index + restaurant_price_index + local_purchasing_power_index + development, data = dataWithCategory)
+model <- lm(cli ~ + groceries_index + restaurant_price_index + local_purchasing_power_index + development, data = dataFinished)
 summary(model)
 
 #groceries und restaurant price hat einen hohen Einfluss

@@ -374,20 +374,6 @@
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}
 
-kurze Einleitung über die Aufgabenstellung (ggf. die Rollen und Aufgabenverteilung im Team)
-
-\begin{itemize}
-\tightlist
-\item
-  Was wurde gemacht?
-\item
-  Beschreibung der einzelnen Kapitel
-\item
-  Kurze Beschreibung der Thematik
-\item
-  code junk mit libary und daten
-\end{itemize}
-
 The standard of living became more and more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
 
 \hypertarget{task-description}{%
@@ -396,21 +382,13 @@ The standard of living became more and more important for the world population. 
 Our task was to analyze a data set and write a report about it using R, RStudio, RMarkdown and the procedures of literate programming to put together a PDF-manuscript.
 In our team we have received the ``cost of living'' data set and analyzed it with the research question ``Is there a significant difference between industrialized countries and developing countries in cost of living?''
 
-TODO: Aufgabenbeschreibung
+\hypertarget{structure}{%
+\section{Structure}\label{structure}}
 
-Was wurde gemacht (Research Question)
-
-Beschreibung der einzelnen Kapitel
-
-In the methods section, the data set
-should be described statistically including information on the variables' distribution, missing values,
-categories / grouping factors (if applicable) and the relationships between the variables, especially
-regarding the variable in focus, for example, the dependent variable of a applied statistical method (if
-applicable).
-
-The
-results section should comprise all necessary calculations, including checking of assumptions (if
-applicable), which are then discussed in connection with the research question in the following section.
+Our document is divided into five chapters. This chapter is the introduction, where we describe the task and how we imported our dataset, respectively added other datasets.
+In the chapter ``Theoretical Background'' the theoretical background of the dataset and the data collection is briefly discussed, before in the methods section the dataset is statistically described, including information on the variables' distribution, missing values,
+categories and the relationships between the variables.
+The results section comprise all necessary calculations, which are then discussed in connection with the research question in the following section (``Discussion'').
 
 \hypertarget{setup}{%
 \section{Setup}\label{setup}}
@@ -575,9 +553,10 @@ To be able to work better with the names of the columns and the dataset in gener
 
 To make it easier to split the data by region, we imported a csv file that shows the names of the countries in this world and their corresponding regions.
 
-First we had to import the dataset, which we named ``continents''.
+First we had to import the dataset, which we named ``continents''. This dataset is from the website ``kaggle'', named ``Country Mapping - ISO, Continent, Region''.
 
---\textgreater{} TODO: Wo haben wir das Datenset her?
+--\textgreater{} TODO: Noch zitieren?
+\url{https://www.kaggle.com/datasets/andradaolteanu/country-mapping-iso-continent-region}
 
 \linespread{1}
 
@@ -663,7 +642,9 @@ Since the country Kosovo could not be assigned to a region, this had to be done 
 \linespread{1}
 
 To assign the different countries in our dataset to either a developing or an industrialized country, we also imported a new csv file, which we named ``dd''.
-We created this file ourselves, based on data from the website --\textgreater{} TODO welche Webseite
+We created this file ourselves, based on data from the website
+
+--\textgreater{} TODO: welche Webseite
 
 \linespread{1}
 
@@ -1029,7 +1010,7 @@ aaaaa, bbbbbb
 \linespread{1}
 
 \begin{verbatim}
-#> #StandWithUkraine
+#> #BlackLivesMatter
 \end{verbatim}
 
 \linespread{1}
@@ -1483,11 +1464,11 @@ The data set is part of the \href{https://cran.r-project.org/web/packages/ggplot
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c805407424d.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c80247e4d3c.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c802f61803.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c8038dc6ac4.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c8038932b77.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7fe839ac385b.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7fe8732a353e.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7fe8718b3cb8.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7fe829df3eb3.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7fe83d301cc8.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1652,16 +1633,16 @@ Once the \(t\)-test statistic value is calculated, one uses the critical value o
 #>  Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -6.1323, df = 98, p-value = 1.826e-08
+#> t = -5.4868, df = 98, p-value = 3.205e-07
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -7.670657 -3.919861
+#>  -8.005484 -3.752756
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>              49.77982              55.57508
+#>              49.95118              55.83030
 \end{verbatim}
 
-This console output is not very pleasant and should not be reported as this. Better to use the package \texttt{broom} and its function \texttt{broom::glance()} to extract everything you need using inline code chunks, which gives you a significant difference of \(\approx~-5.8\) between class A (\(M = 49.78\), \(SD = 5.26\)) and class B (\(M = 55.58\), \(SD = 4.13\)) in this case, \(t(98)~=~-6.132,~p~<~.001\). You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output.
+This console output is not very pleasant and should not be reported as this. Better to use the package \texttt{broom} and its function \texttt{broom::glance()} to extract everything you need using inline code chunks, which gives you a significant difference of \(\approx~-5.88\) between class A (\(M = 49.95\), \(SD = 5.61\)) and class B (\(M = 55.83\), \(SD = 5.1\)) in this case, \(t(98)~=~-5.487,~p~<~.001\). You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output.
 
 \hypertarget{chi2-test}{%
 \subsection{\texorpdfstring{\(\chi^2\)-test}{\textbackslash chi\^{}2-test}}\label{chi2-test}}
