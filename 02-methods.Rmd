@@ -12,16 +12,16 @@ First of all, we had to check, if there are missing values inside of the data-se
 ```{r}
 #| echo = TRUE,
 #| message = TRUE
-summary(is.na(dataWithCategory))
+summary(is.na(dataFinished))
 ```
-As it can be seen, there were $`r sum(is.na(dataWithCategory$state))`$ missing values inside the column "state". 
+As it can be seen, there were $`r sum(is.na(dataFinished$state))`$ missing values inside the column "state". 
 However, since the column has no bearing on our research question, we decided to disregard this column. With the city column we have a more meaningful basis to answer our question.
 To disregard this column, we cut it off. To do this, we used to following R code chunk. Because it is the second column, we can just delete this column.
 
 ```{r}
 #| echo = TRUE,
 #| message = TRUE
-dataWithCategory <- dataWithCategory[-2]
+dataFinished <- dataFinished[-2]
 ```
 
 We also truncated the leverage_model_1 and leverage_model_2 columns, since we did not work with these columns any further.
@@ -29,8 +29,8 @@ We also truncated the leverage_model_1 and leverage_model_2 columns, since we di
 ```{r}
 #| echo = TRUE,
 #| message = TRUE
-dataWithCategory <- dataWithCategory[-9]
-dataWithCategory <- dataWithCategory[-9]
+dataFinished <- dataFinished[-9]
+dataFinished <- dataFinished[-9]
 ```
 
 

@@ -390,6 +390,28 @@ kurze Einleitung über die Aufgabenstellung (ggf. die Rollen und Aufgabenverteil
 
 The standard of living became more and more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
 
+\hypertarget{task-description}{%
+\section{Task description}\label{task-description}}
+
+Our task was to analyze a data set and write a report about it using R, RStudio, RMarkdown and the procedures of literate programming to put together a PDF-manuscript.
+In our team we have received the ``cost of living'' data set and analyzed it with the research question ``Is there a significant difference between industrialized countries and developing countries in cost of living?''
+
+TODO: Aufgabenbeschreibung
+
+Was wurde gemacht (Research Question)
+
+Beschreibung der einzelnen Kapitel
+
+In the methods section, the data set
+should be described statistically including information on the variables' distribution, missing values,
+categories / grouping factors (if applicable) and the relationships between the variables, especially
+regarding the variable in focus, for example, the dependent variable of a applied statistical method (if
+applicable).
+
+The
+results section should comprise all necessary calculations, including checking of assumptions (if
+applicable), which are then discussed in connection with the research question in the following section.
+
 \hypertarget{setup}{%
 \section{Setup}\label{setup}}
 
@@ -555,6 +577,8 @@ To make it easier to split the data by region, we imported a csv file that shows
 
 First we had to import the dataset, which we named ``continents''.
 
+--\textgreater{} TODO: Wo haben wir das Datenset her?
+
 \linespread{1}
 
 \begin{Shaded}
@@ -638,7 +662,8 @@ Since the country Kosovo could not be assigned to a region, this had to be done 
 
 \linespread{1}
 
-TODO
+To assign the different countries in our dataset to either a developing or an industrialized country, we also imported a new csv file, which we named ``dd''.
+We created this file ourselves, based on data from the website --\textgreater{} TODO welche Webseite
 
 \linespread{1}
 
@@ -668,11 +693,31 @@ TODO
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dd }\OtherTok{\textless{}{-}}\NormalTok{ janitor}\SpecialCharTok{::}\FunctionTok{clean\_names}\NormalTok{(dd)}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
+
+To format the category as a double value, we executed the following commands.
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{dd}\SpecialCharTok{$}\NormalTok{category[dd}\SpecialCharTok{$}\NormalTok{category }\SpecialCharTok{==} \StringTok{"developed"}\NormalTok{] }\OtherTok{\textless{}{-}} \FloatTok{1.0}
 \NormalTok{dd}\SpecialCharTok{$}\NormalTok{category[dd}\SpecialCharTok{$}\NormalTok{category }\SpecialCharTok{==} \StringTok{"developing"}\NormalTok{] }\OtherTok{\textless{}{-}} \FloatTok{0.0}
 \NormalTok{dd}\SpecialCharTok{$}\NormalTok{category }\OtherTok{\textless{}{-}} \FunctionTok{as.double}\NormalTok{(dd}\SpecialCharTok{$}\NormalTok{category)}
+\end{Highlighting}
+\end{Shaded}
 
+\linespread{1}
 
+Once this was done, we scanned the dataset for various capitalization errors and corrected them. Also we have renamed the column category to development.
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"italy"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Italy"}
 \NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Hong Kong SAR"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Hong Kong"}
 \NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Taiwan Province of China"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Taiwan"}
@@ -681,36 +726,22 @@ TODO
 \NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Bosnia and Herzegovina"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Bosnia And Herzegovina"}
 \NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Kosovo"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Kosovo (Disputed Territory)"}
 \FunctionTok{colnames}\NormalTok{(dd)[}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"development"}
-
-\NormalTok{dataWithCategory }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(costOfLivingAndContinents,dd, }\AttributeTok{by=}\StringTok{"country"}\NormalTok{)}
-\NormalTok{dataWithCategory}
 \end{Highlighting}
 \end{Shaded}
 
 \linespread{1}
 
-\begin{verbatim}
-#> # A tibble: 511 x 13
-#>    city  state country cost_~1   cli rent_~2 groce~3 resta~4
-#>    <chr> <chr> <chr>     <dbl> <dbl>   <dbl>   <dbl>   <dbl>
-#>  1 Zuri~ <NA>  Switze~   109.   150.    66.8    164.    141.
-#>  2 Hami~ <NA>  Bermuda   133.   148.   118.     145.    153.
-#>  3 Zug   <NA>  Switze~   106.   143.    67.4    148.    143.
-#>  4 Gene~ <NA>  Switze~   107.   142.    70.2    147.    139.
-#>  5 Basel <NA>  Switze~    97.5  142.    51.5    150.    132.
-#>  6 Bern  <NA>  Switze~    91.1  136.    45.3    146.    122.
-#>  7 Laus~ <NA>  Switze~    93.6  131.    54.6    137.    128.
-#>  8 Reyk~ <NA>  Iceland    93.9  131.    55.9    128.    141.
-#>  9 Luga~ <NA>  Switze~    88.6  124.    51.7    121.    128.
-#> 10 Stav~ <NA>  Norway     77.8  117.    37.4    108.    143.
-#> # ... with 501 more rows, 5 more variables:
-#> #   local_purchasing_power_index <dbl>,
-#> #   leverage_model_1 <dbl>, leverage_model_2 <dbl>,
-#> #   region <chr>, development <dbl>, and abbreviated
-#> #   variable names 1: cost_of_living_plus_rent_index,
-#> #   2: rent_index, 3: groceries_index,
-#> #   4: restaurant_price_index
-\end{verbatim}
+In the end, we were able to perform a left join and thus add the categorization of development countries to our dataset.
+
+\linespread{1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataFinished }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(costOfLivingAndContinents,dd, }\AttributeTok{by=}\StringTok{"country"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\linespread{1}
 
 \hypertarget{theoretical-background}{%
 \chapter{Theoretical background}\label{theoretical-background}}
@@ -733,6 +764,14 @@ Inhalt/Aufbau:
 
 Das ist ein Zitat von Konus (\protect\hyperlink{ref-Konus1939}{1939})
 
+Because of different prices, living standards, currencies and other factors, it is not possible to compare the cost of living in different countries properly.
+
+To be able to compare the cost of living between different countries, the Cost of Living Index is used - also abbreviated as CLI in the following. The cost of living is the financial resources needed to cover, in a given place and in a given period of time, the basic expenses for a given standard of living, such as a shelter, food, medicines and others. The CLI enables the comparison of expenditures between different places in the world and at different times in history. (\url{https://www.investopedia.com/terms/c/cost-of-living.asp})
+
+In economics, the cost-of-living index describes the ratio of the minimum expenditure required to achieve a given indifference curve between two prices. The calculation not only requires two different price groups, but is also dependent on a preference order of the required living goods and on a basic indifference curve describing the utility of two products.
+Among the two prices needed, e.g., from two different places, one is called the comparison price and the other is called the reference price or the base price. The base price is then used to illustrate on which prices the Cost-Of-Living Index is based and calculated. The calculated index is then dependent on the comparison prices determined. Further, the general logic of the cost-of-living index is best understood when the index is interpreted in the multiple context of temporal and spatial comparisons.
+(\url{https://books.google.de/books?hl=de\&lr=\&id=tWzmCwAAQBAJ\&oi=fnd\&pg=PR9\&dq=cost+of+living+index\&ots=CcktA8DaTk\&sig=uSeHqr0M8ig2QdQWEeUUqqVptGI\&redir_esc=y\#v=onepage\&q=cost\%20of\%20living\%20index\&f=false} )
+
 \hypertarget{methods}{%
 \chapter{Methods}\label{methods}}
 
@@ -745,7 +784,7 @@ First of all, we had to check, if there are missing values inside of the data-se
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{summary}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(dataWithCategory))}
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(dataFinished))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -782,7 +821,7 @@ To disregard this column, we cut it off. To do this, we used to following R code
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dataWithCategory }\OtherTok{\textless{}{-}}\NormalTok{ dataWithCategory[}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{]}
+\NormalTok{dataFinished }\OtherTok{\textless{}{-}}\NormalTok{ dataFinished[}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -794,8 +833,8 @@ We also truncated the leverage\_model\_1 and leverage\_model\_2 columns, since w
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dataWithCategory }\OtherTok{\textless{}{-}}\NormalTok{ dataWithCategory[}\SpecialCharTok{{-}}\DecValTok{9}\NormalTok{]}
-\NormalTok{dataWithCategory }\OtherTok{\textless{}{-}}\NormalTok{ dataWithCategory[}\SpecialCharTok{{-}}\DecValTok{9}\NormalTok{]}
+\NormalTok{dataFinished }\OtherTok{\textless{}{-}}\NormalTok{ dataFinished[}\SpecialCharTok{{-}}\DecValTok{9}\NormalTok{]}
+\NormalTok{dataFinished }\OtherTok{\textless{}{-}}\NormalTok{ dataFinished[}\SpecialCharTok{{-}}\DecValTok{9}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1195,7 +1234,7 @@ aaaaa, bbbbbb
 \end{Highlighting}
 \end{Shaded}
 
-\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-23-1.pdf} \linespread{1}
+\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-26-1.pdf} \linespread{1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1444,11 +1483,11 @@ The data set is part of the \href{https://cran.r-project.org/web/packages/ggplot
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c8443f1931.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c842d1b6a1f.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c8476e1487c.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c8439563c8a.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c8430cd66b5.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c805407424d.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c80247e4d3c.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c802f61803.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c8038dc6ac4.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c8038932b77.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1613,16 +1652,16 @@ Once the \(t\)-test statistic value is calculated, one uses the critical value o
 #>  Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -4.7718, df = 98, p-value = 6.376e-06
+#> t = -6.1323, df = 98, p-value = 1.826e-08
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -7.189916 -2.966232
+#>  -7.670657 -3.919861
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>              50.33938              55.41746
+#>              49.77982              55.57508
 \end{verbatim}
 
-This console output is not very pleasant and should not be reported as this. Better to use the package \texttt{broom} and its function \texttt{broom::glance()} to extract everything you need using inline code chunks, which gives you a significant difference of \(\approx~-5.08\) between class A (\(M = 50.34\), \(SD = 5.44\)) and class B (\(M = 55.42\), \(SD = 5.2\)) in this case, \(t(98)~=~-4.772,~p~<~.001\). You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output.
+This console output is not very pleasant and should not be reported as this. Better to use the package \texttt{broom} and its function \texttt{broom::glance()} to extract everything you need using inline code chunks, which gives you a significant difference of \(\approx~-5.8\) between class A (\(M = 49.78\), \(SD = 5.26\)) and class B (\(M = 55.58\), \(SD = 4.13\)) in this case, \(t(98)~=~-6.132,~p~<~.001\). You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output.
 
 \hypertarget{chi2-test}{%
 \subsection{\texorpdfstring{\(\chi^2\)-test}{\textbackslash chi\^{}2-test}}\label{chi2-test}}
@@ -2864,7 +2903,7 @@ Mal schauen, ob diese Datei funktioniert
 \end{Highlighting}
 \end{Shaded}
 
-\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-57-1.pdf}
+\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-60-1.pdf}
 
 \linespread{1}
 
@@ -2963,7 +3002,7 @@ Mal schauen, ob diese Datei funktioniert
 \end{Highlighting}
 \end{Shaded}
 
-\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-58-1.pdf}
+\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-61-1.pdf}
 
 \linespread{1}
 
@@ -3133,7 +3172,7 @@ Mal schauen, ob diese Datei funktioniert
 \end{Highlighting}
 \end{Shaded}
 
-\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-59-1.pdf} \linespread{1}
+\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-62-1.pdf} \linespread{1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3143,7 +3182,7 @@ Mal schauen, ob diese Datei funktioniert
 \end{Highlighting}
 \end{Shaded}
 
-\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-59-2.pdf} \linespread{1}
+\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-62-2.pdf} \linespread{1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3188,7 +3227,7 @@ Mal schauen, ob diese Datei funktioniert
 \end{Highlighting}
 \end{Shaded}
 
-\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-59-3.pdf}
+\linespread{1}\includegraphics{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-62-3.pdf}
 
 
 

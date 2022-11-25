@@ -141,6 +141,27 @@ kurze Einleitung über die Aufgabenstellung (ggf. die Rollen und Aufgabenverteil
 
 The standard of living became more and more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
 
+## Task description
+Our task was to analyze a data set and write a report about it using R, RStudio, RMarkdown and the procedures of literate programming to put together a PDF-manuscript.
+In our team we have received the "cost of living" data set and analyzed it with the research question "Is there a significant difference between industrialized countries and developing countries in cost of living?"
+
+
+TODO: Aufgabenbeschreibung
+
+Was wurde gemacht (Research Question)
+
+Beschreibung der einzelnen Kapitel
+
+In the methods section, the data set
+should be described statistically including information on the variables’ distribution, missing values,
+categories / grouping factors (if applicable) and the relationships between the variables, especially
+regarding the variable in focus, for example, the dependent variable of a applied statistical method (if
+applicable).
+
+The
+results section should comprise all necessary calculations, including checking of assumptions (if
+applicable), which are then discussed in connection with the research question in the following section.
+
 ## Setup
 After the required libraries, which will be worked with in the following, were installed, the libraries still had to be imported in order to be able to use them.
 
@@ -304,6 +325,8 @@ To make it easier to split the data by region, we imported a csv file that shows
 
 First we had to import the dataset, which we named "continents".
 
+--> TODO: Wo haben wir das Datenset her?
+
 \linespread{1}
 
 ```r
@@ -387,7 +410,8 @@ costOfLivingAndContinents[486, 12] <- "Europe"
 
 \linespread{1}
 
-TODO
+To assign the different countries in our dataset to either a developing or an industrialized country, we also imported a new csv file, which we named "dd". 
+We created this file ourselves, based on data from the website --> TODO welche Webseite
 
 \linespread{1}
 
@@ -416,11 +440,31 @@ dd <- read_delim("02-data/developed_and_developing_countries.csv",
 
 ```r
 dd <- janitor::clean_names(dd)
+```
+
+
+
+\linespread{1}
+
+To format the category as a double value, we executed the following commands.
+
+\linespread{1}
+
+```r
 dd$category[dd$category == "developed"] <- 1.0
 dd$category[dd$category == "developing"] <- 0.0
 dd$category <- as.double(dd$category)
+```
 
 
+
+\linespread{1}
+
+Once this was done, we scanned the dataset for various capitalization errors and corrected them. Also we have renamed the column category to development.
+
+\linespread{1}
+
+```r
 dd$country[dd$country == "italy"] <- "Italy"
 dd$country[dd$country == "Hong Kong SAR"] <- "Hong Kong"
 dd$country[dd$country == "Taiwan Province of China"] <- "Taiwan"
@@ -429,37 +473,23 @@ dd$country[dd$country == "Viet Nam"] <- "Vietnam"
 dd$country[dd$country == "Bosnia and Herzegovina"] <- "Bosnia And Herzegovina"
 dd$country[dd$country == "Kosovo"] <- "Kosovo (Disputed Territory)"
 colnames(dd)[2] <- "development"
-
-dataWithCategory <- left_join(costOfLivingAndContinents,dd, by="country")
-dataWithCategory
 ```
 
 
 
 \linespread{1}
 
+In the end, we were able to perform a left join and thus add the categorization of development countries to our dataset.
+
+\linespread{1}
+
+```r
+dataFinished <- left_join(costOfLivingAndContinents,dd, by="country")
 ```
-#> # A tibble: 511 x 13
-#>    city  state country cost_~1   cli rent_~2 groce~3 resta~4
-#>    <chr> <chr> <chr>     <dbl> <dbl>   <dbl>   <dbl>   <dbl>
-#>  1 Zuri~ <NA>  Switze~   109.   150.    66.8    164.    141.
-#>  2 Hami~ <NA>  Bermuda   133.   148.   118.     145.    153.
-#>  3 Zug   <NA>  Switze~   106.   143.    67.4    148.    143.
-#>  4 Gene~ <NA>  Switze~   107.   142.    70.2    147.    139.
-#>  5 Basel <NA>  Switze~    97.5  142.    51.5    150.    132.
-#>  6 Bern  <NA>  Switze~    91.1  136.    45.3    146.    122.
-#>  7 Laus~ <NA>  Switze~    93.6  131.    54.6    137.    128.
-#>  8 Reyk~ <NA>  Iceland    93.9  131.    55.9    128.    141.
-#>  9 Luga~ <NA>  Switze~    88.6  124.    51.7    121.    128.
-#> 10 Stav~ <NA>  Norway     77.8  117.    37.4    108.    143.
-#> # ... with 501 more rows, 5 more variables:
-#> #   local_purchasing_power_index <dbl>,
-#> #   leverage_model_1 <dbl>, leverage_model_2 <dbl>,
-#> #   region <chr>, development <dbl>, and abbreviated
-#> #   variable names 1: cost_of_living_plus_rent_index,
-#> #   2: rent_index, 3: groceries_index,
-#> #   4: restaurant_price_index
-```
+
+
+
+\linespread{1}
 
 <!--chapter:end:00-introduction.Rmd-->
 
@@ -478,7 +508,16 @@ Inhalt/Aufbau:
   
 
 Das ist ein Zitat von @Konus1939
-  
+
+Because of different prices, living standards, currencies and other factors, it is not possible to compare the cost of living in different countries properly. 
+
+To be able to compare the cost of living between different countries, the Cost of Living Index is used - also abbreviated as CLI in the following. The cost of living is the financial resources needed to cover, in a given place and in a given period of time, the basic expenses for a given standard of living, such as a shelter, food, medicines and others. The CLI enables the comparison of expenditures between different places in the world and at different times in history. (https://www.investopedia.com/terms/c/cost-of-living.asp)
+
+In economics, the cost-of-living index describes the ratio of the minimum expenditure required to achieve a given indifference curve between two prices. The calculation not only requires two different price groups, but is also dependent on a preference order of the required living goods and on a basic indifference curve describing the utility of two products. 
+Among the two prices needed, e.g., from two different places, one is called the comparison price and the other is called the reference price or the base price. The base price is then used to illustrate on which prices the Cost-Of-Living Index is based and calculated. The calculated index is then dependent on the comparison prices determined. Further, the general logic of the cost-of-living index is best understood when the index is interpreted in the multiple context of temporal and spatial comparisons. 
+(https://books.google.de/books?hl=de&lr=&id=tWzmCwAAQBAJ&oi=fnd&pg=PR9&dq=cost+of+living+index&ots=CcktA8DaTk&sig=uSeHqr0M8ig2QdQWEeUUqqVptGI&redir_esc=y#v=onepage&q=cost%20of%20living%20index&f=false )
+
+
 
 <!--chapter:end:01-theoretical-background.Rmd-->
 
@@ -497,7 +536,7 @@ First of all, we had to check, if there are missing values inside of the data-se
 \linespread{1}
 
 ```r
-summary(is.na(dataWithCategory))
+summary(is.na(dataFinished))
 ```
 
 
@@ -533,7 +572,7 @@ To disregard this column, we cut it off. To do this, we used to following R code
 \linespread{1}
 
 ```r
-dataWithCategory <- dataWithCategory[-2]
+dataFinished <- dataFinished[-2]
 ```
 
 
@@ -545,8 +584,8 @@ We also truncated the leverage_model_1 and leverage_model_2 columns, since we di
 \linespread{1}
 
 ```r
-dataWithCategory <- dataWithCategory[-9]
-dataWithCategory <- dataWithCategory[-9]
+dataFinished <- dataFinished[-9]
+dataFinished <- dataFinished[-9]
 ```
 
 
@@ -922,7 +961,7 @@ ggplot(data = manipulated_data, aes(x = region)) +
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-23-1.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -1173,11 +1212,11 @@ datasummary_skim(df1, output = 'kableExtra', booktabs = TRUE,
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c8443f1931.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c842d1b6a1f.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c8476e1487c.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c8439563c8a.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c8430cd66b5.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c805407424d.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c80247e4d3c.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c802f61803.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c8038dc6ac4.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_2c8038932b77.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1338,16 +1377,16 @@ test1
 #> 	Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -4.7718, df = 98, p-value = 6.376e-06
+#> t = -6.1323, df = 98, p-value = 1.826e-08
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -7.189916 -2.966232
+#>  -7.670657 -3.919861
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>              50.33938              55.41746
+#>              49.77982              55.57508
 ```
 
-This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-5.08$ between class A ($M = 50.34$, $SD = 5.44$) and class B ($M = 55.42$, $SD = 5.2$) in this case, $t(98)~=~-4.772,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
+This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-5.8$ between class A ($M = 49.78$, $SD = 5.26$) and class B ($M = 55.58$, $SD = 4.13$) in this case, $t(98)~=~-6.132,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
 
 
 ### $\chi^2$-test
@@ -2543,7 +2582,7 @@ worldCLI
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-57-1.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-60-1.pdf)<!-- --> 
 
 
 \linespread{1}
@@ -2643,7 +2682,7 @@ worldDD
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-58-1.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-61-1.pdf)<!-- --> 
 
 \linespread{1}
 
@@ -2813,7 +2852,7 @@ plot(data$cost_of_living_plus_rent_index,data$development
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-59-1.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-62-1.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -2823,7 +2862,7 @@ plot(data$groceries_index,data$rent_index
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-59-2.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-62-2.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -2868,7 +2907,7 @@ boxplot(data$cost_of_living_plus_rent_index~data$development)
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-59-3.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-62-3.pdf)<!-- --> 
 
 <!--chapter:end:XX-test_datei_BM.Rmd-->
 

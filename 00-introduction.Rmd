@@ -1,13 +1,15 @@
 # Introduction
-
-kurze Einleitung über die Aufgabenstellung (ggf. die Rollen und Aufgabenverteilung im Team)
-
-- Was wurde gemacht?
-- Beschreibung der einzelnen Kapitel
-- Kurze Beschreibung der Thematik
-- code junk mit libary und daten
-
 The standard of living became more and more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
+
+## Task description
+Our task was to analyze a data set and write a report about it using R, RStudio, RMarkdown and the procedures of literate programming to put together a PDF-manuscript.
+In our team we have received the "cost of living" data set and analyzed it with the research question "Is there a significant difference between industrialized countries and developing countries in cost of living?"
+
+## Structure
+Our document is divided into five chapters. This chapter is the introduction, where we describe the task and how we imported our dataset, respectively added other datasets. 
+In the chapter "Theoretical Background" the theoretical background of the dataset and the data collection is briefly discussed, before in the methods section the dataset is statistically described, including information on the variables’ distribution, missing values,
+categories and the relationships between the variables.
+The results section comprise all necessary calculations, which are then discussed in connection with the research question in the following section ("Discussion").
 
 ## Setup
 After the required libraries, which will be worked with in the following, were installed, the libraries still had to be imported in order to be able to use them.
@@ -38,9 +40,12 @@ costOfLiving <- janitor::clean_names(costOfLiving)
 
 To make it easier to split the data by region, we imported a csv file that shows the names of the countries in this world and their corresponding regions.
 
-First we had to import the dataset, which we named "continents".
+First we had to import the dataset, which we named "continents". This dataset is from the website "kaggle", named "Country Mapping - ISO, Continent, Region".
 
---> TODO: Wo haben wir das Datenset her?
+--> TODO: Noch zitieren?
+https://www.kaggle.com/datasets/andradaolteanu/country-mapping-iso-continent-region
+
+
 
 ```{r}
 #import list of continents and countries
@@ -69,7 +74,9 @@ costOfLivingAndContinents[486, 12] <- "Europe"
 ```
 
 To assign the different countries in our dataset to either a developing or an industrialized country, we also imported a new csv file, which we named "dd". 
-We created this file ourselves, based on data from the website --> TODO welche Webseite
+We created this file ourselves, based on data from the website 
+
+--> TODO: welche Webseite
 
 ```{r}
 #import list of Countries and development status
@@ -103,5 +110,5 @@ colnames(dd)[2] <- "development"
 In the end, we were able to perform a left join and thus add the categorization of development countries to our dataset.
 
 ```{r}
-datafinished <- left_join(costOfLivingAndContinents,dd, by="country")
-````
+dataFinished <- left_join(costOfLivingAndContinents,dd, by="country")
+```
