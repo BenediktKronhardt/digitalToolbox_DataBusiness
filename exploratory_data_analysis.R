@@ -10,11 +10,11 @@ library(carData)
 library(gpairs)
 library(GGally)
 #Initial data
-rawData <- read_delim("02-data/cost-of-living-2017.csv", 
-                      delim = "\t", escape_double = FALSE, 
-                      trim_ws = TRUE)
-rawData <- janitor::clean_names(rawData)
-rawData
+#rawData <- read_delim("02-data/cost-of-living-2017.csv", 
+ #                     delim = "\t", escape_double = FALSE, 
+  #                    trim_ws = TRUE)
+#rawData <- janitor::clean_names(rawData)
+#rawData
 #
 #
 #
@@ -25,8 +25,8 @@ rawData
 
 #raw
 dataset <- read_delim("02-data/cost-of-living-2017.csv", 
-                      delim = "\t", escape_double = FALSE, 
-                      trim_ws = TRUE)
+                     delim = "\t", escape_double = FALSE, 
+                     trim_ws = TRUE)
 continents <- read_csv("02-data/continents2.csv")
 
 head(dataset)
@@ -112,6 +112,7 @@ range(dataWithCategory$cost_of_living_plus_rent_index)
 #uninteressant für uns, nur für count Variablen!
 
 
+filter(costOfLivingAndContinents, is.na(region))
 
 
 

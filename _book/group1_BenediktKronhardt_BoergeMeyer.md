@@ -141,10 +141,12 @@ kurze Einleitung über die Aufgabenstellung (ggf. die Rollen und Aufgabenverteil
 
 The standard of living became more and more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
 
+## Setup
+After the required libraries, which will be worked with in the following, were installed, the libraries still had to be imported in order to be able to use them.
+
 \linespread{1}
 
 ```r
-
 library(tidyverse)
 ```
 
@@ -262,11 +264,12 @@ library(GGally)
 #>   +.gg   ggplot2
 ```
 
+Subsequently, the data had to be read in. This could be initialized with the following command, after the data set was added as a csv file in the folder "02-data".
+To be able to work better with the names of the columns and the dataset in general, the command "janitor::clean_names" was executed.  With this, for example, the spaces were removed and the names were all written in small letters.
+
 \linespread{1}
 
 ```r
-
-#Import initial data
 costOfLiving <- read_delim("02-data/cost-of-living-2017.csv", 
                       delim = "\t", escape_double = FALSE, 
                       trim_ws = TRUE)
@@ -291,9 +294,21 @@ costOfLiving <- read_delim("02-data/cost-of-living-2017.csv",
 
 ```r
 costOfLiving <- janitor::clean_names(costOfLiving)
+```
 
+
+
+\linespread{1}
+
+To make it easier to split the data by region, we imported a csv file that shows the names of the countries in this world and their corresponding regions.
+
+First we had to import the dataset, which we named "continents".
+
+\linespread{1}
+
+```r
 #import list of continents and countries
-manipulated_continents <- read_csv("02-data/continents2.csv")
+continents <- read_csv("02-data/continents2.csv")
 ```
 
 
@@ -314,14 +329,32 @@ manipulated_continents <- read_csv("02-data/continents2.csv")
 \linespread{1}
 
 ```r
-manipulated_continents <- janitor::clean_names(manipulated_continents)
+continents <- janitor::clean_names(continents)
+```
 
+
+
+\linespread{1}
+
+To be able to do a join with the raw data, we had to rename the column "name" to "country". After that, a left join could be performed on the renamed column. Since we only needed the column "region", a select for this one column was performed within the join.
+
+\linespread{1}
+
+```r
 #rename attribute 'name' in 'country' to perform a left join.
-#Kosovo as a country has to be added seperately
-manipulated_continents <- rename(manipulated_continents, country = name)
-costOfLivingAndContinents <- left_join(costOfLiving, select(manipulated_continents, country, region), by="country")
+continents <- rename(continents, country = name)
+costOfLivingAndContinents <- left_join(costOfLiving, select(continents, country, region), by="country")
+```
 
-#Check, if a region has no entry -> Result: Kosovo has no region
+
+
+\linespread{1}
+
+Now it was possible to check if a country was not assigned to a region. 
+
+\linespread{1}
+
+```r
 filter(costOfLivingAndContinents, is.na(region))
 ```
 
@@ -342,12 +375,23 @@ filter(costOfLivingAndContinents, is.na(region))
 #> #   3: groceries_index, 4: restaurant_price_index
 ```
 
+Since the country Kosovo could not be assigned to a region, this had to be done manually.
+
 \linespread{1}
 
 ```r
-#Kosovo has no continent -> changed to "Europe"
 costOfLivingAndContinents[486, 12] <- "Europe"
+```
 
+
+
+\linespread{1}
+
+TODO
+
+\linespread{1}
+
+```r
 #import list of Countries and development status
 dd <- read_delim("02-data/developed_and_developing_countries.csv",
                  delim = ";", escape_double = FALSE,
@@ -482,12 +526,38 @@ summary(is.na(dataWithCategory))
 #>  FALSE:511        FALSE:511       FALSE:511      
 #> 
 ```
-As it can be seen, there were $383$ missing values inside the column "state".
+As it can be seen, there were $383$ missing values inside the column "state". 
+However, since the column has no bearing on our research question, we decided to disregard this column. With the city column we have a more meaningful basis to answer our question.
+To disregard this column, we cut it off. To do this, we used to following R code chunk. Because it is the second column, we can just delete this column.
+
+\linespread{1}
+
+```r
+dataWithCategory <- dataWithCategory[-2]
+```
+
+
+
+\linespread{1}
+
+We also truncated the leverage_model_1 and leverage_model_2 columns, since we did not work with these columns any further.
+
+\linespread{1}
+
+```r
+dataWithCategory <- dataWithCategory[-9]
+dataWithCategory <- dataWithCategory[-9]
+```
+
+
+
+\linespread{1}
 
 
 ## Folgendes nur zur Übersicht/weiteren Aufbau(Gliederung)
 
-
+zu wrangling gehören joining, merging und grouping
+Boxplot gehört zu profiling
 
 3. Methods, for example:
 - Descriptive statistics
@@ -640,6 +710,19 @@ library(gt) # For displaying tables
 
 ```r
 library(gtsummary) # For model reporting inline and in tables
+```
+
+
+
+\linespread{1}
+
+```
+#> #StandWithUkraine
+```
+
+\linespread{1}
+
+```r
 library(broom) # For working with statistical models
 library(car) # For type-III anova tests
 library(report) # For automated text-based model reporting
@@ -839,7 +922,7 @@ ggplot(data = manipulated_data, aes(x = region)) +
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-23-1.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -1090,11 +1173,11 @@ datasummary_skim(df1, output = 'kableExtra', booktabs = TRUE,
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_667c1afb7db5.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_667c4a09694d.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_667c550838c.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_667c5d1343ee.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_667c6da84823.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c8443f1931.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c842d1b6a1f.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c8476e1487c.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c8439563c8a.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7c8430cd66b5.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1255,16 +1338,16 @@ test1
 #> 	Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -4.1666, df = 98, p-value = 6.667e-05
+#> t = -4.7718, df = 98, p-value = 6.376e-06
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -7.025644 -2.492386
+#>  -7.189916 -2.966232
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>              49.52447              54.28349
+#>              50.33938              55.41746
 ```
 
-This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-4.76$ between class A ($M = 49.52$, $SD = 5.62$) and class B ($M = 54.28$, $SD = 5.8$) in this case, $t(98)~=~-4.167,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
+This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-5.08$ between class A ($M = 50.34$, $SD = 5.44$) and class B ($M = 55.42$, $SD = 5.2$) in this case, $t(98)~=~-4.772,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
 
 
 ### $\chi^2$-test
@@ -2460,7 +2543,7 @@ worldCLI
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-49-1.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-57-1.pdf)<!-- --> 
 
 
 \linespread{1}
@@ -2560,7 +2643,7 @@ worldDD
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-50-1.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-58-1.pdf)<!-- --> 
 
 \linespread{1}
 
@@ -2730,7 +2813,7 @@ plot(data$cost_of_living_plus_rent_index,data$development
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-51-1.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-59-1.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -2740,7 +2823,7 @@ plot(data$groceries_index,data$rent_index
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-51-2.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-59-2.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -2785,7 +2868,7 @@ boxplot(data$cost_of_living_plus_rent_index~data$development)
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-51-3.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-59-3.pdf)<!-- --> 
 
 <!--chapter:end:XX-test_datei_BM.Rmd-->
 
