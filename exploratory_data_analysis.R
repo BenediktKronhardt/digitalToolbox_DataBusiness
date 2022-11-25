@@ -169,7 +169,7 @@ coplot(cost_of_living_plus_rent_index ~ groceries_index | region * development ,
 #multiple linear regression:
 
 #model -> ei
-model <- lm(cli ~ + groceries_index + restaurant_price_index + local_purchasing_power_index + development, data = dataFinished)
+model <- lm(cli ~ rent_index + groceries_index + restaurant_price_index + local_purchasing_power_index + development, data = dataFinished)
 summary(model)
 
 #groceries und restaurant price hat einen hohen Einfluss
