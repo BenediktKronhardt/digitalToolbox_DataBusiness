@@ -21,6 +21,8 @@ hist(residuals(model))
 
 
 #4.: Skalenbildung ist gegeben, da cli auf einer Skala ist
+
+#IN BERICHT WEGGELASSEN
 #5.:Homoskedastizität: 
 
 #grafische Erkennung:
@@ -34,6 +36,7 @@ plot(model, 1)
 library(lmtest)
 coeftest(model, vcov=vcovHC(model, type= "HC3")) #--> TODO:noch einmal checken!
 
+
 #6.: keine Autokorrelation - Unabhängigkeit der Fehlerterme
 
 #7.: keine Multikollinearität - übermäßige Korrelation der unabhängigen Variablen miteinander
@@ -43,6 +46,7 @@ coeftest(model, vcov=vcovHC(model, type= "HC3")) #--> TODO:noch einmal checken!
 subset_cor <- subset(dataFinished, select = c(rent_index, groceries_index, restaurant_price_index, local_purchasing_power_index, development))
 korr_tab <- cor(subset_cor, method = "pearson")
 korr_tab
+
 #Da restaurant_price_index und groceries_index eine Korrelation >0,8 haben, it dies ein Anzeichen dafür, dass eine Multikollinearität vorliegt. 
 #Um die Vermutung der Multikollinearität zu bestätigen oder zu wiederlegen, haben wir ebenfalls die Methode der VIF-Werte angewandt (VIF= Variance Inflation Factor)
 library(car)
@@ -52,6 +56,7 @@ vif(model)
 #Alle Voraussetzungen durchgegangen, jetzt die eigentliche Auswertung/Interpretation:
 summary(model)
 
+#DAS NACHFOLGENDE FEHLT NOCH IM BERICHT
 #F-Statistik: F(5,505)=4539; p<2,2e-16: Die Signifikanz (p-Value) sollte einen möglichst kleinen Wert haben (<0,05) Wenn das so ist, leistet das Regressionsmodell einen Erklärungsbeitrag.
 #Das Modell leistet einen signifikanten Erklärungsbeitrag, da der p-Wert deutlich unter 0,05 ist und es kann mit der Interpretation der weiteren Ergebnisse fortgefahren werden
 
