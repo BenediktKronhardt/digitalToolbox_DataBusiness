@@ -157,12 +157,12 @@ library(tidyverse)
 \linespread{1}
 
 ```
-#> -- Attaching packages -------------------------------------- tidyverse 1.3.2 --
+#> -- Attaching packages --------- tidyverse 1.3.2 --
 #> v ggplot2 3.3.6      v purrr   0.3.5 
 #> v tibble  3.1.8      v dplyr   1.0.10
 #> v tidyr   1.2.1      v stringr 1.4.1 
 #> v readr   2.1.3      v forcats 0.5.2 
-#> -- Conflicts ----------------------------------------- tidyverse_conflicts() --
+#> -- Conflicts ------------ tidyverse_conflicts() --
 #> x dplyr::filter() masks stats::filter()
 #> x dplyr::lag()    masks stats::lag()
 ```
@@ -283,7 +283,7 @@ costOfLiving <- read_delim("02-data/cost-of-living-2017.csv",
 
 ```
 #> Rows: 511 Columns: 11
-#> -- Column specification -------------------------------------------------------
+#> -- Column specification --------------------------
 #> Delimiter: "\t"
 #> chr (3): City, State, Country
 #> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
@@ -324,7 +324,7 @@ continents <- read_csv("02-data/continents2.csv")
 
 ```
 #> Rows: 249 Columns: 11
-#> -- Column specification -------------------------------------------------------
+#> -- Column specification --------------------------
 #> Delimiter: ","
 #> chr (7): name, alpha-2, alpha-3, iso_3166-2, region, sub...
 #> dbl (4): country-code, region-code, sub-region-code, int...
@@ -414,7 +414,7 @@ dd <- read_delim("02-data/developed_and_developing_countries.csv",
 
 ```
 #> Rows: 172 Columns: 2
-#> -- Column specification -------------------------------------------------------
+#> -- Column specification --------------------------
 #> Delimiter: ";"
 #> chr (2): country, category
 #> 
@@ -578,6 +578,82 @@ dataFinished <- dataFinished[-9]
 
 \linespread{1}
 
+To determine if outliers exist within the data set, we chose to draw a boxplot.
+
+\linespread{1}
+
+```r
+dataFinished %>%
+  mutate(across(where(is.factor), as.numeric))
+```
+
+
+
+\linespread{1}
+
+```
+#> # A tibble: 511 x 10
+#>    city      country   cost_~1   cli rent_~2 groce~3 resta~4
+#>    <chr>     <chr>       <dbl> <dbl>   <dbl>   <dbl>   <dbl>
+#>  1 Zurich    Switzerl~   109.   150.    66.8    164.    141.
+#>  2 Hamilton  Bermuda     133.   148.   118.     145.    153.
+#>  3 Zug       Switzerl~   106.   143.    67.4    148.    143.
+#>  4 Geneva    Switzerl~   107.   142.    70.2    147.    139.
+#>  5 Basel     Switzerl~    97.5  142.    51.5    150.    132.
+#>  6 Bern      Switzerl~    91.1  136.    45.3    146.    122.
+#>  7 Lausanne  Switzerl~    93.6  131.    54.6    137.    128.
+#>  8 Reykjavik Iceland      93.9  131.    55.9    128.    141.
+#>  9 Lugano    Switzerl~    88.6  124.    51.7    121.    128.
+#> 10 Stavanger Norway       77.8  117.    37.4    108.    143.
+#> # ... with 501 more rows, 3 more variables:
+#> #   local_purchasing_power_index <dbl>, region <chr>,
+#> #   development <dbl>, and abbreviated variable names
+#> #   1: cost_of_living_plus_rent_index, 2: rent_index,
+#> #   3: groceries_index, 4: restaurant_price_index
+```
+
+\linespread{1}
+
+```r
+  
+col = c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')
+boxplot(dataFinished[,c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')])
+```
+
+
+
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-21-1.pdf)<!-- --> 
+
+--> TODO: Abbildung beschriften!
+
+As can be seen from the figure, there are several outliers within the data set. In order not to distort the result, we decided to keep these outliers and to continue working with them.
+
+--> TODO: Text zu Correlation schreiben
+
+\linespread{1}
+
+```r
+datasummary_correlation(dataFinished)
+```
+
+
+
+\linespread{1}\begin{table}
+\centering
+\begin{tabular}[t]{lrrrrrrr}
+\toprule
+  & cost\_of\_living\_plus\_rent\_index & cli & rent\_index & groceries\_index & restaurant\_price\_index & local\_purchasing\_power\_index & development\\
+\midrule
+cost\_of\_living\_plus\_rent\_index & 1 & . & . & . & . & . & .\\
+cli & \num{.96} & 1 & . & . & . & . & .\\
+rent\_index & \num{.93} & \num{.79} & 1 & . & . & . & .\\
+groceries\_index & \num{.92} & \num{.95} & \num{.77} & 1 & . & . & .\\
+restaurant\_price\_index & \num{.91} & \num{.95} & \num{.75} & \num{.85} & 1 & . & .\\
+local\_purchasing\_power\_index & \num{.66} & \num{.64} & \num{.60} & \num{.65} & \num{.64} & 1 & .\\
+development & \num{.61} & \num{.65} & \num{.47} & \num{.60} & \num{.68} & \num{.64} & 1\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 ## Folgendes nur zur Übersicht/weiteren Aufbau(Gliederung)
 
@@ -603,13 +679,164 @@ applicable)
 
 
 # Results
+To determine whether there is a significant difference between developing and developed countries, we decided to run a multiple linear regression. This is to determine whether the classification into a developing country has a significant influence on the cost of living index or not.
 
-4. Results
+## Multiple linear regression
+->(Sollten die verschiedenen Namen der Kategorien auch mit R eingefügt werden?)
+Within multiple linear regression, our dependent variable (y) is the cost of living index. Our independent variables (x) are the rent index, the groceries index, the restaurant price index, the local purchasing power index and the development status.
 
-Inhalt:
+In order to perform a multiple linear regression, some conditions have to be fulfilled, which we will check in the following.
 
-should comprise all necessary calculations, including checking of assumptions (if
-applicable)
+First, there must be a linear relationship between the x variables and the y variable. This is evident from the correlation shown in -->(TODO: Querverweis Kapitel Methods (Korrelation)).
+Also, the y variable must be metrically scaled, which is given.
+
+Third, the residuals should be approximately normally distributed. We proved this graphically with the help of a histogram.
+
+First, we need to set up our model.
+
+\linespread{1}
+
+```r
+model <- lm(cli ~ rent_index + groceries_index + restaurant_price_index + local_purchasing_power_index + development, data = dataFinished)
+```
+
+
+
+\linespread{1}
+
+After that, we can create a histogram from our model.
+
+\linespread{1}
+
+```r
+hist(residuals(model))
+```
+
+
+
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-25-1.pdf)<!-- --> 
+
+From the histogram we can see that the distribution can be considered normally distributed, therefore this condition is also fulfilled.
+Scaling is also given, since the cost of living index is on a scale.
+
+The last condition we checked is that there must be no multicollinearity within the independent variables.
+To check this, we created a correlation matrix. First, we generated a subset from the data in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
+
+\linespread{1}
+
+```r
+subset_cor <- subset(dataFinished, select = c(rent_index, groceries_index, restaurant_price_index, local_purchasing_power_index, development))
+korr_tab <- cor(subset_cor, method = "pearson")
+korr_tab
+```
+
+
+
+\linespread{1}
+
+```
+#>                              rent_index groceries_index
+#> rent_index                    1.0000000       0.7674361
+#> groceries_index               0.7674361       1.0000000
+#> restaurant_price_index        0.7523090       0.8518550
+#> local_purchasing_power_index  0.6000432       0.6458339
+#> development                   0.4730879       0.5998356
+#>                              restaurant_price_index
+#> rent_index                                0.7523090
+#> groceries_index                           0.8518550
+#> restaurant_price_index                    1.0000000
+#> local_purchasing_power_index              0.6436926
+#> development                               0.6838520
+#>                              local_purchasing_power_index
+#> rent_index                                      0.6000432
+#> groceries_index                                 0.6458339
+#> restaurant_price_index                          0.6436926
+#> local_purchasing_power_index                    1.0000000
+#> development                                     0.6425433
+#>                              development
+#> rent_index                     0.4730879
+#> groceries_index                0.5998356
+#> restaurant_price_index         0.6838520
+#> local_purchasing_power_index   0.6425433
+#> development                    1.0000000
+```
+
+Since the correlation between restaurant price index and groceries index is -->(TODO: correlation mit R einfügen) >0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
+
+\linespread{1}
+
+```r
+vif(model)
+```
+
+
+
+\linespread{1}
+
+```
+#>                   rent_index              groceries_index 
+#>                     2.821033                     4.346802 
+#>       restaurant_price_index local_purchasing_power_index 
+#>                     4.863177                     2.187319 
+#>                  development 
+#>                     2.241055
+```
+
+Since according to this method none of the values is >10 we have rejected the theory of multicollinearity.
+
+Now that all the assumptions can be accepted, we come to the actual evaluation of the model.
+
+\linespread{1}
+
+```r
+summary(model)
+```
+
+
+
+\linespread{1}
+
+```
+#> 
+#> Call:
+#> lm(formula = cli ~ rent_index + groceries_index + restaurant_price_index + 
+#>     local_purchasing_power_index + development, data = dataFinished)
+#> 
+#> Residuals:
+#>     Min      1Q  Median      3Q     Max 
+#> -8.4054 -2.4098 -0.2694  1.8302 12.6586 
+#> 
+#> Coefficients:
+#>                               Estimate Std. Error t value
+#> (Intercept)                  10.785427   0.468691  23.012
+#> rent_index                    0.028668   0.013976   2.051
+#> groceries_index               0.479207   0.012561  38.152
+#> restaurant_price_index        0.427674   0.012145  35.213
+#> local_purchasing_power_index -0.028731   0.006438  -4.463
+#> development                   0.466335   0.461661   1.010
+#>                              Pr(>|t|)    
+#> (Intercept)                   < 2e-16 ***
+#> rent_index                     0.0408 *  
+#> groceries_index               < 2e-16 ***
+#> restaurant_price_index        < 2e-16 ***
+#> local_purchasing_power_index 9.98e-06 ***
+#> development                    0.3129    
+#> ---
+#> Signif. codes:  
+#> 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> 
+#> Residual standard error: 3.317 on 505 degrees of freedom
+#> Multiple R-squared:  0.9782,	Adjusted R-squared:  0.978 
+#> F-statistic:  4539 on 5 and 505 DF,  p-value: < 2.2e-16
+```
+
+The F-statistic of the model is F(5,505)=4539 -->(TODO: mit code) and the significance is  p<2,2e-16 -->(TODO: mit code).
+
+The model makes a significant explanatory contribution, as the p-value is well below 0.05, and we can proceed with the interpretation of the further results.
+
+The regression model explains 97.82%-->(TODO: checken ob man auch dies mit R einfügen kann) of the variance, as R²=0.9782 (--> TODO: mit code).
+
+As we can see, according to the p-values, all variables except the classification of development have a significant impact on the cost of living index.
 
 <!--chapter:end:03-results.Rmd-->
 
@@ -735,19 +962,6 @@ library(gt) # For displaying tables
 
 ```r
 library(gtsummary) # For model reporting inline and in tables
-```
-
-
-
-\linespread{1}
-
-```
-#> #BlackLivesMatter
-```
-
-\linespread{1}
-
-```r
 library(broom) # For working with statistical models
 library(car) # For type-III anova tests
 library(report) # For automated text-based model reporting
@@ -781,7 +995,7 @@ dataset <- read_delim("02-data/cost-of-living-2017.csv",
 
 ```
 #> Rows: 511 Columns: 11
-#> -- Column specification -------------------------------------------------------
+#> -- Column specification --------------------------
 #> Delimiter: "\t"
 #> chr (3): City, State, Country
 #> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
@@ -802,7 +1016,7 @@ continents <- read_csv("02-data/continents2.csv")
 
 ```
 #> Rows: 249 Columns: 11
-#> -- Column specification -------------------------------------------------------
+#> -- Column specification --------------------------
 #> Delimiter: ","
 #> chr (7): name, alpha-2, alpha-3, iso_3166-2, region, sub...
 #> dbl (4): country-code, region-code, sub-region-code, int...
@@ -889,7 +1103,7 @@ dd <- read_delim("02-data/developed_and_developing_countries.csv",
 
 ```
 #> Rows: 172 Columns: 2
-#> -- Column specification -------------------------------------------------------
+#> -- Column specification --------------------------
 #> Delimiter: ";"
 #> chr (2): country, category
 #> 
@@ -947,7 +1161,7 @@ ggplot(data = manipulated_data, aes(x = region)) +
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-33-1.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -1108,7 +1322,7 @@ df1 <- read_csv("02-data/mpg_data_as_csv.csv", lazy = FALSE)
 
 ```
 #> Rows: 234 Columns: 11
-#> -- Column specification -------------------------------------------------------
+#> -- Column specification --------------------------
 #> Delimiter: ","
 #> chr (6): manufacturer, model, trans, drv, fl, class
 #> dbl (5): displ, year, cyl, cty, hwy
@@ -1198,11 +1412,11 @@ datasummary_skim(df1, output = 'kableExtra', booktabs = TRUE,
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7fe839ac385b.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7fe8732a353e.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7fe8718b3cb8.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7fe829df3eb3.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7fe83d301cc8.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7bc4f5412d9.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7bc3c3449a0.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7bc67272c1b.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7bc333a0e.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7bc1a426a9c.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1363,16 +1577,16 @@ test1
 #> 	Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -5.4868, df = 98, p-value = 3.205e-07
+#> t = -4.9189, df = 98, p-value = 3.508e-06
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -8.005484 -3.752756
+#>  -6.856982 -2.914740
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>              49.95118              55.83030
+#>              50.23306              55.11892
 ```
 
-This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-5.88$ between class A ($M = 49.95$, $SD = 5.61$) and class B ($M = 55.83$, $SD = 5.1$) in this case, $t(98)~=~-5.487,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
+This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-4.89$ between class A ($M = 50.23$, $SD = 5.12$) and class B ($M = 55.12$, $SD = 4.81$) in this case, $t(98)~=~-4.919,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
 
 
 ### $\chi^2$-test
@@ -2373,7 +2587,7 @@ dataset <- read_csv("02-data/cost-of-living-2017.csv", lazy= FALSE)
 
 ```
 #> Rows: 511 Columns: 1
-#> -- Column specification -------------------------------------------------------
+#> -- Column specification --------------------------
 #> Delimiter: ","
 #> chr (1): City	State	Country	Cost of Living Plus Rent Ind...
 #> 
@@ -2415,7 +2629,7 @@ rawData <- read_delim("02-data/cost-of-living-2017.csv",
 
 ```
 #> Rows: 511 Columns: 11
-#> -- Column specification -------------------------------------------------------
+#> -- Column specification --------------------------
 #> Delimiter: "\t"
 #> chr (3): City, State, Country
 #> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
@@ -2500,7 +2714,7 @@ rawData <- read_delim("02-data/cost-of-living-2017.csv",
 
 ```
 #> Rows: 511 Columns: 11
-#> -- Column specification -------------------------------------------------------
+#> -- Column specification --------------------------
 #> Delimiter: "\t"
 #> chr (3): City, State, Country
 #> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
@@ -2568,7 +2782,7 @@ worldCLI
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-60-1.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-67-1.pdf)<!-- --> 
 
 
 \linespread{1}
@@ -2593,7 +2807,7 @@ dd <- read_delim("02-data/developed_and_developing_countries.csv",
 
 ```
 #> Rows: 172 Columns: 2
-#> -- Column specification -------------------------------------------------------
+#> -- Column specification --------------------------
 #> Delimiter: ";"
 #> chr (2): country, category
 #> 
@@ -2668,7 +2882,7 @@ worldDD
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-61-1.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-68-1.pdf)<!-- --> 
 
 \linespread{1}
 
@@ -2692,7 +2906,7 @@ rawData <- read_delim("02-data/cost-of-living-2017.csv",
 
 ```
 #> Rows: 511 Columns: 11
-#> -- Column specification -------------------------------------------------------
+#> -- Column specification --------------------------
 #> Delimiter: "\t"
 #> chr (3): City, State, Country
 #> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
@@ -2749,7 +2963,7 @@ dd <- read_delim("02-data/developed_and_developing_countries.csv",
 
 ```
 #> Rows: 172 Columns: 2
-#> -- Column specification -------------------------------------------------------
+#> -- Column specification --------------------------
 #> Delimiter: ";"
 #> chr (2): country, category
 #> 
@@ -2838,7 +3052,7 @@ plot(data$cost_of_living_plus_rent_index,data$development
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-62-1.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-69-1.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -2848,7 +3062,7 @@ plot(data$groceries_index,data$rent_index
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-62-2.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-69-2.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -2893,7 +3107,7 @@ boxplot(data$cost_of_living_plus_rent_index~data$development)
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-62-3.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-69-3.pdf)<!-- --> 
 
 <!--chapter:end:XX-test_datei_BM.Rmd-->
 
