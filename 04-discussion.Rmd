@@ -1,5 +1,15 @@
 # Discussion
 
+Stichpunkte/Überthemen zum diskutieren/kritisch hinterfragen:
+
+## Woher stammen die Daten
+-sowohl der eigentliche Datensatz als auch die hinzugefügten Datensätze (continents2 und dd) - Waren die Seiten vertrauensvoll, wie hätte man alternativ "bessere" Daten bekommen können?
+
+## Reicht es aus, eine einfache multiple lineare regression zu machen, um die Forschungsfrage zu beantworten? - Was hätte man zusätzlich machen können?
+-Können wir eine Aussage dadurch treffen?
+
+## Ist die Forschungsfrage mit der Menge der Daten überhaupt aussagekräftig? - Gibt es genug Datensätze für Industrie und Entwicklungsländer?
+
 5. Diskussion
 Muss noch überarbeitet werden!
 
