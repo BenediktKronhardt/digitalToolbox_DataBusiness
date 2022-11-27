@@ -1,12 +1,13 @@
 # Results
-To determine whether there is a significant difference between developing and developed countries, we decided to first run a multiple linear regression. This is to determine whether the classification into a developing country has a significant influence on the cost of living index or not.
+To determine whether there is a significant difference between developing and developed countries, we decided to run a multiple linear regression. This is to determine whether the classification into a developing country has a significant influence on the cost of living index or not.
 
 ## Multiple linear regression
+->(Sollten die verschiedenen Namen der Kategorien auch mit R eingefügt werden?)
 Within multiple linear regression, our dependent variable (y) is the cost of living index. Our independent variables (x) are the rent index, the groceries index, the restaurant price index, the local purchasing power index and the development status.
 
 In order to perform a multiple linear regression, some conditions have to be fulfilled, which we will check in the following.
 
-First, there must be a linear relationship between the x variables and the y variable. This is evident from the correlation shown in -->TODO: Querverweis Kapitel Methods (Korrelation).
+First, there must be a linear relationship between the x variables and the y variable. This is evident from the correlation shown in -->(TODO: Querverweis Kapitel Methods (Korrelation)).
 Also, the y variable must be metrically scaled, which is given.
 
 Third, the residuals should be approximately normally distributed. We proved this graphically with the help of a histogram.
@@ -35,7 +36,7 @@ korr_tab <- cor(subset_cor, method = "pearson")
 korr_tab
 ```
 
-Since the correlation between restaurant price index and groceries index is >0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
+Since the correlation between restaurant price index and groceries index is -->(TODO: correlation mit R einfügen) >0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
 
 ```{r}
 vif(model)
@@ -49,11 +50,10 @@ Now that all the assumptions can be accepted, we come to the actual evaluation o
 summary(model)
 ```
 
+The F-statistic of the model is F(5,505)=4539 -->(TODO: mit code) and the significance is  p<2,2e-16 -->(TODO: mit code).
 
+The model makes a significant explanatory contribution, as the p-value is well below 0.05, and we can proceed with the interpretation of the further results.
 
-4. Results
+The regression model explains 97.82%-->(TODO: checken ob man auch dies mit R einfügen kann) of the variance, as R²=0.9782 (--> TODO: mit code).
 
-Inhalt:
-
-should comprise all necessary calculations, including checking of assumptions (if
-applicable)
+As we can see, according to the p-values, all variables except the classification of development have a significant impact on the cost of living index.

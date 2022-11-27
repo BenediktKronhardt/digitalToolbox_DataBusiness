@@ -56,7 +56,7 @@ vif(model)
 #Alle Voraussetzungen durchgegangen, jetzt die eigentliche Auswertung/Interpretation:
 summary(model)
 
-#DAS NACHFOLGENDE FEHLT NOCH IM BERICHT
+
 #F-Statistik: F(5,505)=4539; p<2,2e-16: Die Signifikanz (p-Value) sollte einen möglichst kleinen Wert haben (<0,05) Wenn das so ist, leistet das Regressionsmodell einen Erklärungsbeitrag.
 #Das Modell leistet einen signifikanten Erklärungsbeitrag, da der p-Wert deutlich unter 0,05 ist und es kann mit der Interpretation der weiteren Ergebnisse fortgefahren werden
 
@@ -64,6 +64,8 @@ summary(model)
 
 #Signifikanz: alle Variablen außer development haben einen signifikanten Einfluss auf den cli, da ihr p-Wert unter 0,05 ist
 
+
+#DAS NACHFOLGENDE IST NICHT IM BERICHT
 #Wenn rent_index um 1 steigt, steigt der cli um 0,028668
 #Wenn groceries_index um 1 steigt, steigt der cli um 0,479207
 #Wenn restaurant_price_index um 1 steigt, steigt der cli um 0,427674
