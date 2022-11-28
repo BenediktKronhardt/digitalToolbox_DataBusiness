@@ -12,7 +12,7 @@ countCountries <- countCountries[!duplicated(countCountries),]
 countCountries <- countCountries[order(countCountries$country),]
 nrow(countCountries)
 ```
-The provided data consists of $`R nrow(dataFinished)` different datasets from $`R nrow(countCountries)` different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
+The provided data consists of $`R nrow(dataFinished)` different datasets from $`R nrow(countCountries)` different states. The data was set up into the following attributes: City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2.
 
 ```{r}
 MapData <- dataFinished
