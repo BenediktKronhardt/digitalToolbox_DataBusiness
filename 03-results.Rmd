@@ -2,12 +2,11 @@
 To determine whether there is a significant difference between developing and developed countries, we decided to run a multiple linear regression. This is to determine whether the classification into a developing country has a significant influence on the cost of living index or not.
 
 ## Multiple linear regression
-->(Sollten die verschiedenen Namen der Kategorien auch mit R eingefügt werden?)
 Within multiple linear regression, our dependent variable (y) is the cost of living index. Our independent variables (x) are the rent index, the groceries index, the restaurant price index, the local purchasing power index and the development status.
 
 In order to perform a multiple linear regression, some conditions have to be fulfilled, which we will check in the following.
 
-First, there must be a linear relationship between the x variables and the y variable. This is evident from the correlation shown in -->(TODO: Querverweis Kapitel Methods (Korrelation)).
+First, there must be a linear relationship between the x variables and the y variable. This is evident from the correlation shown in -->(TODO: Querverweis Kapitel Methods oder auch nur Tabelle/Figure Korrelation).
 Also, the y variable must be metrically scaled, which is given.
 
 Third, the residuals should be approximately normally distributed. We proved this graphically with the help of a histogram.
@@ -36,7 +35,8 @@ korr_tab <- cor(subset_cor, method = "pearson")
 korr_tab
 ```
 
-Since the correlation between restaurant price index and groceries index is -->(TODO: correlation mit R einfügen) >0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
+Since the correlation between restaurant price index and groceries index is
+ $`r cor(x=dataFinished$restaurant_price_index, y=dataFinished$groceries_index, method="pearson")`$ > 0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
 
 ```{r}
 vif(model)
