@@ -5,6 +5,9 @@ output:
 ---
 # Methods
 
+## Data Description
+The provided data consists of !!!number of datasets!!! different datasets from !!!!!110!!!!! different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
+
 ## Exploratory Data Analysis
 
 First of all, we had to check, if there are missing values inside of the data-set. Therefore we used the following code to proof this:
