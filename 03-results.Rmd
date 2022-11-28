@@ -50,10 +50,6 @@ Now that all the assumptions can be accepted, we come to the actual evaluation o
 summary(model)
 ```
 
-The F-statistic of the model is F(5,505)=4539 -->(TODO: mit code) and the significance is  p<2,2e-16 -->(TODO: mit code).
-
 The model makes a significant explanatory contribution, as the p-value is well below 0.05, and we can proceed with the interpretation of the further results.
-
-The regression model explains 97.82%-->(TODO: checken ob man auch dies mit R einfügen kann) of the variance, as R²=0.9782 (--> TODO: mit code).
 
 As we can see, according to the p-values, all variables except the classification of development have a significant impact on the cost of living index.
