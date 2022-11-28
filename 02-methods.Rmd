@@ -6,7 +6,47 @@ output:
 # Methods
 
 ## Data Description
-The provided data consists of !!!number of datasets!!! different datasets from !!!!!110!!!!! different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
+```{r}
+countCountries <- dataFinished[,3:3] %>% group_by(country)
+countCountries <- countCountries[!duplicated(countCountries),] 
+countCountries <- countCountries[order(countCountries$country),]
+nrow(countCountries)
+```
+The provided data consists of $`R nrow(dataFinished)` different datasets from $`R nrow(countCountries)` different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
+
+```{r}
+MapData <- dataFinished
+#selecting attributes (country, region, development)
+MapData <- MapData %>% select(3,13)
+colnames(MapData)[1] <- "region"
+MapData <- MapData %>% group_by()
+#merge data
+world <- map_data("world")
+MapData <- left_join(MapData, world, by="region")
+MapData
+
+plain <- theme(
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  panel.border = element_blank(),
+  panel.grid = element_blank(),
+  axis.title = element_blank(),
+  panel.background = element_rect(fill = "white"),
+  plot.title = element_text(hjust = 0.5)
+)
+worldDD <- ggplot(data = MapData, mapping = aes(x = long, y = lat, group = group)) +
+  borders("world", fill="grey90",colour="grey") + 
+  coord_fixed(1.3) +
+  geom_polygon(aes(fill = development)) +
+  scale_fill_distiller(palette ="RdBu", direction = 1) + # or direction=1
+  ggtitle("Industrialized and developing countries") +
+  plain
+
+worldDD
+
+```
+
 
 ## Exploratory Data Analysis
 
