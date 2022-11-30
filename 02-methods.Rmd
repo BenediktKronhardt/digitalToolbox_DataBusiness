@@ -14,8 +14,19 @@ countCountries <- dataFinished[,3:3] %>% group_by(country)
 countCountries <- countCountries[!duplicated(countCountries),] 
 countCountries <- countCountries[order(countCountries$country),]
 
+<<<<<<< HEAD
 ```
 The provided data consists of $`r nrow(dataFinished)`$ different datasets from $`r nrow(countCountries)`$ different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
+=======
+basisDataSet <- subset(dataFinished,(dataFinished$cost_of_living_plus_rent_index==100),show_col_types = FALSE)
+```
+The provided data consists of $`R nrow(dataFinished)` different datasets from $`R nrow(countCountries)` different states. These data was set up into the following attributes: City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2.
+
+String and doubles as a data type is a major part of the attributes. In this case, the attributes City, State and Country are represented as strings. The remaining attributes were assigned to the data type double.When reviewing the data, it became apparent that the data set with the following data set was used as a reference for the continuous evaluation to which the further results of the values are based on:
+$`r` basisDataSet`$
+
+
+>>>>>>> 5be655a4e86f1f86df11b7ba5b473fb1b0f7efa3
 
 ```{r}
 #| echo = FALSE,
@@ -46,7 +57,7 @@ plain <- theme(
   panel.background = element_rect(fill = "white"),
   plot.title = element_text(hjust = 0.5)
 )
-worldDD <- ggplot(data = MapData, mapping = aes(x = long, y = lat, group = group)) +
+worldMap <- ggplot(data = MapData, mapping = aes(x = long, y = lat, group = group)) +
   borders("world", fill="grey90",colour="grey") + 
   coord_fixed(1.3) +
   geom_polygon(aes(fill = development)) +
@@ -54,10 +65,10 @@ worldDD <- ggplot(data = MapData, mapping = aes(x = long, y = lat, group = group
   #ggtitle("Industrialized and developing countries") +
   plain
 
-worldDD
-
 ```
+As an overview a world map with developed and industrialized countries were created:
 
+$`r worldMap`$
 
 ## Exploratory Data Analysis
 
