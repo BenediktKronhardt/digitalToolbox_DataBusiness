@@ -7,23 +7,34 @@ output:
 
 ## Data Description
 ```{r}
+#| message = FALSE,
+#| warning = FALSE,
+#| echo = FALSE
 countCountries <- dataFinished[,3:3] %>% group_by(country)
 countCountries <- countCountries[!duplicated(countCountries),] 
 countCountries <- countCountries[order(countCountries$country),]
-nrow(countCountries)
+
 ```
-The provided data consists of $`R nrow(dataFinished)` different datasets from $`R nrow(countCountries)` different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
+The provided data consists of $`r nrow(dataFinished)`$ different datasets from $`r nrow(countCountries)`$ different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
 
 ```{r}
+#| echo = FALSE,
+#| warning = FALSE,
+#| label = "worldMap",
+#| fig.cap = "Industrialized and developing countries",
+#| out.width = "80%",
+#| fig.asp = 0.75,
+#| fig.align = "center",
+
+
 MapData <- dataFinished
-#selecting attributes (country, region, development)
+#selecting attributes (country, development)
 MapData <- MapData %>% select(3,13)
 colnames(MapData)[1] <- "region"
-MapData <- MapData %>% group_by()
+#MapData <- MapData %>% group_by()
 #merge data
 world <- map_data("world")
 MapData <- left_join(MapData, world, by="region")
-MapData
 
 plain <- theme(
   axis.text = element_blank(),
@@ -40,7 +51,7 @@ worldDD <- ggplot(data = MapData, mapping = aes(x = long, y = lat, group = group
   coord_fixed(1.3) +
   geom_polygon(aes(fill = development)) +
   scale_fill_distiller(palette ="RdBu", direction = 1) + # or direction=1
-  ggtitle("Industrialized and developing countries") +
+  #ggtitle("Industrialized and developing countries") +
   plain
 
 worldDD

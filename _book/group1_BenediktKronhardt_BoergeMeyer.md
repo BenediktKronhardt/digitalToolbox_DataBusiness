@@ -150,121 +150,21 @@ After the required libraries, which will be worked with in the following, were i
 
 ```r
 library(tidyverse)
-```
-
-
-
-\linespread{1}
-
-```
-#> -- Attaching packages --------- tidyverse 1.3.2 --
-#> v ggplot2 3.3.6      v purrr   0.3.5 
-#> v tibble  3.1.8      v dplyr   1.0.10
-#> v tidyr   1.2.1      v stringr 1.4.1 
-#> v readr   2.1.3      v forcats 0.5.2 
-#> -- Conflicts ------------ tidyverse_conflicts() --
-#> x dplyr::filter() masks stats::filter()
-#> x dplyr::lag()    masks stats::lag()
-```
-
-\linespread{1}
-
-```r
 library(dplyr)
 library(stringr)
 library(ggplot2)
 library(maps)
-```
-
-
-
-\linespread{1}
-
-```
-#> Warning: Paket 'maps' wurde unter R Version 4.2.2 erstellt
-#> 
-#> Attache Paket: 'maps'
-#> 
-#> Das folgende Objekt ist maskiert 'package:purrr':
-#> 
-#>     map
-```
-
-\linespread{1}
-
-```r
 library(janitor)
-```
-
-
-
-\linespread{1}
-
-```
-#> 
-#> Attache Paket: 'janitor'
-#> 
-#> Die folgenden Objekte sind maskiert von 'package:stats':
-#> 
-#>     chisq.test, fisher.test
-```
-
-\linespread{1}
-
-```r
 library(modelsummary)
 library(car)
-```
-
-
-
-\linespread{1}
-
-```
-#> Lade nötiges Paket: carData
-#> 
-#> Attache Paket: 'car'
-#> 
-#> Das folgende Objekt ist maskiert 'package:dplyr':
-#> 
-#>     recode
-#> 
-#> Das folgende Objekt ist maskiert 'package:purrr':
-#> 
-#>     some
-```
-
-\linespread{1}
-
-```r
 library(carData)
 library(gpairs)
-```
-
-
-
-\linespread{1}
-
-```
-#> Warning: Paket 'gpairs' wurde unter R Version 4.2.2 erstellt
-```
-
-\linespread{1}
-
-```r
 library(GGally)
 ```
 
 
 
 \linespread{1}
-
-```
-#> Warning: Paket 'GGally' wurde unter R Version 4.2.2 erstellt
-#> Registered S3 method overwritten by 'GGally':
-#>   method from   
-#>   +.gg   ggplot2
-```
 
 Subsequently, the data had to be read in. This could be initialized with the following command, after the data set was added as a csv file in the folder "02-data".
 To be able to work better with the names of the columns and the dataset in general, the command "janitor::clean_names" was executed.  With this, for example, the spaces were removed and the names were all written in small letters.
@@ -275,26 +175,6 @@ To be able to work better with the names of the columns and the dataset in gener
 costOfLiving <- read_delim("02-data/cost-of-living-2017.csv", 
                       delim = "\t", escape_double = FALSE, 
                       trim_ws = TRUE)
-```
-
-
-
-\linespread{1}
-
-```
-#> Rows: 511 Columns: 11
-#> -- Column specification --------------------------
-#> Delimiter: "\t"
-#> chr (3): City, State, Country
-#> dbl (8): Cost of Living Plus Rent Index, CLI, Rent Index...
-#> 
-#> i Use `spec()` to retrieve the full column specification for this data.
-#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-```
-
-\linespread{1}
-
-```r
 costOfLiving <- janitor::clean_names(costOfLiving)
 ```
 
@@ -304,38 +184,13 @@ costOfLiving <- janitor::clean_names(costOfLiving)
 
 To make it easier to split the data by region, we imported a csv file that shows the names of the countries in this world and their corresponding regions.
 
-First we had to import the dataset, which we named "continents". This dataset is from the website "kaggle", named "Country Mapping - ISO, Continent, Region".
-
---> TODO: Noch zitieren?
-https://www.kaggle.com/datasets/andradaolteanu/country-mapping-iso-continent-region
-
-
+First we had to import the dataset, which we named "continents". This dataset is from the website "kaggle", named "Country Mapping - ISO, Continent, Region". ^[@continents2]
 
 \linespread{1}
 
 ```r
 #import list of continents and countries
 continents <- read_csv("02-data/continents2.csv")
-```
-
-
-
-\linespread{1}
-
-```
-#> Rows: 249 Columns: 11
-#> -- Column specification --------------------------
-#> Delimiter: ","
-#> chr (7): name, alpha-2, alpha-3, iso_3166-2, region, sub...
-#> dbl (4): country-code, region-code, sub-region-code, int...
-#> 
-#> i Use `spec()` to retrieve the full column specification for this data.
-#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-```
-
-\linespread{1}
-
-```r
 continents <- janitor::clean_names(continents)
 ```
 
@@ -358,30 +213,6 @@ costOfLivingAndContinents <- left_join(costOfLiving, select(continents, country,
 \linespread{1}
 
 Now it was possible to check if a country was not assigned to a region. 
-
-\linespread{1}
-
-```r
-filter(costOfLivingAndContinents, is.na(region))
-```
-
-
-
-\linespread{1}
-
-```
-#> # A tibble: 1 x 12
-#>   city   state country cost_~1   cli rent_~2 groce~3 resta~4
-#>   <chr>  <chr> <chr>     <dbl> <dbl>   <dbl>   <dbl>   <dbl>
-#> 1 Prist~ <NA>  Kosovo~    19.3  29.4     8.9    26.6    22.3
-#> # ... with 4 more variables:
-#> #   local_purchasing_power_index <dbl>,
-#> #   leverage_model_1 <dbl>, leverage_model_2 <dbl>,
-#> #   region <chr>, and abbreviated variable names
-#> #   1: cost_of_living_plus_rent_index, 2: rent_index,
-#> #   3: groceries_index, 4: restaurant_price_index
-```
-
 Since the country Kosovo could not be assigned to a region, this had to be done manually.
 
 \linespread{1}
@@ -395,9 +226,7 @@ costOfLivingAndContinents[486, 12] <- "Europe"
 \linespread{1}
 
 To assign the different countries in our dataset to either a developing or an industrialized country, we also imported a new csv file, which we named "dd". 
-We created this file ourselves, based on data from the website 
-
---> TODO: welche Webseite
+We created this file ourselves, based on data from @ddcountries.
 
 \linespread{1}
 
@@ -406,25 +235,6 @@ We created this file ourselves, based on data from the website
 dd <- read_delim("02-data/developed_and_developing_countries.csv",
                  delim = ";", escape_double = FALSE,
                  trim_ws = TRUE)
-```
-
-
-
-\linespread{1}
-
-```
-#> Rows: 172 Columns: 2
-#> -- Column specification --------------------------
-#> Delimiter: ";"
-#> chr (2): country, category
-#> 
-#> i Use `spec()` to retrieve the full column specification for this data.
-#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-```
-
-\linespread{1}
-
-```r
 dd <- janitor::clean_names(dd)
 ```
 
@@ -482,28 +292,23 @@ dataFinished <- left_join(costOfLivingAndContinents,dd, by="country")
 
 # Theoretical background
 
-2. Theoretical background concluding with the research question
-
-Inhalt/Aufbau:
-
-  1:Description of the topic, the data set is focused
-
-  2:What information is critical to know for a reader of the report to understand the theoretical background of the data set
-
-  3:research question (describe the question and the part, developing it)
-  
-
-Das ist ein Zitat von @Konus1939
+## Cost of Living Index
 
 Because of different prices, living standards, currencies and other factors, it is not possible to compare the cost of living in different countries properly. 
 
-To be able to compare the cost of living between different countries, the Cost of Living Index is used - also abbreviated as CLI in the following. The cost of living is the financial resources needed to cover, in a given place and in a given period of time, the basic expenses for a given standard of living, such as a shelter, food, medicines and others. The CLI enables the comparison of expenditures between different places in the world and at different times in history. (https://www.investopedia.com/terms/c/cost-of-living.asp)
+To be able to compare the cost of living between different countries, the Cost of Living Index is used - also abbreviated as CLI in the following. The cost of living is the financial resources needed to cover, in a given place and in a given period of time, the basic expenses for a given standard of living, such as a shelter, food, medicines and others. The CLI enables the comparison of expenditures between different places in the world and at different times in history.^[@caroline]
 
 In economics, the cost-of-living index describes the ratio of the minimum expenditure required to achieve a given indifference curve between two prices. The calculation not only requires two different price groups, but is also dependent on a preference order of the required living goods and on a basic indifference curve describing the utility of two products. 
-Among the two prices needed, e.g., from two different places, one is called the comparison price and the other is called the reference price or the base price. The base price is then used to illustrate on which prices the Cost-Of-Living Index is based and calculated. The calculated index is then dependent on the comparison prices determined. Further, the general logic of the cost-of-living index is best understood when the index is interpreted in the multiple context of temporal and spatial comparisons. 
-(https://books.google.de/books?hl=de&lr=&id=tWzmCwAAQBAJ&oi=fnd&pg=PR9&dq=cost+of+living+index&ots=CcktA8DaTk&sig=uSeHqr0M8ig2QdQWEeUUqqVptGI&redir_esc=y#v=onepage&q=cost%20of%20living%20index&f=false )
+Among the two prices needed, e.g., from two different places, one is called the comparison price and the other is called the reference price or the base price. The base price is then used to illustrate on which prices the Cost-Of-Living Index is based and calculated. The calculated index is then dependent on the comparison prices determined. Further, the general logic of the cost-of-living index is best understood when the index is interpreted in the multiple context of temporal and spatial comparisons.^[@Pollak1989]
 
+## Industrialized, emerging and developing countries
+In general, countries are divided into industrialized, emerging and developing countries. States in which the economic performance is supported by a large part of the resident companies are referred to as industrialized countries. Such countries stand out due to their high per capita income, which results from the available standard of education, high productivity in production, good external trade relations and usually a currency with low inflation.^[@bpd]
 
+A country that is in the process of becoming an industrialized country is called an emerging country. These are nevertheless referred to the category of developing countries. Emerging countries are identifiable by their above-average economic growth. Nevertheless, emerging countries are similar to developing countries in the social structure, such as in the level of education, mortality and access to infrastructure.^[@bmz]
+
+The third category is developing countries, which are associated with poor food supply, high poverty, poor health care and educational opportunities. In association with the characteristics, such countries have an overall low standard of living and a preponderance of labor in agriculture and external economic difficulties.^[@bmzentwicklung]
+
+To analyze the available data, developing countries were combined with emerging economies and contrasted with developed countries.
 
 <!--chapter:end:01-theoretical-background.Rmd-->
 
@@ -514,6 +319,20 @@ output:
 ---
 
 # Methods
+
+## Data Description
+
+The provided data consists of $511$ different datasets from $110$ different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/worldMap-1} 
+
+}
+
+\caption{Industrialized and developing countries}(\#fig:worldMap)
+\end{figure}
+
 
 ## Exploratory Data Analysis
 
@@ -622,7 +441,7 @@ boxplot(dataFinished[,c('cost_of_living_plus_rent_index','cli','rent_index','gro
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-21-1.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-22-1.pdf)<!-- --> 
 
 --> TODO: Abbildung beschriften!
 
@@ -682,12 +501,11 @@ applicable)
 To determine whether there is a significant difference between developing and developed countries, we decided to run a multiple linear regression. This is to determine whether the classification into a developing country has a significant influence on the cost of living index or not.
 
 ## Multiple linear regression
-->(Sollten die verschiedenen Namen der Kategorien auch mit R eingefügt werden?)
 Within multiple linear regression, our dependent variable (y) is the cost of living index. Our independent variables (x) are the rent index, the groceries index, the restaurant price index, the local purchasing power index and the development status.
 
 In order to perform a multiple linear regression, some conditions have to be fulfilled, which we will check in the following.
 
-First, there must be a linear relationship between the x variables and the y variable. This is evident from the correlation shown in -->(TODO: Querverweis Kapitel Methods (Korrelation)).
+First, there must be a linear relationship between the x variables and the y variable. This is evident from the correlation shown in -->(TODO: Querverweis Kapitel Methods oder auch nur Tabelle/Figure Korrelation).
 Also, the y variable must be metrically scaled, which is given.
 
 Third, the residuals should be approximately normally distributed. We proved this graphically with the help of a histogram.
@@ -714,7 +532,7 @@ hist(residuals(model))
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-25-1.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> 
 
 From the histogram we can see that the distribution can be considered normally distributed, therefore this condition is also fulfilled.
 Scaling is also given, since the cost of living index is on a scale.
@@ -761,7 +579,8 @@ korr_tab
 #> development                    1.0000000
 ```
 
-Since the correlation between restaurant price index and groceries index is -->(TODO: correlation mit R einfügen) >0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
+Since the correlation between restaurant price index and groceries index is
+ $0.851855$ > 0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
 
 \linespread{1}
 
@@ -830,11 +649,7 @@ summary(model)
 #> F-statistic:  4539 on 5 and 505 DF,  p-value: < 2.2e-16
 ```
 
-The F-statistic of the model is F(5,505)=4539 -->(TODO: mit code) and the significance is  p<2,2e-16 -->(TODO: mit code).
-
 The model makes a significant explanatory contribution, as the p-value is well below 0.05, and we can proceed with the interpretation of the further results.
-
-The regression model explains 97.82%-->(TODO: checken ob man auch dies mit R einfügen kann) of the variance, as R²=0.9782 (--> TODO: mit code).
 
 As we can see, according to the p-values, all variables except the classification of development have a significant impact on the cost of living index.
 
@@ -842,6 +657,16 @@ As we can see, according to the p-values, all variables except the classificatio
 
 
 # Discussion
+
+Stichpunkte/Überthemen zum diskutieren/kritisch hinterfragen:
+
+## Woher stammen die Daten
+-sowohl der eigentliche Datensatz als auch die hinzugefügten Datensätze (continents2 und dd) - Waren die Seiten vertrauensvoll, wie hätte man alternativ "bessere" Daten bekommen können?
+
+## Reicht es aus, eine einfache multiple lineare regression zu machen, um die Forschungsfrage zu beantworten? - Was hätte man zusätzlich machen können?
+-Können wir eine Aussage dadurch treffen?
+
+## Ist die Forschungsfrage mit der Menge der Daten überhaupt aussagekräftig? - Gibt es genug Datensätze für Industrie und Entwicklungsländer?
 
 5. Diskussion
 Muss noch überarbeitet werden!
@@ -1161,7 +986,7 @@ ggplot(data = manipulated_data, aes(x = region)) +
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-33-1.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-34-1.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -1412,11 +1237,11 @@ datasummary_skim(df1, output = 'kableExtra', booktabs = TRUE,
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7bc4f5412d9.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7bc3c3449a0.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7bc67272c1b.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7bc333a0e.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_7bc1a426a9c.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5e6c2e0a5803.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5e6c46c05c35.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5e6c10df1986.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5e6c4ec57e5b.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5e6c2a4e4046.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1577,16 +1402,16 @@ test1
 #> 	Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -4.9189, df = 98, p-value = 3.508e-06
+#> t = -4.6252, df = 98, p-value = 1.145e-05
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -6.856982 -2.914740
+#>  -6.782396 -2.709760
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>              50.23306              55.11892
+#>              50.60720              55.35327
 ```
 
-This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-4.89$ between class A ($M = 50.23$, $SD = 5.12$) and class B ($M = 55.12$, $SD = 4.81$) in this case, $t(98)~=~-4.919,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
+This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-4.75$ between class A ($M = 50.61$, $SD = 4.85$) and class B ($M = 55.35$, $SD = 5.39$) in this case, $t(98)~=~-4.625,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
 
 
 ### $\chi^2$-test
@@ -2782,7 +2607,7 @@ worldCLI
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-67-1.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-68-1.pdf)<!-- --> 
 
 
 \linespread{1}
@@ -2882,7 +2707,7 @@ worldDD
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-68-1.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-69-1.pdf)<!-- --> 
 
 \linespread{1}
 
@@ -3052,7 +2877,7 @@ plot(data$cost_of_living_plus_rent_index,data$development
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-69-1.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-70-1.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -3062,7 +2887,7 @@ plot(data$groceries_index,data$rent_index
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-69-2.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-70-2.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -3107,7 +2932,7 @@ boxplot(data$cost_of_living_plus_rent_index~data$development)
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-69-3.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-70-3.pdf)<!-- --> 
 
 <!--chapter:end:XX-test_datei_BM.Rmd-->
 

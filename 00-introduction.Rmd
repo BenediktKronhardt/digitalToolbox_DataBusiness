@@ -15,6 +15,8 @@ The results section comprise all necessary calculations, which are then discusse
 After the required libraries, which will be worked with in the following, were installed, the libraries still had to be imported in order to be able to use them.
 
 ```{r}
+#| message = FALSE,
+#| warning = FALSE
 library(tidyverse)
 library(dplyr)
 library(stringr)
@@ -32,6 +34,8 @@ Subsequently, the data had to be read in. This could be initialized with the fol
 To be able to work better with the names of the columns and the dataset in general, the command "janitor::clean_names" was executed.  With this, for example, the spaces were removed and the names were all written in small letters.
 
 ```{r}
+#| message = FALSE,
+#| warning = FALSE
 costOfLiving <- read_delim("02-data/cost-of-living-2017.csv", 
                       delim = "\t", escape_double = FALSE, 
                       trim_ws = TRUE)
@@ -40,14 +44,11 @@ costOfLiving <- janitor::clean_names(costOfLiving)
 
 To make it easier to split the data by region, we imported a csv file that shows the names of the countries in this world and their corresponding regions.
 
-First we had to import the dataset, which we named "continents". This dataset is from the website "kaggle", named "Country Mapping - ISO, Continent, Region".
-
---> TODO: Noch zitieren?
-https://www.kaggle.com/datasets/andradaolteanu/country-mapping-iso-continent-region
-
-
+First we had to import the dataset, which we named "continents". This dataset is from the website "kaggle", named "Country Mapping - ISO, Continent, Region". ^[@continents2]
 
 ```{r}
+#| message = FALSE,
+#| warning = FALSE
 #import list of continents and countries
 continents <- read_csv("02-data/continents2.csv")
 continents <- janitor::clean_names(continents)
@@ -56,29 +57,28 @@ continents <- janitor::clean_names(continents)
 To be able to do a join with the raw data, we had to rename the column "name" to "country". After that, a left join could be performed on the renamed column. Since we only needed the column "region", a select for this one column was performed within the join.
 
 ```{r}
+#| message = FALSE,
+#| warning = FALSE
 #rename attribute 'name' in 'country' to perform a left join.
 continents <- rename(continents, country = name)
 costOfLivingAndContinents <- left_join(costOfLiving, select(continents, country, region), by="country")
 ```
 
 Now it was possible to check if a country was not assigned to a region. 
-
-```{r}
-filter(costOfLivingAndContinents, is.na(region))
-```
-
 Since the country Kosovo could not be assigned to a region, this had to be done manually.
 
 ```{r}
+#| message = FALSE,
+#| warning = FALSE
 costOfLivingAndContinents[486, 12] <- "Europe"
 ```
 
 To assign the different countries in our dataset to either a developing or an industrialized country, we also imported a new csv file, which we named "dd". 
-We created this file ourselves, based on data from the website 
-
---> TODO: welche Webseite
+We created this file ourselves, based on data from @ddcountries.
 
 ```{r}
+#| message = FALSE,
+#| warning = FALSE
 #import list of Countries and development status
 dd <- read_delim("02-data/developed_and_developing_countries.csv",
                  delim = ";", escape_double = FALSE,
@@ -89,6 +89,8 @@ dd <- janitor::clean_names(dd)
 To format the category as a double value, we executed the following commands.
 
 ```{r}
+#| message = FALSE,
+#| warning = FALSE
 dd$category[dd$category == "developed"] <- 1.0
 dd$category[dd$category == "developing"] <- 0.0
 dd$category <- as.double(dd$category)
@@ -97,6 +99,8 @@ dd$category <- as.double(dd$category)
 Once this was done, we scanned the dataset for various capitalization errors and corrected them. Also we have renamed the column category to development.
 
 ```{r}
+#| message = FALSE,
+#| warning = FALSE
 dd$country[dd$country == "italy"] <- "Italy"
 dd$country[dd$country == "Hong Kong SAR"] <- "Hong Kong"
 dd$country[dd$country == "Taiwan Province of China"] <- "Taiwan"
@@ -110,5 +114,7 @@ colnames(dd)[2] <- "development"
 In the end, we were able to perform a left join and thus add the categorization of development countries to our dataset.
 
 ```{r}
+#| message = FALSE,
+#| warning = FALSE
 dataFinished <- left_join(costOfLivingAndContinents,dd, by="country")
 ```

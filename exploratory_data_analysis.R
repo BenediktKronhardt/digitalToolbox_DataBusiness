@@ -64,9 +64,9 @@ dd$country[dd$country == "Kosovo"] <- "Kosovo (Disputed Territory)"
 
 colnames(dd)[2] <- "development"
 
-dataWithCategory <- left_join(manipulated_data,dd, by="country")
+dataFinished <- left_join(manipulated_data,dd, by="country")
 
-sum(is.na(dataWithCategory))
+sum(is.na(dataFinished))
 summary(is.na(dataFinished))
 
 #outliers with boxlpot
@@ -171,6 +171,23 @@ coplot(cost_of_living_plus_rent_index ~ groceries_index | region * development ,
 #model -> ei
 model <- lm(cli ~ rent_index + groceries_index + restaurant_price_index + local_purchasing_power_index + development, data = dataFinished)
 summary(model)
+
+subset_cor <- subset(dataFinished, select = c(rent_index, groceries_index, restaurant_price_index, local_purchasing_power_index, development))
+cor(subset_cor, method = "pearson")
+cor(x=dataFinished$restaurant_price_index, y=dataFinished$groceries_index, method="pearson")
+
+model$fitted.values
+
+
+
+summary(model)
+qf(model)
+
+pf(4539, 5.000, 505, lower.tail=FALSE)
+
+anova(model)
+korr_tab <- cor(subset_cor, method = "pearson")
+korr_tab
 
 #groceries und restaurant price hat einen hohen Einfluss
 #groceries index steigt auf 1Punkt, dann würde der CLI um 0,4876 steigen (para zu restaurant)
