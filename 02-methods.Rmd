@@ -31,7 +31,8 @@ MapData <- dataFinished
 #selecting attributes (country, development)
 MapData <- MapData %>% select(3,13)
 colnames(MapData)[1] <- "region"
-#MapData <- MapData %>% group_by()
+MapData <- MapData %>% group_by(MapData$region) 
+MapDataFix <- MapData %>% group_by(MapData$region) %>% summarise(average = mean(development))
 #merge data
 world <- map_data("world")
 MapData <- left_join(MapData, world, by="region")
