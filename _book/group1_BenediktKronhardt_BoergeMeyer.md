@@ -402,51 +402,17 @@ dataFinished <- dataFinished[-9]
 
 To determine if outliers exist within the data set, we chose to draw a boxplot.
 
-\linespread{1}
-
-```r
-dataFinished %>%
-  mutate(across(where(is.factor), as.numeric))
-```
 
 
 
-\linespread{1}
+\begin{figure}
 
-```
-#> # A tibble: 511 x 10
-#>    city      country   cost_~1   cli rent_~2 groce~3 resta~4
-#>    <chr>     <chr>       <dbl> <dbl>   <dbl>   <dbl>   <dbl>
-#>  1 Zurich    Switzerl~   109.   150.    66.8    164.    141.
-#>  2 Hamilton  Bermuda     133.   148.   118.     145.    153.
-#>  3 Zug       Switzerl~   106.   143.    67.4    148.    143.
-#>  4 Geneva    Switzerl~   107.   142.    70.2    147.    139.
-#>  5 Basel     Switzerl~    97.5  142.    51.5    150.    132.
-#>  6 Bern      Switzerl~    91.1  136.    45.3    146.    122.
-#>  7 Lausanne  Switzerl~    93.6  131.    54.6    137.    128.
-#>  8 Reykjavik Iceland      93.9  131.    55.9    128.    141.
-#>  9 Lugano    Switzerl~    88.6  124.    51.7    121.    128.
-#> 10 Stavanger Norway       77.8  117.    37.4    108.    143.
-#> # ... with 501 more rows, 3 more variables:
-#> #   local_purchasing_power_index <dbl>, region <chr>,
-#> #   development <dbl>, and abbreviated variable names
-#> #   1: cost_of_living_plus_rent_index, 2: rent_index,
-#> #   3: groceries_index, 4: restaurant_price_index
-```
+{\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/boxplot-1} 
 
-\linespread{1}
+}
 
-```r
-  
-col = c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')
-boxplot(dataFinished[,c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')])
-```
-
-
-
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-22-1.pdf)<!-- --> 
-
---> TODO: Abbildung beschriften!
+\caption{Boxplot of Data to identify outliers}(\#fig:boxplot)
+\end{figure}
 
 As can be seen from the figure, there are several outliers within the data set. In order not to distort the result, we decided to keep these outliers and to continue working with them.
 
@@ -535,7 +501,7 @@ hist(residuals(model))
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-27-1.pdf)<!-- --> 
 
 From the histogram we can see that the distribution can be considered normally distributed, therefore this condition is also fulfilled.
 Scaling is also given, since the cost of living index is on a scale.
@@ -989,7 +955,7 @@ ggplot(data = manipulated_data, aes(x = region)) +
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-34-1.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-35-1.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -1240,11 +1206,11 @@ datasummary_skim(df1, output = 'kableExtra', booktabs = TRUE,
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76c8b8111ce.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76c830a1c42.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76c86a51a5e.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76c816fc7aef.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76c845a05ce5.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_54d864132288.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_54d8119827cf.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_54d853074d4f.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_54d87b28cb8.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_54d87e277a3f.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1405,16 +1371,16 @@ test1
 #> 	Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -3.0501, df = 98, p-value = 0.002943
+#> t = -4.6691, df = 98, p-value = 9.62e-06
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -4.963456 -1.050553
+#>  -6.730663 -2.715713
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>                50.305                53.312
+#>              50.33385              55.05703
 ```
 
-This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-3.01$ between class A ($M = 50.3$, $SD = 4.41$) and class B ($M = 53.31$, $SD = 5.4$) in this case, $t(98)~=~-3.05,~p~=~0.003$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
+This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-4.72$ between class A ($M = 50.33$, $SD = 5.17$) and class B ($M = 55.06$, $SD = 4.94$) in this case, $t(98)~=~-4.669,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
 
 
 ### $\chi^2$-test
@@ -2625,7 +2591,7 @@ worldCLI
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-68-1.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-69-1.pdf)<!-- --> 
 
 
 \linespread{1}
@@ -2725,7 +2691,7 @@ worldDD
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-69-1.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-70-1.pdf)<!-- --> 
 
 \linespread{1}
 
@@ -2895,7 +2861,7 @@ plot(data$cost_of_living_plus_rent_index,data$development
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-70-1.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-71-1.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -2905,7 +2871,7 @@ plot(data$groceries_index,data$rent_index
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-70-2.pdf)<!-- --> \linespread{1}
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-71-2.pdf)<!-- --> \linespread{1}
 
 ```r
 
@@ -2950,7 +2916,7 @@ boxplot(data$cost_of_living_plus_rent_index~data$development)
 
 
 
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-70-3.pdf)<!-- --> 
+\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-71-3.pdf)<!-- --> 
 
 <!--chapter:end:XX-test_datei_BM.Rmd-->
 

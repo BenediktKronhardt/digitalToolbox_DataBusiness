@@ -44,7 +44,6 @@ plain <- theme(
   axis.ticks = element_blank(),
   panel.border = element_blank(),
   panel.grid = element_blank(),
-  axis.title = element_blank(),
   panel.background = element_rect(fill = "white"),
   plot.title = element_text(hjust = 0.5)
 )
@@ -54,7 +53,8 @@ worldDD <- ggplot(data = MapData, mapping = aes(x = long, y = lat, group = group
   geom_polygon(aes(fill = development)) +
   scale_fill_distiller(palette ="RdBu", direction = 1) +
   guides(fill = FALSE) +
-  plain
+  plain +
+  labs(title = "", x = "Red = Developing Countries, Blue = Industrialized         Countries", y = "")
 
 worldDD
 
@@ -92,14 +92,27 @@ dataFinished <- dataFinished[-9]
 To determine if outliers exist within the data set, we chose to draw a boxplot.
 
 ```{r}
-dataFinished %>%
+#| echo = FALSE,
+#| warning = FALSE,
+#| message = FALSE
+
+dataBoxplot <- dataFinished %>%
   mutate(across(where(is.factor), as.numeric))
   
 col = c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')
-boxplot(dataFinished[,c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')])
 ```
 
---> TODO: Abbildung beschriften!
+
+```{r}
+#| echo = FALSE,
+#| warning = FALSE,
+#| label = "boxplot",
+#| fig.cap = "Boxplot of Data to identify outliers",
+#| out.width = "80%",
+#| fig.asp = 0.75,
+#| fig.align = "center"
+boxplot(dataBoxplot[,c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')])
+```
 
 As can be seen from the figure, there are several outliers within the data set. In order not to distort the result, we decided to keep these outliers and to continue working with them.
 

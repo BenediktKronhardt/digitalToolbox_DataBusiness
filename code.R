@@ -81,3 +81,5 @@ worldDD <- ggplot(data = MapData, mapping = aes(x = long, y = lat, group = group
   plain
 
 worldDD
+
+boxplot(dataFinished[,c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')])
