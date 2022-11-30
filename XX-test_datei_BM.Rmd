@@ -36,7 +36,8 @@ worldCLI <- ggplot(data = worldSubset, mapping = aes(x = long, y = lat, group = 
   geom_polygon(aes(fill = average)) +
   scale_fill_distiller(palette ="RdBu", direction = 1) + # or direction=1
   ggtitle("Average Cost of Living + Rent Index") +
-  plain
+  plain +
+  guides(fill = FALSE)  
 worldCLI
 ```
 
