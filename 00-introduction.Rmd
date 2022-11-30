@@ -108,8 +108,6 @@ dd$country[dd$country == "Russian Federation"] <- "Russia"
 dd$country[dd$country == "Viet Nam"] <- "Vietnam"
 dd$country[dd$country == "Bosnia and Herzegovina"] <- "Bosnia And Herzegovina"
 dd$country[dd$country == "Kosovo"] <- "Kosovo (Disputed Territory)"
-dd$country[dd$country == "United States"] <- "USA"
-dd$country[dd$country == "United Kingdom"] <- "UK"
 colnames(dd)[2] <- "development"
 ```
 

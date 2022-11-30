@@ -31,10 +31,11 @@ MapData <- dataFinished
 #selecting attributes (country, development)
 MapData <- MapData %>% select(3,13)
 colnames(MapData)[1] <- "region"
-MapData <- MapData %>% group_by(MapData$region) 
-MapDataFix <- MapData %>% group_by(MapData$region) %>% summarise(average = mean(development))
+MapData <- distinct(MapData)
 #merge data
 world <- map_data("world")
+MapData$region[MapData$region == "United States"] <- "USA"
+MapData$region[MapData$region == "United Kingdom"] <- "UK"
 MapData <- left_join(MapData, world, by="region")
 
 plain <- theme(

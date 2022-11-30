@@ -302,7 +302,9 @@ In economics, the cost-of-living index describes the ratio of the minimum expend
 Among the two prices needed, e.g., from two different places, one is called the comparison price and the other is called the reference price or the base price. The base price is then used to illustrate on which prices the Cost-Of-Living Index is based and calculated. The calculated index is then dependent on the comparison prices determined. Further, the general logic of the cost-of-living index is best understood when the index is interpreted in the multiple context of temporal and spatial comparisons.^[@Pollak1989]
 
 ## Industrialized, emerging and developing countries
+
 In general, countries are divided into industrialized, emerging and developing countries. States in which the economic performance is supported by a large part of the resident companies are referred to as industrialized countries. Such countries stand out due to their high per capita income, which results from the available standard of education, high productivity in production, good external trade relations and usually a currency with low inflation.^[@bpd]
+
 
 A country that is in the process of becoming an industrialized country is called an emerging country. These are nevertheless referred to the category of developing countries. Emerging countries are identifiable by their above-average economic growth. Nevertheless, emerging countries are similar to developing countries in the social structure, such as in the level of education, mortality and access to infrastructure.^[@bmz]
 
@@ -321,6 +323,7 @@ output:
 # Methods
 
 ## Data Description
+
 
 The provided data consists of $511$ different datasets from $110$ different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
 
@@ -1237,11 +1240,11 @@ datasummary_skim(df1, output = 'kableExtra', booktabs = TRUE,
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5e6c2e0a5803.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5e6c46c05c35.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5e6c10df1986.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5e6c4ec57e5b.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_5e6c2a4e4046.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76c8b8111ce.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76c830a1c42.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76c86a51a5e.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76c816fc7aef.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_76c845a05ce5.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1402,16 +1405,16 @@ test1
 #> 	Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -4.6252, df = 98, p-value = 1.145e-05
+#> t = -3.0501, df = 98, p-value = 0.002943
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -6.782396 -2.709760
+#>  -4.963456 -1.050553
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>              50.60720              55.35327
+#>                50.305                53.312
 ```
 
-This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-4.75$ between class A ($M = 50.61$, $SD = 4.85$) and class B ($M = 55.35$, $SD = 5.39$) in this case, $t(98)~=~-4.625,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
+This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-3.01$ between class A ($M = 50.3$, $SD = 4.41$) and class B ($M = 53.31$, $SD = 5.4$) in this case, $t(98)~=~-3.05,~p~=~0.003$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
 
 
 ### $\chi^2$-test
@@ -2601,7 +2604,22 @@ worldCLI <- ggplot(data = worldSubset, mapping = aes(x = long, y = lat, group = 
   geom_polygon(aes(fill = average)) +
   scale_fill_distiller(palette ="RdBu", direction = 1) + # or direction=1
   ggtitle("Average Cost of Living + Rent Index") +
-  plain
+  plain +
+  guides(fill = FALSE)  
+```
+
+
+
+\linespread{1}
+
+```
+#> Warning: `guides(<scale> = FALSE)` is deprecated. Please use
+#> `guides(<scale> = "none")` instead.
+```
+
+\linespread{1}
+
+```r
 worldCLI
 ```
 
