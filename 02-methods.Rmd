@@ -80,8 +80,6 @@ worldDD
 
 ```
 
---> TODO: Text zu 
-
 ## Exploratory Data Analysis
 
 First of all, we had to check, if there are missing values inside of the data-set. Therefore we used the following code to proof this:
@@ -109,6 +107,17 @@ We also truncated the leverage_model_1 and leverage_model_2 columns, since we di
 dataFinished <- dataFinished[-9]
 dataFinished <- dataFinished[-9]
 ```
+
+--> TODO: Text zu den numerischen Variablen schreiben
+
+```{r}
+#Summary of the numerical variables in the dataset: (von appendix)
+datasummary_skim(dataFinished, output = 'kableExtra', booktabs = TRUE,
+                 title = "Overview of the numerical variables in data set cli") %>%
+  kable_styling(latex_options = c("striped", "HOLD_position"))
+```
+
+
 
 To determine if outliers exist within the data set, we chose to draw a boxplot.
 
@@ -142,6 +151,7 @@ As can be seen from the figure, there are several outliers within the data set. 
 ```{r}
 datasummary_correlation(dataFinished)
 ```
+
 
 ## Folgendes nur zur Übersicht/weiteren Aufbau(Gliederung)
 

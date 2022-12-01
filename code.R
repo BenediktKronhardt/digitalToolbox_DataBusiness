@@ -91,3 +91,9 @@ ggplot(data = dataFinished, aes(x = region)) +
   xlab("Regions") +
   ylab("Number of Data") +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+
+#Summary of the numerical variables in the dataset: (von appendix)
+datasummary_skim(dataFinished, output = 'kableExtra', booktabs = TRUE,
+                 title = "Overview of the numerical variables in data set cli") %>%
+  kable_styling(latex_options = c("striped", "HOLD_position"))
