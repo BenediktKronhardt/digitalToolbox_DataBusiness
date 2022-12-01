@@ -408,16 +408,7 @@ dataFinished <- dataFinished[-2]
 We also truncated the leverage_model_1 and leverage_model_2 columns, since we did not work with these columns any further.
 
 
-\linespread{1}
 
-```r
-dataFinished <- dataFinished[-9]
-dataFinished <- dataFinished[-9]
-```
-
-
-
-\linespread{1}
 
 
 In our customized dataset we still have seven numeric variables, which are shown in table \@ref(tab:numericalVariables). Also the mean, median, minimum and maximum value of each numerical variable can be read here.
@@ -437,13 +428,13 @@ datasummary_skim(dataFinished, allign="center")
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-cost\_of\_living\_plus\_rent\_index & 490 & 0 & \num{46.3} & \num{19.0} & \num{13.6} & \num{48.6} & \num{133.2} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_49307426523e.pdf}\\
-cli & 489 & 0 & \num{65.2} & \num{22.4} & \num{21.8} & \num{70.6} & \num{149.5} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_493030b71420.pdf}\\
-rent\_index & 485 & 0 & \num{26.8} & \num{17.7} & \num{3.1} & \num{24.5} & \num{119.6} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_493017641a41.pdf}\\
-groceries\_index & 495 & 0 & \num{63.4} & \num{24.4} & \num{22.0} & \num{65.0} & \num{163.7} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_49301e7b4e0a.pdf}\\
-restaurant\_price\_index & 493 & 0 & \num{59.0} & \num{26.7} & \num{12.1} & \num{65.4} & \num{152.5} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_493032dc35b7.pdf}\\
-local\_purchasing\_power\_index & 497 & 0 & \num{80.0} & \num{33.7} & \num{3.0} & \num{84.2} & \num{176.2} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_493039ad7916.pdf}\\
-development & 2 & 0 & \num{0.7} & \num{0.5} & \num{0.0} & \num{1.0} & \num{1.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_49305a4e238b.pdf}\\
+cost\_of\_living\_plus\_rent\_index & 490 & 0 & \num{46.3} & \num{19.0} & \num{13.6} & \num{48.6} & \num{133.2} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c29b74947.pdf}\\
+cli & 489 & 0 & \num{65.2} & \num{22.4} & \num{21.8} & \num{70.6} & \num{149.5} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c50e767c9.pdf}\\
+rent\_index & 485 & 0 & \num{26.8} & \num{17.7} & \num{3.1} & \num{24.5} & \num{119.6} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c15df6d22.pdf}\\
+groceries\_index & 495 & 0 & \num{63.4} & \num{24.4} & \num{22.0} & \num{65.0} & \num{163.7} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c73345d63.pdf}\\
+restaurant\_price\_index & 493 & 0 & \num{59.0} & \num{26.7} & \num{12.1} & \num{65.4} & \num{152.5} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c517e22f6.pdf}\\
+local\_purchasing\_power\_index & 497 & 0 & \num{80.0} & \num{33.7} & \num{3.0} & \num{84.2} & \num{176.2} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c2c5e1cea.pdf}\\
+development & 2 & 0 & \num{0.7} & \num{0.5} & \num{0.0} & \num{1.0} & \num{1.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c8bf678b.pdf}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -541,15 +532,14 @@ model <- lm(cli ~ rent_index + groceries_index + restaurant_price_index + local_
 
 After that, we can create a histogram from our model.
 
-\linespread{1}
+\begin{figure}
 
-```r
-hist(residuals(model))
-```
+{\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/histogramModel-1} 
 
+}
 
-
-\linespread{1}![](group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-28-1.pdf)<!-- --> 
+\caption{Histogram of the multiple linear regression model}(\#fig:histogramModel)
+\end{figure}
 
 From the histogram we can see that the distribution can be considered normally distributed, therefore this condition is also fulfilled.
 Scaling is also given, since the cost of living index is on a scale.
@@ -557,17 +547,6 @@ Scaling is also given, since the cost of living index is on a scale.
 The last condition we checked is that there must be no multicollinearity within the independent variables.
 To check this, we created a correlation matrix. First, we generated a subset from the data in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
 
-\linespread{1}
-
-```r
-subset_cor <- subset(dataFinished, select = c(rent_index, groceries_index, restaurant_price_index, local_purchasing_power_index, development))
-korr_tab <- cor(subset_cor, method = "pearson")
-korr_tab
-```
-
-
-
-\linespread{1}
 
 ```
 #>                              rent_index groceries_index
@@ -599,15 +578,6 @@ korr_tab
 Since the correlation between restaurant price index and groceries index is
  $0.851855$ > 0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
 
-\linespread{1}
-
-```r
-vif(model)
-```
-
-
-
-\linespread{1}
 
 ```
 #>                   rent_index              groceries_index 
@@ -622,15 +592,6 @@ Since according to this method none of the values is >10 we have rejected the th
 
 Now that all the assumptions can be accepted, we come to the actual evaluation of the model.
 
-\linespread{1}
-
-```r
-summary(model)
-```
-
-
-
-\linespread{1}
 
 ```
 #> 
@@ -1265,11 +1226,11 @@ datasummary_skim(df1, output = 'kableExtra', booktabs = TRUE,
 \toprule
   & Unique (\#) & Missing (\%) & Mean & SD & Min & Median & Max &   \\
 \midrule
-\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_493048676b4b.pdf}}\\
-year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_49305de2336b.pdf}\\
-\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4930543d2675.pdf}}\\
-cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_49302415773a.pdf}\\
-\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4930f5271c.pdf}}\\
+\cellcolor{gray!6}{displ} & \cellcolor{gray!6}{35} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{3.5}} & \cellcolor{gray!6}{\num{1.3}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{3.3}} & \cellcolor{gray!6}{\num{7.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c6add6f7f.pdf}}\\
+year & 2 & 0 & \num{2003.5} & \num{4.5} & \num{1999.0} & \num{2003.5} & \num{2008.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c73a159e5.pdf}\\
+\cellcolor{gray!6}{cyl} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{5.9}} & \cellcolor{gray!6}{\num{1.6}} & \cellcolor{gray!6}{\num{4.0}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{8.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c3cb47896.pdf}}\\
+cty & 21 & 0 & \num{16.9} & \num{4.3} & \num{9.0} & \num{17.0} & \num{35.0} & \includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c18892a86.pdf}\\
+\cellcolor{gray!6}{hwy} & \cellcolor{gray!6}{27} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{\num{23.4}} & \cellcolor{gray!6}{\num{6.0}} & \cellcolor{gray!6}{\num{12.0}} & \cellcolor{gray!6}{\num{24.0}} & \cellcolor{gray!6}{\num{44.0}} & \cellcolor{gray!6}{\includegraphics[width=0.67in, height=0.17in]{C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c7f7d507.pdf}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1430,16 +1391,16 @@ test1
 #> 	Two Sample t-test
 #> 
 #> data:  exam_score by class
-#> t = -5.0984, df = 98, p-value = 1.671e-06
+#> t = -5.9078, df = 98, p-value = 5.025e-08
 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0
 #> 95 percent confidence interval:
-#>  -6.882412 -3.025802
+#>  -8.056795 -4.005108
 #> sample estimates:
 #> mean in group Class A mean in group Class B 
-#>              49.70114              54.65525
+#>              49.66084              55.69179
 ```
 
-This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-4.95$ between class A ($M = 49.7$, $SD = 5.13$) and class B ($M = 54.66$, $SD = 4.57$) in this case, $t(98)~=~-5.098,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
+This console output is not very pleasant and should not be reported as this. Better to use the package `broom` and its function `broom::glance()` to extract everything you need using inline code chunks, which gives you a significant difference of $\approx~-6.03$ between class A ($M = 49.66$, $SD = 4.42$) and class B ($M = 55.69$, $SD = 5.71$) in this case, $t(98)~=~-5.908,~p~<~.001$. You should read the source code of this paragraph carefully to see how everything in the inline chunks fits together to produce such an output. 
 
 
 ### $\chi^2$-test

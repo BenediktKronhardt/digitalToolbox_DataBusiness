@@ -14,12 +14,22 @@ Third, the residuals should be approximately normally distributed. We proved thi
 First, we need to set up our model.
 
 ```{r}
+#| echo = TRUE,
+#| warning = FALSE
 model <- lm(cli ~ rent_index + groceries_index + restaurant_price_index + local_purchasing_power_index + development, data = dataFinished)
 ```
 
 After that, we can create a histogram from our model.
 
 ```{r}
+#| echo = FALSE,
+#| warning = FALSE,
+#| label = "histogramModel",
+#| fig.cap = "Histogram of the multiple linear regression model",
+#| out.width = "80%",
+#| fig.asp = 0.75,
+#| fig.align = "center"
+
 hist(residuals(model))
 ```
 
@@ -30,6 +40,13 @@ The last condition we checked is that there must be no multicollinearity within 
 To check this, we created a correlation matrix. First, we generated a subset from the data in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
 
 ```{r}
+#| echo = FALSE,
+#| warning = FALSE,
+#| label = "correlationMatrix",
+#| tab.cap = "Matrix for correlation between the independent variables in the model",
+#| out.width = "80%",
+#| tab.asp = 0.75,
+#| tab.align = "center",
 subset_cor <- subset(dataFinished, select = c(rent_index, groceries_index, restaurant_price_index, local_purchasing_power_index, development))
 korr_tab <- cor(subset_cor, method = "pearson")
 korr_tab
@@ -39,6 +56,8 @@ Since the correlation between restaurant price index and groceries index is
  $`r cor(x=dataFinished$restaurant_price_index, y=dataFinished$groceries_index, method="pearson")`$ > 0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
 
 ```{r}
+#| echo = FALSE,
+#| warning = FALSE
 vif(model)
 ```
 
@@ -47,6 +66,8 @@ Since according to this method none of the values is >10 we have rejected the th
 Now that all the assumptions can be accepted, we come to the actual evaluation of the model.
 
 ```{r}
+#| echo = FALSE,
+#| warning = FALSE
 summary(model)
 ```
 

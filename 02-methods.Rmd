@@ -109,7 +109,7 @@ We also truncated the leverage_model_1 and leverage_model_2 columns, since we di
 
 
 ```{r}
-#| echo = TRUE,
+#| echo = FALSE,
 #| message = TRUE
 dataFinished <- dataFinished[-9]
 dataFinished <- dataFinished[-9]
