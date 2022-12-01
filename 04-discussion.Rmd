@@ -2,7 +2,7 @@
 
 Stichpunkte/Überthemen zum diskutieren/kritisch hinterfragen:
 
-##Critical assessment of the data
+##Critical assessment of the data 
 The objective of this study was to determine to what degree the status as an industrialized or developing country has an influence on the Cost of Living Index.
 
 The critical review allows first of all to scrutinize the available data. Most of the data sets that were used as a basis for this work did not include all existing countries. In addition, it must be mentioned that a large number of African countries in particular are not included in the initial data. This could have biased the results of the work (see Figure 3.1).
