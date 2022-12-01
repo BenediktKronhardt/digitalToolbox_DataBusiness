@@ -6,6 +6,7 @@ output:
 # Methods
 
 ## Data Description
+
 ```{r}
 #| message = FALSE,
 #| warning = FALSE,
@@ -17,7 +18,7 @@ countCountries <- countCountries[order(countCountries$country),]
 
 The provided data consists of $`r nrow(dataFinished)`$ different datasets from $`r nrow(countCountries)`$ different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
 
---> TODO: Text schreiben - Wie viele unterschiedliche Länder und Kontinente haben wir
+In Figure \@ref(fig:continentCountdata) can be seen how many datasets are available per region.
 
 ```{r}
 #| echo = FALSE,
@@ -84,14 +85,18 @@ worldDD
 
 First of all, we had to check, if there are missing values inside of the data-set. Therefore we used the following code to proof this:
 
+
 ```{r}
 #| echo = TRUE,
 #| message = TRUE
 summary(is.na(dataFinished))
 ```
+
+
 As it can be seen, there were $`r sum(is.na(dataFinished$state))`$ missing values inside the column "state". 
 However, since the column has no bearing on our research question, we decided to disregard this column. With the city column we have a more meaningful basis to answer our question.
 To disregard this column, we cut it off. To do this, we used to following R code chunk. Because it is the second column, we can just delete this column.
+
 
 ```{r}
 #| echo = TRUE,
@@ -99,7 +104,9 @@ To disregard this column, we cut it off. To do this, we used to following R code
 dataFinished <- dataFinished[-2]
 ```
 
+
 We also truncated the leverage_model_1 and leverage_model_2 columns, since we did not work with these columns any further.
+
 
 ```{r}
 #| echo = TRUE,
@@ -108,29 +115,20 @@ dataFinished <- dataFinished[-9]
 dataFinished <- dataFinished[-9]
 ```
 
---> TODO: Text zu den numerischen Variablen schreiben
+
+In our customized dataset we still have seven numeric variables, which are shown in table \@ref(tab:numericalVariables). Also the mean, median, minimum and maximum value of each numerical variable can be read here.
+
 
 ```{r}
-#Summary of the numerical variables in the dataset: (von appendix)
-datasummary_skim(dataFinished, output = 'kableExtra', booktabs = TRUE,
-                 title = "Overview of the numerical variables in data set cli") %>%
-  kable_styling(latex_options = c("striped", "HOLD_position"))
+#| echo = TRUE,
+#| warning = FALSE,
+#| label = "numericalVariables",
+#| tab.cap = "Overview of the numerical variables in data set cli"
+datasummary_skim(dataFinished, allign="center")
 ```
-
 
 
 To determine if outliers exist within the data set, we chose to draw a boxplot.
-
-```{r}
-#| echo = FALSE,
-#| warning = FALSE,
-#| message = FALSE
-
-dataBoxplot <- dataFinished %>%
-  mutate(across(where(is.factor), as.numeric))
-  
-col = c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')
-```
 
 
 ```{r}
@@ -141,6 +139,11 @@ col = c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','r
 #| out.width = "80%",
 #| fig.asp = 0.75,
 #| fig.align = "center"
+
+dataBoxplot <- dataFinished %>%
+  mutate(across(where(is.factor), as.numeric))
+  
+col = c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')
 boxplot(dataBoxplot[,c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')])
 ```
 

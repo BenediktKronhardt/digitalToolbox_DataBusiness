@@ -94,6 +94,4 @@ ggplot(data = dataFinished, aes(x = region)) +
 
 
 #Summary of the numerical variables in the dataset: (von appendix)
-datasummary_skim(dataFinished, output = 'kableExtra', booktabs = TRUE,
-                 title = "Overview of the numerical variables in data set cli") %>%
-  kable_styling(latex_options = c("striped", "HOLD_position"))
+datasummary_skim(dataFinished, allign="center")
