@@ -83,3 +83,11 @@ worldDD <- ggplot(data = MapData, mapping = aes(x = long, y = lat, group = group
 worldDD
 
 boxplot(dataFinished[,c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')])
+
+
+ggplot(data = dataFinished, aes(x = region)) +
+  geom_bar() +
+  ggtitle("Region - Count data") +
+  xlab("Regions") +
+  ylab("Number of Data") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))

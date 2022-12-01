@@ -17,6 +17,26 @@ countCountries <- countCountries[order(countCountries$country),]
 
 The provided data consists of $`r nrow(dataFinished)`$ different datasets from $`r nrow(countCountries)`$ different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
 
+--> TODO: Text schreiben - Wie viele unterschiedliche Länder und Kontinente haben wir
+
+```{r}
+#| echo = FALSE,
+#| warning = FALSE,
+#| label = "continentCountdata",
+#| fig.cap = "Count of Data from different regions",
+#| out.width = "80%",
+#| fig.asp = 0.75,
+#| fig.align = "center",
+ggplot(data = dataFinished, aes(x = region)) +
+  geom_bar() +
+  ggtitle("Region - Count data") +
+  xlab("Regions") +
+  ylab("Number of Data") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+```
+
+-->TODO: Text zu Weltkarte schreiben
+
 ```{r}
 #| echo = FALSE,
 #| warning = FALSE,
@@ -60,6 +80,7 @@ worldDD
 
 ```
 
+--> TODO: Text zu 
 
 ## Exploratory Data Analysis
 
