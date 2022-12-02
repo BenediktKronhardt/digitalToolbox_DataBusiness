@@ -38,6 +38,7 @@ ggplot(data = dataFinished, aes(x = region)) +
 
 -->TODO: Text zu Weltkarte schreiben
 
+In addition to the overview of datasets by region in figure \@ref(fig:continentCountdata), a world map in figure \@ref(fig:worldMap) has been created to illustrate the countries from which the datasets originate. The data sets from the industrialized countries were marked in blue and those from the emerging and developing countries in red.
 ```{r}
 #| echo = FALSE,
 #| warning = FALSE,
@@ -75,7 +76,7 @@ worldDD <- ggplot(data = MapData, mapping = aes(x = long, y = lat, group = group
   scale_fill_distiller(palette ="RdBu", direction = 1) +
   guides(fill = FALSE) +
   plain +
-  labs(title = "", x = "Red = Developing Countries, Blue = Industrialized         Countries", y = "")
+  labs(title = "", x = "Red = Developing Countries, Blue = Industrialized Countries", y = "")
 
 worldDD
 
