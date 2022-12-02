@@ -1,9 +1,6 @@
 # Discussion
 
-Stichpunkte/Überthemen zum diskutieren/kritisch hinterfragen:
-
 ## Critical assessment of the data
-
 The objective of this study was to determine to what degree the status as an industrialized or developing country has an influence on the Cost of Living Index.
 
 The critical review allows first of all to scrutinize the available data. Most of the data sets that were used as a basis for this work did not include all existing countries. In addition, it must be mentioned that a large number of African countries in particular are not included in the initial data. This could have biased the results of the work (see figure \@ref(fig:worldMap)).
@@ -12,17 +9,9 @@ Furthermore, data were added that resulted in additional analysis possibilities,
 
 Data produced by third parties are classified as less trustworthy, as this can lead to falsification. Since this was based on the regional allocation of the data provided for the different countries, the usage does not have a high weighting in the result. 
 
+## Expressiveness of the model used
+Furthermore, it must be critically questioned whether the multiple linear regression model used was really suitable to be applied to the research question. A multiple linear regression model was used with all numerical variables within the data set to determine which variables have a significant influence on the cli. Alternatively, the model could have been set up with only the variable developed and one other variable such as the rent index. However, we decided to use all variables in order to obtain the highest possible R². A simple linear regression between the cli and the developed variable was not possible because the linear relationship does not exist.
+In order to answer the research question more comprehensively, an additional t-test could have been implemented. However, we decided against this, as it would have exceeded the scope of our work.
 
-## Woher stammen die Daten
--sowohl der eigentliche Datensatz als auch die hinzugefügten Datensätze (continents2 und dd) - Waren die Seiten vertrauensvoll, wie hätte man alternativ "bessere" Daten bekommen können?
-
-## Reicht es aus, eine einfache multiple lineare regression zu machen, um die Forschungsfrage zu beantworten? - Was hätte man zusätzlich machen können?
--Können wir eine Aussage dadurch treffen?
-
-## Ist die Forschungsfrage mit der Menge der Daten überhaupt aussagekräftig? - Gibt es genug Datensätze für Industrie und Entwicklungsländer?
-
-5. Diskussion
-Muss noch überarbeitet werden!
-
-Inhalt:
-Die vorher dargestellten Results diskutieren in Verbindung mit der Forschungsfrage!
+## Answer to the research question
+Within the report, we conclude that the classification of a country as a developing or industrialized country does not have a significant impact on cli (see Chapter 03 results --> TODO: Querverweis). This is true for our data set. However, some countries are missing from our data set, so we cannot make this statement universally (see critical assessment of the data --> TODO: Querverweis zu dieser Überschrift hier in der Datei).
