@@ -1,4 +1,4 @@
-# Results
+# Results {#results}
 To determine whether there is a significant difference between developing and developed countries, we decided to run a multiple linear regression. This is to determine whether the classification into a developing country has a significant influence on the cost of living index or not.
 
 ## Multiple linear regression

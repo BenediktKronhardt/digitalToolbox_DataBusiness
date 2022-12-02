@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.11.4)  1 DEC 2022 17:51
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.11.4)  2 DEC 2022 12:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1413,38 +1413,39 @@ chapter 2.
 chapter 3.
 File: group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/continentCountdata-1.pdf Graphic file (type pdf)
 <use group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/continentCountdata-1.pdf>
-File: group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/worldMap-1.pdf Graphic file (type pdf)
-<use group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/worldMap-1.pdf>
 [7
 
 
-] [8]
+]
+File: group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/worldMap-1.pdf Graphic file (type pdf)
+<use group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/worldMap-1.pdf>
+[8]
 
-LaTeX Warning: Reference `tab:numericalVariables' on page 9 undefined on input line 647.
+LaTeX Warning: Reference `tab:numericalVariables' on page 9 undefined on input line 649.
 
-File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c29b74947.pdf Graphic file (type pdf)
-<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c29b74947.pdf>
-File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c50e767c9.pdf Graphic file (type pdf)
-<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c50e767c9.pdf>
-File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c15df6d22.pdf Graphic file (type pdf)
-<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c15df6d22.pdf>
-File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c73345d63.pdf Graphic file (type pdf)
-<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c73345d63.pdf>
-File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c517e22f6.pdf Graphic file (type pdf)
-<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c517e22f6.pdf>
-File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c2c5e1cea.pdf Graphic file (type pdf)
-<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c2c5e1cea.pdf>
-File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c8bf678b.pdf Graphic file (type pdf)
-<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c8bf678b.pdf>
+File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff82df11d51.pdf Graphic file (type pdf)
+<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff82df11d51.pdf>
+File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff86d942ee2.pdf Graphic file (type pdf)
+<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff86d942ee2.pdf>
+File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff84f38290d.pdf Graphic file (type pdf)
+<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff84f38290d.pdf>
+File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff86f9c5804.pdf Graphic file (type pdf)
+<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff86f9c5804.pdf>
+File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff810ae493c.pdf Graphic file (type pdf)
+<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff810ae493c.pdf>
+File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff81bab6565.pdf Graphic file (type pdf)
+<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff81bab6565.pdf>
+File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff8e88669f.pdf Graphic file (type pdf)
+<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff8e88669f.pdf>
 
-Overfull \hbox (83.41945pt too wide) in paragraph at lines 661--674
+Overfull \hbox (83.41945pt too wide) in paragraph at lines 663--676
  [][] 
  []
 
 File: group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/boxplot-1.pdf Graphic file (type pdf)
 <use group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/boxplot-1.pdf>
 [9]
-Overfull \hbox (383.94315pt too wide) in paragraph at lines 703--716
+Overfull \hbox (383.94315pt too wide) in paragraph at lines 705--718
  [][] 
  []
 
@@ -1465,7 +1466,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [18]
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 929.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 915.
 [19
 
 
@@ -1478,22 +1479,22 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
 ]
 chapter 6.
 
-Overfull \hbox (72.97958pt too wide) in paragraph at lines 1012--1012
+Overfull \hbox (72.97958pt too wide) in paragraph at lines 998--998
 []\TU/SourceCodePro(0)/m/n/10.95 #>  Hlavac, Marek (2022). stargazer: Well-Formatted Regression and Summary Statistics Tables.[] 
  []
 
 [23]
-Overfull \hbox (13.85008pt too wide) in paragraph at lines 1095--1095
+Overfull \hbox (13.85008pt too wide) in paragraph at lines 1081--1081
 []\TU/SourceCodePro(0)/m/n/10.95 #> i Specify the column types or set `show_col_types = FALSE` to quiet this message.[] 
  []
 
 
-Overfull \hbox (13.85008pt too wide) in paragraph at lines 1116--1116
+Overfull \hbox (13.85008pt too wide) in paragraph at lines 1102--1102
 []\TU/SourceCodePro(0)/m/n/10.95 #> i Specify the column types or set `show_col_types = FALSE` to quiet this message.[] 
  []
 
 [24]
-Overfull \hbox (13.85008pt too wide) in paragraph at lines 1202--1202
+Overfull \hbox (13.85008pt too wide) in paragraph at lines 1188--1188
 []\TU/SourceCodePro(0)/m/n/10.95 #> i Specify the column types or set `show_col_types = FALSE` to quiet this message.[] 
  []
 
@@ -1501,12 +1502,12 @@ Overfull \hbox (13.85008pt too wide) in paragraph at lines 1202--1202
 File: group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-36-1.pdf Graphic file (type pdf)
 <use group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-36-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 1254--1255
+Underfull \hbox (badness 10000) in paragraph at lines 1240--1241
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1254--1255
+Underfull \hbox (badness 10000) in paragraph at lines 1240--1241
 
  []
 
@@ -1514,83 +1515,83 @@ Underfull \hbox (badness 10000) in paragraph at lines 1254--1255
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [26] [27]
-Overfull \hbox (84.8055pt too wide) in paragraph at lines 1310--1310
+Overfull \hbox (84.8055pt too wide) in paragraph at lines 1296--1296
 []\TU/SourceCodePro(0)/m/n/10.95 #> alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0[] 
  []
 
 [28]
 chapter A.
 Package acronym Info: Label `acro:cran' newly defined as it shall be overridden
-although it is yet undefined on input line 1365.
+although it is yet undefined on input line 1351.
 Package acronym Info: Label `acro:ide' newly defined as it shall be overridden
-although it is yet undefined on input line 1366.
+although it is yet undefined on input line 1352.
 Package acronym Info: Label `acro:H2O' newly defined as it shall be overridden
-although it is yet undefined on input line 1367.
+although it is yet undefined on input line 1353.
 [29
 
 
 ]
-Overfull \hbox (13.85008pt too wide) in paragraph at lines 1419--1419
+Overfull \hbox (13.85008pt too wide) in paragraph at lines 1405--1405
 []\TU/SourceCodePro(0)/m/n/10.95 #> i Specify the column types or set `show_col_types = FALSE` to quiet this message.[] 
  []
 
 [30]
-File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c6add6f7f.pdf Graphic file (type pdf)
-<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c6add6f7f.pdf>
-File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c73a159e5.pdf Graphic file (type pdf)
-<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c73a159e5.pdf>
-File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c3cb47896.pdf Graphic file (type pdf)
-<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c3cb47896.pdf>
-File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c18892a86.pdf Graphic file (type pdf)
-<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c18892a86.pdf>
-File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c7f7d507.pdf Graphic file (type pdf)
-<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_9b4c7f7d507.pdf>
+File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff85ef5432d.pdf Graphic file (type pdf)
+<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff85ef5432d.pdf>
+File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff8587e245d.pdf Graphic file (type pdf)
+<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff8587e245d.pdf>
+File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff8437f4a62.pdf Graphic file (type pdf)
+<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff8437f4a62.pdf>
+File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff8149c52f5.pdf Graphic file (type pdf)
+<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff8149c52f5.pdf>
+File: C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff82f1951f1.pdf Graphic file (type pdf)
+<use C:/Users/kronh/OneDrive/Dokumente/R_Projects/group1_BenediktKronhardt_BoergeMeyer/group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/hist_4ff82f1951f1.pdf>
 
 Underfull \vbox (badness 7740) has occurred while \output is active []
 
 [31] [32]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 12.36182pt on input line 1631.
+(Font)              scaled to size 12.36182pt on input line 1617.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.24121pt on input line 1631.
+(Font)              scaled to size 8.24121pt on input line 1617.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 12.3631pt on input line 1631.
+(Font)              scaled to size 12.3631pt on input line 1617.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.24207pt on input line 1631.
+(Font)              scaled to size 8.24207pt on input line 1617.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 12.36072pt on input line 1631.
+(Font)              scaled to size 12.36072pt on input line 1617.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.24048pt on input line 1631.
+(Font)              scaled to size 8.24048pt on input line 1617.
 [33]
-Overfull \hbox (151.81895pt too wide) in paragraph at lines 1679--1679
+Overfull \hbox (151.81895pt too wide) in paragraph at lines 1665--1665
 []\TU/SourceCodePro(0)/m/n/10.95 #> alternative hypothesis: true difference in means between group Class A and group Class B is not equal to 0[] 
  []
 
 [34] [35]
 LaTeX Font Info:    Font shape `TU/SourceCodePro(0)/b/n' will be
-(Font)              scaled to size 9.85492pt on input line 1752.
+(Font)              scaled to size 9.85492pt on input line 1738.
 [36] [37]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.30151pt on input line 1899.
+(Font)              scaled to size 10.30151pt on input line 1885.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.21106pt on input line 1899.
+(Font)              scaled to size 7.21106pt on input line 1885.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.30258pt on input line 1899.
+(Font)              scaled to size 10.30258pt on input line 1885.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.2118pt on input line 1899.
+(Font)              scaled to size 7.2118pt on input line 1885.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 10.3006pt on input line 1899.
+(Font)              scaled to size 10.3006pt on input line 1885.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.21042pt on input line 1899.
+(Font)              scaled to size 7.21042pt on input line 1885.
 [38]
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 1935.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 1921.
 
 Overfull \vbox (7.0pt too high) has occurred while \output is active []
 
 [39]
 Package acronym Info: Label `acro:glm' newly defined as it shall be overridden
-although it is yet undefined on input line 1978.
+although it is yet undefined on input line 1964.
 [40]
 Overfull \vbox (5.0pt too high) has occurred while \output is active []
 
@@ -1629,7 +1630,7 @@ File: group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/nice-fig-1.pdf Gra
 ]
 chapter C.
 
-Overfull \hbox (13.85008pt too wide) in paragraph at lines 2745--2745
+Overfull \hbox (13.85008pt too wide) in paragraph at lines 2731--2731
 []\TU/SourceCodePro(0)/m/n/10.95 #> i Specify the column types or set `show_col_types = FALSE` to quiet this message.[] 
  []
 
@@ -1639,12 +1640,12 @@ Overfull \hbox (13.85008pt too wide) in paragraph at lines 2745--2745
 ]
 chapter D.
 
-Overfull \hbox (13.85008pt too wide) in paragraph at lines 2782--2782
+Overfull \hbox (13.85008pt too wide) in paragraph at lines 2768--2768
 []\TU/SourceCodePro(0)/m/n/10.95 #> i Specify the column types or set `show_col_types = FALSE` to quiet this message.[] 
  []
 
 [61]
-Overfull \hbox (13.85008pt too wide) in paragraph at lines 2862--2862
+Overfull \hbox (13.85008pt too wide) in paragraph at lines 2848--2848
 []\TU/SourceCodePro(0)/m/n/10.95 #> i Specify the column types or set `show_col_types = FALSE` to quiet this message.[] 
  []
 
@@ -1652,7 +1653,7 @@ Overfull \hbox (13.85008pt too wide) in paragraph at lines 2862--2862
 File: group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-70-1.pdf Graphic file (type pdf)
 <use group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-70-1.pdf>
 
-Overfull \hbox (10.41046pt too wide) in paragraph at lines 2938--2939
+Overfull \hbox (10.41046pt too wide) in paragraph at lines 2924--2925
 [][] 
  []
 
@@ -1660,7 +1661,7 @@ Overfull \hbox (10.41046pt too wide) in paragraph at lines 2938--2939
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [63]
-Overfull \hbox (13.85008pt too wide) in paragraph at lines 2968--2968
+Overfull \hbox (13.85008pt too wide) in paragraph at lines 2954--2954
 []\TU/SourceCodePro(0)/m/n/10.95 #> i Specify the column types or set `show_col_types = FALSE` to quiet this message.[] 
  []
 
@@ -1668,7 +1669,7 @@ Overfull \hbox (13.85008pt too wide) in paragraph at lines 2968--2968
 File: group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-71-1.pdf Graphic file (type pdf)
 <use group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-71-1.pdf>
 
-Overfull \hbox (10.41046pt too wide) in paragraph at lines 3037--3038
+Overfull \hbox (10.41046pt too wide) in paragraph at lines 3023--3024
 [][] 
  []
 
@@ -1676,12 +1677,12 @@ Overfull \hbox (10.41046pt too wide) in paragraph at lines 3037--3038
 Underfull \vbox (badness 4995) has occurred while \output is active []
 
 [65]
-Overfull \hbox (13.85008pt too wide) in paragraph at lines 3068--3068
+Overfull \hbox (13.85008pt too wide) in paragraph at lines 3054--3054
 []\TU/SourceCodePro(0)/m/n/10.95 #> i Specify the column types or set `show_col_types = FALSE` to quiet this message.[] 
  []
 
 [66]
-Overfull \hbox (13.85008pt too wide) in paragraph at lines 3124--3124
+Overfull \hbox (13.85008pt too wide) in paragraph at lines 3110--3110
 []\TU/SourceCodePro(0)/m/n/10.95 #> i Specify the column types or set `show_col_types = FALSE` to quiet this message.[] 
  []
 
@@ -1689,12 +1690,12 @@ Overfull \hbox (13.85008pt too wide) in paragraph at lines 3124--3124
 File: group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-72-1.pdf Graphic file (type pdf)
 <use group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-72-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 3207--3208
+Underfull \hbox (badness 10000) in paragraph at lines 3193--3194
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3207--3208
+Underfull \hbox (badness 10000) in paragraph at lines 3193--3194
 
  []
 
@@ -1705,12 +1706,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 File: group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-72-2.pdf Graphic file (type pdf)
 <use group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-72-2.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 3217--3218
+Underfull \hbox (badness 10000) in paragraph at lines 3203--3204
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3217--3218
+Underfull \hbox (badness 10000) in paragraph at lines 3203--3204
 
  []
 
@@ -1718,7 +1719,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3217--3218
 File: group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-72-3.pdf Graphic file (type pdf)
 <use group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/unnamed-chunk-72-3.pdf>
 
-Overfull \hbox (10.41046pt too wide) in paragraph at lines 3262--3263
+Overfull \hbox (10.41046pt too wide) in paragraph at lines 3248--3249
 [][] 
  []
 
@@ -1730,7 +1731,7 @@ Package scrlayer-scrpage Warning: \headheight to low.
 (scrlayer-scrpage)                processing, but you should do this yourself,
 (scrlayer-scrpage)                e.g., setting geometry's option
 (scrlayer-scrpage)                `head=22.16652pt'.
-(scrlayer-scrpage)                I'll also decrease \topmargin on input line 3268.
+(scrlayer-scrpage)                I'll also decrease \topmargin on input line 3254.
 
 
 Overfull \vbox (5.16652pt too high) has occurred while \output is active []
@@ -1744,7 +1745,7 @@ Package scrlayer-scrpage Warning: \footheight to low.
 (scrlayer-scrpage)                e.g., using
 (scrlayer-scrpage)                  \setlength{\footheight}{22.16652pt}
 (scrlayer-scrpage)                in your preamble.
-(scrlayer-scrpage)                I'll also increase \footskip on input line 3268.
+(scrlayer-scrpage)                I'll also increase \footskip on input line 3254.
 
 [70] (./group1_BenediktKronhardt_BoergeMeyer.aux)
 
@@ -1756,11 +1757,11 @@ LaTeX Warning: There were undefined references.
  ) 
 Here is how much of TeX's memory you used:
  31935 strings out of 477643
- 684330 string characters out of 5839643
- 1327732 words of memory out of 5000000
+ 684093 string characters out of 5839643
+ 1327303 words of memory out of 5000000
  52576 multiletter control sequences out of 15000+600000
  479649 words of font info for 129 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 108i,20n,123p,10659b,1053s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,20n,123p,10659b,1051s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on group1_BenediktKronhardt_BoergeMeyer.pdf (76 pages).
