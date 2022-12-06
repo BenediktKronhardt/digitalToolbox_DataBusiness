@@ -602,7 +602,7 @@ Within the report, we conclude that the classification of a country as a develop
 <!-- # Literaturverzeichnis {-} -->
 
 <div id="refs"></div>
-\newpage
+<!-- \newpage -->
 
 
 <!--chapter:end:05-references.Rmd-->
@@ -618,17 +618,17 @@ We hereby declare that
 2. we have marked direct quotes used from the literature and the use of ideas of other authors at the corresponding locations in the thesis;
 3. we have not presented this thesis for any other exam. We acknowledge that a false declaration will have legal consequences.
 
-Hamburg, dd.mm.yyyy
+Hamburg, \today
 
-aaaaa, bbbbbb
+Börge Meyer, Benedikt Kronhardt
 
 \vspace{2.5cm}
 
 We accept that the HSBA may check the originality of our work using a range of manual and computer based techniques, including transferring and storing our submission in a database for the purpose of data-matching to help detect plagiarism.
 
-Hamburg, dd.mm.yyyy 
+Hamburg, \today
 
-aaaaa, bbbbbb
+Börge Meyer, Benedikt Kronhardt
 
 <!--chapter:end:06-declaration.Rmd-->
 
