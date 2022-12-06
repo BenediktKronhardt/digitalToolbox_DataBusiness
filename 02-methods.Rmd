@@ -36,9 +36,8 @@ ggplot(data = dataFinished, aes(x = region)) +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 ```
 
--->TODO: Text zu Weltkarte schreiben
-
 In addition to the overview of datasets by region in figure \@ref(fig:continentCountdata), a world map in figure \@ref(fig:worldMap) has been created to illustrate the countries from which the datasets originate. The data sets from the industrialized countries were marked in blue and those from the emerging and developing countries in red.
+
 ```{r}
 #| echo = FALSE,
 #| warning = FALSE,
@@ -110,22 +109,10 @@ We also truncated the leverage_model_1 and leverage_model_2 columns, since we di
 
 
 ```{r}
-#| echo = FALSE,
+#| echo = TRUE,
 #| message = TRUE
 dataFinished <- dataFinished[-9]
 dataFinished <- dataFinished[-9]
-```
-
-
-In our customized dataset we still have seven numeric variables, which are shown in table \@ref(tab:numericalVariables). Also the mean, median, minimum and maximum value of each numerical variable can be read here.
-
-
-```{r}
-#| echo = TRUE,
-#| warning = FALSE,
-#| label = "numericalVariables",
-#| tab.cap = "Overview of the numerical variables in data set cli"
-datasummary_skim(dataFinished, allign="center")
 ```
 
 
@@ -148,31 +135,4 @@ col = c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','r
 boxplot(dataBoxplot[,c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')])
 ```
 
-As can be seen from the figure, there are several outliers within the data set. In order not to distort the result, we decided to keep these outliers and to continue working with them.
-
---> TODO: Text zu Correlation schreiben
-
-```{r}
-datasummary_correlation(dataFinished)
-```
-
-
-## Folgendes nur zur Übersicht/weiteren Aufbau(Gliederung)
-
-zu wrangling gehören joining, merging und grouping
-Boxplot gehört zu profiling
-
-3. Methods, for example:
-- Descriptive statistics
-- Variable distributions
-- Statements about variances and co-variance and missing values
-- Chosen analytical procedures to answer the research question
-
-
-Inhalt/Aufbau:
-  1:EDA (Exploratory Data Analysis) auf Datenset    anwenden
-    1.1: including information on the variables’ distribution, missing values,
-categories / grouping factors (if applicable) and the relationships between the variables, especially
-regarding the variable in focus, for example, the dependent variable of a applied statistical method (if
-applicable)
-  2:Methoden/statistische Modelle aufstellen
+As can be seen from the figure \@ref(fig:boxplot), there are several outliers within the data set. In order not to distort the result, we decided to keep these outliers and to continue working with them.

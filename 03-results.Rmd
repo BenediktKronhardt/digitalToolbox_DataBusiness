@@ -6,8 +6,7 @@ Within multiple linear regression, our dependent variable (y) is the cost of liv
 
 In order to perform a multiple linear regression, some conditions have to be fulfilled, which we will check in the following.
 
-First, there must be a linear relationship between the x variables and the y variable. This is evident from the correlation shown in -->(TODO: Querverweis Kapitel Methods oder auch nur Tabelle/Figure Korrelation).
-Also, the y variable must be metrically scaled, which is given.
+First, there must be a linear relationship between the x variables and the y variable. Also, the y variable must be metrically scaled, which is given.
 
 Third, the residuals should be approximately normally distributed. We proved this graphically with the help of a histogram.
 
@@ -16,7 +15,8 @@ First, we need to set up our model.
 ```{r}
 #| echo = TRUE,
 #| warning = FALSE
-model <- lm(cli ~ rent_index + groceries_index + restaurant_price_index + local_purchasing_power_index + development, data = dataFinished)
+model <- lm(cli ~ rent_index + groceries_index + restaurant_price_index 
+            + local_purchasing_power_index + development, data = dataFinished)
 ```
 
 After that, we can create a histogram from our model.

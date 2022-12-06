@@ -3,7 +3,7 @@ The standard of living became more and more important for the world population. 
 
 ## Task description
 Our task was to analyze a data set and write a report about it using R, RStudio, RMarkdown and the procedures of literate programming to put together a PDF-manuscript.
-In our team we have received the "cost of living" data set and analyzed it with the research question "Is there a significant difference between industrialized countries and developing countries in cost of living?"
+In our team we have received the "cost of living" data set and analyzed it with the research question "Does the classification of a country as a developing or industrialized country have a significant impact on the cost of living index?"
 
 ## Structure
 Our document is divided into five chapters. This chapter is the introduction, where we describe the task and how we imported our dataset, respectively added other datasets. 
