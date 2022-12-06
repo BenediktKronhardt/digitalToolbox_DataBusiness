@@ -11,5 +11,5 @@
 <!-- # Literaturverzeichnis {-} -->
 
 <div id="refs"></div>
-\newpage
+\clearpage
 

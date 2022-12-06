@@ -59,7 +59,7 @@
 \documentclass[
   11pt,
   a4paper,
-  twoside]{scrbook}
+  twoside]{scrreprt}
 \usepackage{amsmath,amssymb}
 \usepackage[]{cmbright}
 
@@ -200,14 +200,27 @@
 \renewcommand{\floatpagefraction}{0.75}
 \usepackage[automark,headsepline=0.9pt]{scrlayer-scrpage}
 %\usepackage[authordate,backend=biber]{biblatex-chicago}
-\newenvironment{abstract}{}{}
-\usepackage{abstract}
 \usepackage{suffix}
 \usepackage{xstring}
 \usepackage{relsize}
 \usepackage{acronym}
 \usepackage{xcolor}
 \usepackage{float}
+\usepackage{sourcecodepro}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -352,146 +365,26 @@ The results section comprise all necessary calculations, which are then discusse
 
 After the required libraries, which will be worked with in the following, were installed, the libraries still had to be imported in order to be able to use them.
 
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(tidyverse)}
-\FunctionTok{library}\NormalTok{(dplyr)}
-\FunctionTok{library}\NormalTok{(stringr)}
-\FunctionTok{library}\NormalTok{(ggplot2)}
-\FunctionTok{library}\NormalTok{(maps)}
-\FunctionTok{library}\NormalTok{(janitor)}
-\FunctionTok{library}\NormalTok{(modelsummary)}
-\FunctionTok{library}\NormalTok{(car)}
-\FunctionTok{library}\NormalTok{(carData)}
-\FunctionTok{library}\NormalTok{(gpairs)}
-\FunctionTok{library}\NormalTok{(GGally)}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
 Subsequently, the data had to be read in. This could be initialized with the following command, after the data set was added as a csv file in the folder ``02-data''.
 To be able to work better with the names of the columns and the dataset in general, the command ``janitor::clean\_names'' was executed. With this, for example, the spaces were removed and the names were all written in small letters.
 
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{costOfLiving }\OtherTok{\textless{}{-}} \FunctionTok{read\_delim}\NormalTok{(}\StringTok{"02{-}data/cost{-}of{-}living{-}2017.csv"}\NormalTok{, }
-                      \AttributeTok{delim =} \StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, }\AttributeTok{escape\_double =} \ConstantTok{FALSE}\NormalTok{, }
-                      \AttributeTok{trim\_ws =} \ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{costOfLiving }\OtherTok{\textless{}{-}}\NormalTok{ janitor}\SpecialCharTok{::}\FunctionTok{clean\_names}\NormalTok{(costOfLiving)}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
 To make it easier to split the data by region, we imported a csv file that shows the names of the countries in this world and their corresponding regions.
 
-First we had to import the dataset, which we named ``continents''. This dataset is from the website ``kaggle'', named ``Country Mapping - ISO, Continent, Region''. \footnote{Kaggle (\protect\hyperlink{ref-continents2}{2019})}
-
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#import list of continents and countries}
-\NormalTok{continents }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"02{-}data/continents2.csv"}\NormalTok{)}
-\NormalTok{continents }\OtherTok{\textless{}{-}}\NormalTok{ janitor}\SpecialCharTok{::}\FunctionTok{clean\_names}\NormalTok{(continents)}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
+First we had to import the dataset, which we named ``continents''. This dataset is from the website ``kaggle'', named ``Country Mapping - ISO, Continent, Region''. \footnote{Kaggle, \protect\hyperlink{ref-continents2}{{``Country Mapping - ISO, Continent, Region,''} December 2019, \url{https://www.kaggle.com/datasets/andradaolteanu/country-mapping-iso-continent-region}}.}
 
 To be able to do a join with the raw data, we had to rename the column ``name'' to ``country''. After that, a left join could be performed on the renamed column. Since we only needed the column ``region'', a select for this one column was performed within the join.
-
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#rename attribute \textquotesingle{}name\textquotesingle{} in \textquotesingle{}country\textquotesingle{} to perform a left join.}
-\NormalTok{continents }\OtherTok{\textless{}{-}} \FunctionTok{rename}\NormalTok{(continents, }\AttributeTok{country =}\NormalTok{ name)}
-\NormalTok{costOfLivingAndContinents }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(costOfLiving, }\FunctionTok{select}\NormalTok{(continents, country, region), }\AttributeTok{by=}\StringTok{"country"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
 
 Now it was possible to check if a country was not assigned to a region.
 Since the country Kosovo could not be assigned to a region, this had to be done manually.
 
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{costOfLivingAndContinents[}\DecValTok{486}\NormalTok{, }\DecValTok{12}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Europe"}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
 To assign the different countries in our dataset to either a developing or an industrialized country, we also imported a new csv file, which we named ``dd''.
-We created this file ourselves, based on data from UN (\protect\hyperlink{ref-ddcountries}{2014}).
-
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#import list of Countries and development status}
-\NormalTok{dd }\OtherTok{\textless{}{-}} \FunctionTok{read\_delim}\NormalTok{(}\StringTok{"02{-}data/developed\_and\_developing\_countries.csv"}\NormalTok{,}
-                 \AttributeTok{delim =} \StringTok{";"}\NormalTok{, }\AttributeTok{escape\_double =} \ConstantTok{FALSE}\NormalTok{,}
-                 \AttributeTok{trim\_ws =} \ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{dd }\OtherTok{\textless{}{-}}\NormalTok{ janitor}\SpecialCharTok{::}\FunctionTok{clean\_names}\NormalTok{(dd)}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
+We created this file ourselves, based on data from UN\footnote{\protect\hyperlink{ref-ddcountries}{\emph{World Economic Situation and Prospects} (United Nations, 2014)}.}.
 
 To format the category as a double value, we executed the following commands.
 
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dd}\SpecialCharTok{$}\NormalTok{category[dd}\SpecialCharTok{$}\NormalTok{category }\SpecialCharTok{==} \StringTok{"developed"}\NormalTok{] }\OtherTok{\textless{}{-}} \FloatTok{1.0}
-\NormalTok{dd}\SpecialCharTok{$}\NormalTok{category[dd}\SpecialCharTok{$}\NormalTok{category }\SpecialCharTok{==} \StringTok{"developing"}\NormalTok{] }\OtherTok{\textless{}{-}} \FloatTok{0.0}
-\NormalTok{dd}\SpecialCharTok{$}\NormalTok{category }\OtherTok{\textless{}{-}} \FunctionTok{as.double}\NormalTok{(dd}\SpecialCharTok{$}\NormalTok{category)}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
 Once this was done, we scanned the dataset for various capitalization errors and corrected them. Also we have renamed the column category to development.
 
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"italy"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Italy"}
-\NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Hong Kong SAR"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Hong Kong"}
-\NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Taiwan Province of China"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Taiwan"}
-\NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Russian Federation"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Russia"}
-\NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Viet Nam"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Vietnam"}
-\NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Bosnia and Herzegovina"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Bosnia And Herzegovina"}
-\NormalTok{dd}\SpecialCharTok{$}\NormalTok{country[dd}\SpecialCharTok{$}\NormalTok{country }\SpecialCharTok{==} \StringTok{"Kosovo"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Kosovo (Disputed Territory)"}
-\FunctionTok{colnames}\NormalTok{(dd)[}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"development"}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
 In the end, we were able to perform a left join and thus add the categorization of development countries to our dataset.
-
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dataFinished }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(costOfLivingAndContinents,dd, }\AttributeTok{by=}\StringTok{"country"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
 
 \hypertarget{theoretical-background}{%
 \chapter{Theoretical background}\label{theoretical-background}}
@@ -501,21 +394,23 @@ In the end, we were able to perform a left join and thus add the categorization 
 
 Because of different prices, living standards, currencies and other factors, it is not possible to compare the cost of living in different countries properly.
 
-To be able to compare the cost of living between different countries, the Cost of Living Index is used - also abbreviated as CLI in the following. The cost of living is the financial resources needed to cover, in a given place and in a given period of time, the basic expenses for a given standard of living, such as a shelter, food, medicines and others. The CLI enables the comparison of expenditures between different places in the world and at different times in history.\footnote{Banton (\protect\hyperlink{ref-caroline}{2021})}
+To be able to compare the cost of living between different countries, the Cost of Living Index is used - also abbreviated as CLI in the following. The cost of living is the financial resources needed to cover, in a given place and in a given period of time, the basic expenses for a given standard of living, such as a shelter, food, medicines and others. The CLI enables the comparison of expenditures between different places in the world and at different times in history.\footnote{\protect\hyperlink{ref-caroline}{Caroline Banton, {``Cost of Living: Definition, How to Calculate, Index, and Example,''} March 2021, \url{https://www.investopedia.com/terms/c/cost-of-living.asp}}.}
 
 In economics, the cost-of-living index describes the ratio of the minimum expenditure required to achieve a given indifference curve between two prices. The calculation not only requires two different price groups, but is also dependent on a preference order of the required living goods and on a basic indifference curve describing the utility of two products.
-Among the two prices needed, e.g., from two different places, one is called the comparison price and the other is called the reference price or the base price. The base price is then used to illustrate on which prices the Cost-Of-Living Index is based and calculated. The calculated index is then dependent on the comparison prices determined. Further, the general logic of the cost-of-living index is best understood when the index is interpreted in the multiple context of temporal and spatial comparisons.\footnote{Pollak (\protect\hyperlink{ref-Pollak1989}{1989})}
+Among the two prices needed, e.g., from two different places, one is called the comparison price and the other is called the reference price or the base price. The base price is then used to illustrate on which prices the Cost-Of-Living Index is based and calculated. The calculated index is then dependent on the comparison prices determined. Further, the general logic of the cost-of-living index is best understood when the index is interpreted in the multiple context of temporal and spatial comparisons.\footnote{\protect\hyperlink{ref-Pollak1989}{Robert A. Pollak, \emph{The Theory of the Cost-of-Living Index} (Oxford University Press, 1989)}.}
 
 \hypertarget{industrialized-emerging-and-developing-countries}{%
 \section{Industrialized, emerging and developing countries}\label{industrialized-emerging-and-developing-countries}}
 
-In general, countries are divided into industrialized, emerging and developing countries. States in which the economic performance is supported by a large part of the resident companies are referred to as industrialized countries. Such countries stand out due to their high per capita income, which results from the available standard of education, high productivity in production, good external trade relations and usually a currency with low inflation.\footnote{BPB (\protect\hyperlink{ref-bpd}{2021})}
+In general, countries are divided into industrialized, emerging and developing countries. States in which the economic performance is supported by a large part of the resident companies are referred to as industrialized countries. Such countries stand out due to their high per capita income, which results from the available standard of education, high productivity in production, good external trade relations and usually a currency with low inflation.\footnote{BPB, \protect\hyperlink{ref-bpd}{{``Industrieländer''} (Bundeszentrale für politische Bildung, June 2021), \url{https://www.bpb.de/kurz-knapp/lexika/lexikon-der-wirtschaft/19720/industrielaender/}}.}
 
-A country that is in the process of becoming an industrialized country is called an emerging country. These are nevertheless referred to the category of developing countries. Emerging countries are identifiable by their above-average economic growth. Nevertheless, emerging countries are similar to developing countries in the social structure, such as in the level of education, mortality and access to infrastructure.\footnote{BMZ (\protect\hyperlink{ref-bmz}{n.d.b})}
+A country that is in the process of becoming an industrialized country is called an emerging country. These are nevertheless referred to the category of developing countries. Emerging countries are identifiable by their above-average economic growth. Nevertheless, emerging countries are similar to developing countries in the social structure, such as in the level of education, mortality and access to infrastructure.\footnote{\protect\hyperlink{ref-bmz}{BMZ, {``Schwellenland''} (Bundesamt für wirtschaftliche Zusammenarbeit und Entwicklung, n.d.), \url{https://www.bmz.de/de/service/lexikon/schwellenland-14810}}.}
 
-The third category is developing countries, which are associated with poor food supply, high poverty, poor health care and educational opportunities. In association with the characteristics, such countries have an overall low standard of living and a preponderance of labor in agriculture and external economic difficulties.\footnote{BMZ (\protect\hyperlink{ref-bmzentwicklung}{n.d.a})}
+The third category is developing countries, which are associated with poor food supply, high poverty, poor health care and educational opportunities. In association with the characteristics, such countries have an overall low standard of living and a preponderance of labor in agriculture and external economic difficulties.\footnote{\protect\hyperlink{ref-bmzentwicklung}{BMZ, {``Entwicklungsland''} (Bundesamt für wirtschaftliche Zusammenarbeit und Entwicklung, n.d.), \url{https://www.bmz.de/de/service/lexikon/entwicklungsland-14308}}.}
 
 To analyze the available data, developing countries were combined with emerging economies and contrasted with developed countries.
+
+\clearpage
 
 \hypertarget{methods}{%
 \chapter{Methods}\label{methods}}
@@ -525,9 +420,9 @@ To analyze the available data, developing countries were combined with emerging 
 
 The provided data consists of \(511\) different datasets from \(110\) different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
 
-In Figure \ref{fig:continentCountdata} can be seen how many datasets are available per region.
+In Figure \ref{fig:continentCountdata} can be seen how many data sets are available per region.
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/continentCountdata-1} 
 
@@ -536,9 +431,9 @@ In Figure \ref{fig:continentCountdata} can be seen how many datasets are availab
 \caption{Count of Data from different regions}\label{fig:continentCountdata}
 \end{figure}
 
-In addition to the overview of datasets by region in figure \ref{fig:continentCountdata}, a world map in figure \ref{fig:worldMap} has been created to illustrate the countries from which the datasets originate. The data sets from the industrialized countries were marked in blue and those from the emerging and developing countries in red.
+In addition to the overview of datasets by region in figure \ref{fig:continentCountdata}, a world map in figure \ref{fig:worldMap} has been created to illustrate the countries from which the data sets originate. The data sets from the industrialized countries were marked in blue and those from the emerging and developing countries in red.
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/worldMap-1} 
 
@@ -550,7 +445,7 @@ In addition to the overview of datasets by region in figure \ref{fig:continentCo
 \hypertarget{exploratory-data-analysis}{%
 \section{Exploratory Data Analysis}\label{exploratory-data-analysis}}
 
-First of all, we had to check, if there are missing values inside of the data-set. Therefore we used the following code to proof this:
+First of all, we had to check, if there are missing values inside of the data set. Therefore we used the following code to proof this:
 
 \linespread{1}
 
@@ -589,32 +484,11 @@ As it can be seen, there were \(383\) missing values inside the column ``state''
 However, since the column has no bearing on our research question, we decided to disregard this column. With the city column we have a more meaningful basis to answer our question.
 To disregard this column, we cut it off. To do this, we used to following R code chunk. Because it is the second column, we can just delete this column.
 
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dataFinished }\OtherTok{\textless{}{-}}\NormalTok{ dataFinished[}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
 We also truncated the leverage\_model\_1 and leverage\_model\_2 columns, since we did not work with these columns any further.
-
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dataFinished }\OtherTok{\textless{}{-}}\NormalTok{ dataFinished[}\SpecialCharTok{{-}}\DecValTok{9}\NormalTok{]}
-\NormalTok{dataFinished }\OtherTok{\textless{}{-}}\NormalTok{ dataFinished[}\SpecialCharTok{{-}}\DecValTok{9}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
 
 To determine if outliers exist within the data set, we chose to draw a boxplot.
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/boxplot-1} 
 
@@ -624,6 +498,8 @@ To determine if outliers exist within the data set, we chose to draw a boxplot.
 \end{figure}
 
 As can be seen from the figure \ref{fig:boxplot}, there are several outliers within the data set. In order not to distort the result, we decided to keep these outliers and to continue working with them.
+
+\clearpage
 
 \hypertarget{results}{%
 \chapter{Results}\label{results}}
@@ -641,22 +517,18 @@ First, there must be a linear relationship between the x variables and the y var
 
 Third, the residuals should be approximately normally distributed. We proved this graphically with the help of a histogram.
 
-First, we need to set up our model.
+First, we need to set up our model as in equation \eqref{eq:lm1}.
 
-\linespread{1}
+\begin{align} 
+  CLI_{\text{\,i}} &= \upalpha + \upbeta_{1} \times Rent~Index_{\text{\,i}} + \upbeta_{2} \times Groceries~Index_{\text{\,i}} + \upbeta_{3} \times Restaurant~Price~Index_{\text{\,i}} + &&\notag\\
+  \phantom{CLI_{\text{\,i}}} & \phantom{{} =  ^l} \upbeta_{4} \times Local~Purchasing~Power~Index_{\text{\,i}} +  \upbeta_{5} \times Development_{\text{\,i}} + \upepsilon_{\text{\,i}} &&\notag\\
+\upepsilon_{i} &\sim N(0, \upsigma^{2})
+  \label{eq:lm1}
+\end{align}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(cli }\SpecialCharTok{\textasciitilde{}}\NormalTok{ rent\_index }\SpecialCharTok{+}\NormalTok{ groceries\_index }\SpecialCharTok{+}\NormalTok{ restaurant\_price\_index }
-            \SpecialCharTok{+}\NormalTok{ local\_purchasing\_power\_index }\SpecialCharTok{+}\NormalTok{ development, }\AttributeTok{data =}\NormalTok{ dataFinished)}
-\end{Highlighting}
-\end{Shaded}
+After that, we can create a histogram from our model, see figure \ref{fig:histogramModel}.
 
-\linespread{1}
-
-After that, we can create a histogram from our model.
-
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/histogramModel-1} 
 
@@ -665,41 +537,27 @@ After that, we can create a histogram from our model.
 \caption{Histogram of the multiple linear regression model}\label{fig:histogramModel}
 \end{figure}
 
-From the histogram we can see that the distribution can be considered normally distributed, therefore this condition is also fulfilled.
-Scaling is also given, since the cost of living index is on a scale.
+From the histogram we can see that the distribution can be considered normally distributed, therefore this condition is also fulfilled. Scaling is also given, since the cost of living index is on a scale.
 
-The last condition we checked is that there must be no multicollinearity within the independent variables.
-To check this, we created a correlation matrix. First, we generated a subset from the data in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
+The last condition we checked is that there must be no multicollinearity within the independent variables. To check this, we created a correlation matrix. First, we generated a subset from the data in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
 
-\begin{verbatim}
-#>                              rent_index groceries_index
-#> rent_index                    1.0000000       0.7674361
-#> groceries_index               0.7674361       1.0000000
-#> restaurant_price_index        0.7523090       0.8518550
-#> local_purchasing_power_index  0.6000432       0.6458339
-#> development                   0.4730879       0.5998356
-#>                              restaurant_price_index
-#> rent_index                                0.7523090
-#> groceries_index                           0.8518550
-#> restaurant_price_index                    1.0000000
-#> local_purchasing_power_index              0.6436926
-#> development                               0.6838520
-#>                              local_purchasing_power_index
-#> rent_index                                      0.6000432
-#> groceries_index                                 0.6458339
-#> restaurant_price_index                          0.6436926
-#> local_purchasing_power_index                    1.0000000
-#> development                                     0.6425433
-#>                              development
-#> rent_index                     0.4730879
-#> groceries_index                0.5998356
-#> restaurant_price_index         0.6838520
-#> local_purchasing_power_index   0.6425433
-#> development                    1.0000000
-\end{verbatim}
+\singlespacing
 
-Since the correlation between restaurant price index and groceries index is
-\(0.851855\) \textgreater{} 0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\raggedright}X}
+\toprule
+ & RI & GI & RPI & LPPI & Dev\\
+\midrule
+RI &  &  &  &  & \\
+GI & .77 &  &  &  & \\
+RPI & .75 & .85 &  &  & \\
+LPPI & .60 & .65 & .64 &  & \\
+Dev & .47 & .60 & .68 & .64 & \\
+\bottomrule
+\end{tabu}
+
+\doublespacing
+
+Since the correlation between restaurant price index and groceries index is \(0.85\) \textgreater{} 0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
 
 \begin{verbatim}
 #>                   rent_index              groceries_index 
@@ -752,6 +610,8 @@ The model makes a significant explanatory contribution, as the p-value is well b
 
 As we can see, according to the p-values, all variables except the classification of development have a significant impact on the cost of living index.
 
+\clearpage
+
 \hypertarget{discussion}{%
 \chapter{Discussion}\label{discussion}}
 
@@ -776,6 +636,8 @@ Furthermore, it must be critically questioned whether the multiple linear regres
 
 Within the report, we conclude that the classification of a country as a developing or industrialized country does not have a significant impact on cli (see chapter \ref{results}). This is true for our data set. However, some countries are missing from our data set, so we cannot make this statement universally (see chapter \ref{critical-assessment}).
 
+\clearpage
+
 \pagebreak
 
 \hypertarget{references}{%
@@ -784,34 +646,30 @@ Within the report, we conclude that the classification of a country as a develop
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-R-rmarkdown}{}}%
-Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2022. \emph{Rmarkdown: Dynamic Documents for r}. \url{https://CRAN.R-project.org/package=rmarkdown}.
-
 \leavevmode\vadjust pre{\hypertarget{ref-caroline}{}}%
-Banton, Caroline. 2021. {``Cost of Living: Definition, How to Calculate, Index, and Example.''} March 2021. \url{https://www.investopedia.com/terms/c/cost-of-living.asp}.
+Banton, Caroline. {``Cost of Living: Definition, How to Calculate, Index, and Example,''} March 2021. \url{https://www.investopedia.com/terms/c/cost-of-living.asp}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-bmzentwicklung}{}}%
-BMZ. n.d.a. {``Entwicklungsland.''} Bundesamt für wirtschaftliche Zusammenarbeit und Entwicklung. \url{https://www.bmz.de/de/service/lexikon/entwicklungsland-14308}.
+BMZ. {``Entwicklungsland.''} Bundesamt für wirtschaftliche Zusammenarbeit und Entwicklung, n.d. \url{https://www.bmz.de/de/service/lexikon/entwicklungsland-14308}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-bmz}{}}%
----------. n.d.b. {``Schwellenland.''} Bundesamt für wirtschaftliche Zusammenarbeit und Entwicklung. \url{https://www.bmz.de/de/service/lexikon/schwellenland-14810}.
+---------. {``Schwellenland.''} Bundesamt für wirtschaftliche Zusammenarbeit und Entwicklung, n.d. \url{https://www.bmz.de/de/service/lexikon/schwellenland-14810}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-bpd}{}}%
-BPB. 2021. {``Industrieländer.''} Bundeszentrale für politische Bildung. June 2021. \url{https://www.bpb.de/kurz-knapp/lexika/lexikon-der-wirtschaft/19720/industrielaender/}.
+BPB. {``Industrieländer.''} Bundeszentrale für politische Bildung, June 2021. \url{https://www.bpb.de/kurz-knapp/lexika/lexikon-der-wirtschaft/19720/industrielaender/}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-continents2}{}}%
-Kaggle. 2019. {``Country Mapping - ISO, Continent, Region.''} December 2019. \url{https://www.kaggle.com/datasets/andradaolteanu/country-mapping-iso-continent-region}.
+Kaggle. {``Country Mapping - ISO, Continent, Region,''} December 2019. \url{https://www.kaggle.com/datasets/andradaolteanu/country-mapping-iso-continent-region}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Pollak1989}{}}%
-Pollak, Robert A. 1989. \emph{The Theory of the Cost-of-Living Index}. Oxford University Press.
-
-\leavevmode\vadjust pre{\hypertarget{ref-R-base}{}}%
-R Core Team. 2022. \emph{R: A Language and Environment for Statistical Computing}. Vienna, Austria: R Foundation for Statistical Computing. \url{https://www.R-project.org/}.
+Pollak, Robert A. \emph{The Theory of the Cost-of-Living Index}. Oxford University Press, 1989.
 
 \leavevmode\vadjust pre{\hypertarget{ref-ddcountries}{}}%
-UN. 2014. \emph{World Economic Situation and Prospects}. United Nations.
+UN. \emph{World Economic Situation and Prospects}. United Nations, 2014.
 
 \end{CSLReferences}
+
+\clearpage
 
 \hypertarget{declaration-of-honor}{%
 \chapter*{Declaration of Honor}\label{declaration-of-honor}}
@@ -841,6 +699,8 @@ We accept that the HSBA may check the originality of our work using a range of m
 Hamburg, \today
 
 Börge Meyer, Benedikt Kronhardt
+
+\clearpage
 
 
 
