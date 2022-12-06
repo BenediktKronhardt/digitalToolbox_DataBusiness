@@ -18,16 +18,14 @@ After the required libraries, which will be worked with in the following, were i
 #| message = FALSE,
 #| warning = FALSE
 library(tidyverse)
-library(dplyr)
-library(stringr)
-library(ggplot2)
 library(maps)
 library(janitor)
 library(modelsummary)
 library(car)
-library(carData)
 library(gpairs)
 library(GGally)
+library(kableExtra)
+library(corrr)
 ```
 
 Subsequently, the data had to be read in. This could be initialized with the following command, after the data set was added as a csv file in the folder "02-data".

@@ -10,9 +10,12 @@ author:
 # use it, just overwrite it:
 # abstract: |
 #  The present specialized bookdown project template you are using now is intended as the basis for a report or thesis at the Hamburg School of Business Administration (HSBA). Compared to the original project template coming with the bookdown package, it generates PDF output only, using a slightly customized LaTeX template based on the original Pandoc-template, which is adapted to the requirements of the HSBA for theses and reports. The main notable differences are an appropriate title page, an automatic word count function, a list of acronyms, an adapted page numbering, the use of the appropriate Chicago Manual of Style citation style (17th edition, CSL-based) and an additional chapter with a basic declaration of honor at the end. In addition, several additional folders are used to demonstrate a basic project structure, as well as a slightly modified file organization to show the use of other R packages in addition to the bookdown basics. The contents of the original bookdown template can be found in the following chapters, the additional code examples in the appendix. For more information about this template, please refer to the file 'README.md'.
-# Here you can use standard LaTeX-classes, i.e., article, book, report or letter, or you 
-# can choose from the KOMA-script-classes, i.e., scrartcl, scrbook, scrreprt or scrlttr2:
-documentclass: scrbook
+# Here you can use standard LaTeX-classes, i.e., article, book, report or letter, or you
+# can choose from the KOMA-script-classes, i.e., scrartcl, scrbook, scrreprt or scrlttr2.
+# For classes book and scrbook, the variable "book" must also be set to true, for all other
+# classes to false!
+documentclass: scrreprt
+book: false
 # Add other options for the documentclass, but NOT fontsize or papersize, which are
 # already listed below as extra options. Suitable options can be one of "oneside" / "twoside"
 # or one of "openleft" / "openright" / "openany":
@@ -103,8 +106,8 @@ link-citations: yes
 #
 # List here every citation that is not directly included 
 # in the text but should be listed in the references:
-no-cite: |
-  @R-base, @R-rmarkdown
+# no-cite: |
+#   @R-base, @R-rmarkdown
 # Here, one can define the name of the list of acronyms used in the frontmatter. 
 # If this variable is used, then you can define the needed acronyms in the file 
 # 'abbreviations.tex'. A short description of how to do this is included in the 

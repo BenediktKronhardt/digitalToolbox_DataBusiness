@@ -10,9 +10,12 @@ author:
 # use it, just overwrite it:
 # abstract: |
 #  The present specialized bookdown project template you are using now is intended as the basis for a report or thesis at the Hamburg School of Business Administration (HSBA). Compared to the original project template coming with the bookdown package, it generates PDF output only, using a slightly customized LaTeX template based on the original Pandoc-template, which is adapted to the requirements of the HSBA for theses and reports. The main notable differences are an appropriate title page, an automatic word count function, a list of acronyms, an adapted page numbering, the use of the appropriate Chicago Manual of Style citation style (17th edition, CSL-based) and an additional chapter with a basic declaration of honor at the end. In addition, several additional folders are used to demonstrate a basic project structure, as well as a slightly modified file organization to show the use of other R packages in addition to the bookdown basics. The contents of the original bookdown template can be found in the following chapters, the additional code examples in the appendix. For more information about this template, please refer to the file 'README.md'.
-# Here you can use standard LaTeX-classes, i.e., article, book, report or letter, or you 
-# can choose from the KOMA-script-classes, i.e., scrartcl, scrbook, scrreprt or scrlttr2:
-documentclass: scrbook
+# Here you can use standard LaTeX-classes, i.e., article, book, report or letter, or you
+# can choose from the KOMA-script-classes, i.e., scrartcl, scrbook, scrreprt or scrlttr2.
+# For classes book and scrbook, the variable "book" must also be set to true, for all other
+# classes to false!
+documentclass: scrreprt
+book: false
 # Add other options for the documentclass, but NOT fontsize or papersize, which are
 # already listed below as extra options. Suitable options can be one of "oneside" / "twoside"
 # or one of "openleft" / "openright" / "openany":
@@ -103,8 +106,8 @@ link-citations: yes
 #
 # List here every citation that is not directly included 
 # in the text but should be listed in the references:
-no-cite: |
-  @R-base, @R-rmarkdown
+# no-cite: |
+#   @R-base, @R-rmarkdown
 # Here, one can define the name of the list of acronyms used in the frontmatter. 
 # If this variable is used, then you can define the needed acronyms in the file 
 # 'abbreviations.tex'. A short description of how to do this is included in the 
@@ -146,146 +149,44 @@ The results section comprise all necessary calculations, which are then discusse
 ## Setup
 After the required libraries, which will be worked with in the following, were installed, the libraries still had to be imported in order to be able to use them.
 
-\linespread{1}
 
-```r
-library(tidyverse)
-library(dplyr)
-library(stringr)
-library(ggplot2)
-library(maps)
-library(janitor)
-library(modelsummary)
-library(car)
-library(carData)
-library(gpairs)
-library(GGally)
-```
-
-
-
-\linespread{1}
 
 Subsequently, the data had to be read in. This could be initialized with the following command, after the data set was added as a csv file in the folder "02-data".
 To be able to work better with the names of the columns and the dataset in general, the command "janitor::clean_names" was executed.  With this, for example, the spaces were removed and the names were all written in small letters.
 
-\linespread{1}
 
-```r
-costOfLiving <- read_delim("02-data/cost-of-living-2017.csv", 
-                      delim = "\t", escape_double = FALSE, 
-                      trim_ws = TRUE)
-costOfLiving <- janitor::clean_names(costOfLiving)
-```
-
-
-
-\linespread{1}
 
 To make it easier to split the data by region, we imported a csv file that shows the names of the countries in this world and their corresponding regions.
 
 First we had to import the dataset, which we named "continents". This dataset is from the website "kaggle", named "Country Mapping - ISO, Continent, Region". ^[@continents2]
 
-\linespread{1}
 
-```r
-#import list of continents and countries
-continents <- read_csv("02-data/continents2.csv")
-continents <- janitor::clean_names(continents)
-```
-
-
-
-\linespread{1}
 
 To be able to do a join with the raw data, we had to rename the column "name" to "country". After that, a left join could be performed on the renamed column. Since we only needed the column "region", a select for this one column was performed within the join.
 
-\linespread{1}
 
-```r
-#rename attribute 'name' in 'country' to perform a left join.
-continents <- rename(continents, country = name)
-costOfLivingAndContinents <- left_join(costOfLiving, select(continents, country, region), by="country")
-```
-
-
-
-\linespread{1}
 
 Now it was possible to check if a country was not assigned to a region. 
 Since the country Kosovo could not be assigned to a region, this had to be done manually.
 
-\linespread{1}
 
-```r
-costOfLivingAndContinents[486, 12] <- "Europe"
-```
-
-
-
-\linespread{1}
 
 To assign the different countries in our dataset to either a developing or an industrialized country, we also imported a new csv file, which we named "dd". 
 We created this file ourselves, based on data from @ddcountries.
 
-\linespread{1}
 
-```r
-#import list of Countries and development status
-dd <- read_delim("02-data/developed_and_developing_countries.csv",
-                 delim = ";", escape_double = FALSE,
-                 trim_ws = TRUE)
-dd <- janitor::clean_names(dd)
-```
-
-
-
-\linespread{1}
 
 To format the category as a double value, we executed the following commands.
 
-\linespread{1}
 
-```r
-dd$category[dd$category == "developed"] <- 1.0
-dd$category[dd$category == "developing"] <- 0.0
-dd$category <- as.double(dd$category)
-```
-
-
-
-\linespread{1}
 
 Once this was done, we scanned the dataset for various capitalization errors and corrected them. Also we have renamed the column category to development.
 
-\linespread{1}
 
-```r
-dd$country[dd$country == "italy"] <- "Italy"
-dd$country[dd$country == "Hong Kong SAR"] <- "Hong Kong"
-dd$country[dd$country == "Taiwan Province of China"] <- "Taiwan"
-dd$country[dd$country == "Russian Federation"] <- "Russia"
-dd$country[dd$country == "Viet Nam"] <- "Vietnam"
-dd$country[dd$country == "Bosnia and Herzegovina"] <- "Bosnia And Herzegovina"
-dd$country[dd$country == "Kosovo"] <- "Kosovo (Disputed Territory)"
-colnames(dd)[2] <- "development"
-```
-
-
-
-\linespread{1}
 
 In the end, we were able to perform a left join and thus add the categorization of development countries to our dataset.
 
-\linespread{1}
 
-```r
-dataFinished <- left_join(costOfLivingAndContinents,dd, by="country")
-```
-
-
-
-\linespread{1}
 
 <!--chapter:end:00-introduction.Rmd-->
 
@@ -296,29 +197,27 @@ dataFinished <- left_join(costOfLivingAndContinents,dd, by="country")
 
 Because of different prices, living standards, currencies and other factors, it is not possible to compare the cost of living in different countries properly. 
 
-To be able to compare the cost of living between different countries, the Cost of Living Index is used - also abbreviated as CLI in the following. The cost of living is the financial resources needed to cover, in a given place and in a given period of time, the basic expenses for a given standard of living, such as a shelter, food, medicines and others. The CLI enables the comparison of expenditures between different places in the world and at different times in history.^[@caroline]
+To be able to compare the cost of living between different countries, the Cost of Living Index is used - also abbreviated as CLI in the following. The cost of living is the financial resources needed to cover, in a given place and in a given period of time, the basic expenses for a given standard of living, such as a shelter, food, medicines and others. The CLI enables the comparison of expenditures between different places in the world and at different times in history.[@caroline]
 
 In economics, the cost-of-living index describes the ratio of the minimum expenditure required to achieve a given indifference curve between two prices. The calculation not only requires two different price groups, but is also dependent on a preference order of the required living goods and on a basic indifference curve describing the utility of two products. 
-Among the two prices needed, e.g., from two different places, one is called the comparison price and the other is called the reference price or the base price. The base price is then used to illustrate on which prices the Cost-Of-Living Index is based and calculated. The calculated index is then dependent on the comparison prices determined. Further, the general logic of the cost-of-living index is best understood when the index is interpreted in the multiple context of temporal and spatial comparisons.^[@Pollak1989]
+Among the two prices needed, e.g., from two different places, one is called the comparison price and the other is called the reference price or the base price. The base price is then used to illustrate on which prices the Cost-Of-Living Index is based and calculated. The calculated index is then dependent on the comparison prices determined. Further, the general logic of the cost-of-living index is best understood when the index is interpreted in the multiple context of temporal and spatial comparisons.[@Pollak1989]
 
 ## Industrialized, emerging and developing countries
 
 In general, countries are divided into industrialized, emerging and developing countries. States in which the economic performance is supported by a large part of the resident companies are referred to as industrialized countries. Such countries stand out due to their high per capita income, which results from the available standard of education, high productivity in production, good external trade relations and usually a currency with low inflation.^[@bpd]
 
 
-A country that is in the process of becoming an industrialized country is called an emerging country. These are nevertheless referred to the category of developing countries. Emerging countries are identifiable by their above-average economic growth. Nevertheless, emerging countries are similar to developing countries in the social structure, such as in the level of education, mortality and access to infrastructure.^[@bmz]
+A country that is in the process of becoming an industrialized country is called an emerging country. These are nevertheless referred to the category of developing countries. Emerging countries are identifiable by their above-average economic growth. Nevertheless, emerging countries are similar to developing countries in the social structure, such as in the level of education, mortality and access to infrastructure.[@bmz]
 
-The third category is developing countries, which are associated with poor food supply, high poverty, poor health care and educational opportunities. In association with the characteristics, such countries have an overall low standard of living and a preponderance of labor in agriculture and external economic difficulties.^[@bmzentwicklung]
+The third category is developing countries, which are associated with poor food supply, high poverty, poor health care and educational opportunities. In association with the characteristics, such countries have an overall low standard of living and a preponderance of labor in agriculture and external economic difficulties.[@bmzentwicklung]
 
 To analyze the available data, developing countries were combined with emerging economies and contrasted with developed countries.
 
+\clearpage
+
+
 <!--chapter:end:01-theoretical-background.Rmd-->
 
----
-output:
-  pdf_document: default
-  html_document: default
----
 
 # Methods
 
@@ -328,9 +227,9 @@ output:
 
 The provided data consists of $511$ different datasets from $110$ different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
 
-In Figure \@ref(fig:continentCountdata) can be seen how many datasets are available per region.
+In Figure \@ref(fig:continentCountdata) can be seen how many data sets are available per region.
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/continentCountdata-1} 
 
@@ -339,9 +238,9 @@ In Figure \@ref(fig:continentCountdata) can be seen how many datasets are availa
 \caption{Count of Data from different regions}(\#fig:continentCountdata)
 \end{figure}
 
-In addition to the overview of datasets by region in figure \@ref(fig:continentCountdata), a world map in figure \@ref(fig:worldMap) has been created to illustrate the countries from which the datasets originate. The data sets from the industrialized countries were marked in blue and those from the emerging and developing countries in red.
+In addition to the overview of datasets by region in figure \@ref(fig:continentCountdata), a world map in figure \@ref(fig:worldMap) has been created to illustrate the countries from which the data sets originate. The data sets from the industrialized countries were marked in blue and those from the emerging and developing countries in red.
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/worldMap-1} 
 
@@ -352,7 +251,7 @@ In addition to the overview of datasets by region in figure \@ref(fig:continentC
 
 ## Exploratory Data Analysis
 
-First of all, we had to check, if there are missing values inside of the data-set. Therefore we used the following code to proof this:
+First of all, we had to check, if there are missing values inside of the data set. Therefore we used the following code to proof this:
 
 
 \linespread{1}
@@ -394,36 +293,19 @@ However, since the column has no bearing on our research question, we decided to
 To disregard this column, we cut it off. To do this, we used to following R code chunk. Because it is the second column, we can just delete this column.
 
 
-\linespread{1}
 
-```r
-dataFinished <- dataFinished[-2]
-```
-
-
-
-\linespread{1}
 
 
 We also truncated the leverage_model_1 and leverage_model_2 columns, since we did not work with these columns any further.
 
 
-\linespread{1}
 
-```r
-dataFinished <- dataFinished[-9]
-dataFinished <- dataFinished[-9]
-```
-
-
-
-\linespread{1}
 
 
 To determine if outliers exist within the data set, we chose to draw a boxplot.
 
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/boxplot-1} 
 
@@ -434,13 +316,17 @@ To determine if outliers exist within the data set, we chose to draw a boxplot.
 
 As can be seen from the figure \@ref(fig:boxplot), there are several outliers within the data set. In order not to distort the result, we decided to keep these outliers and to continue working with them.
 
+\clearpage
+
 <!--chapter:end:02-methods.Rmd-->
 
 
 # Results {#results}
+
 To determine whether there is a significant difference between developing and developed countries, we decided to run a multiple linear regression. This is to determine whether the classification into a developing country has a significant influence on the cost of living index or not.
 
 ## Multiple linear regression
+
 Within multiple linear regression, our dependent variable (y) is the cost of living index. Our independent variables (x) are the rent index, the groceries index, the restaurant price index, the local purchasing power index and the development status.
 
 In order to perform a multiple linear regression, some conditions have to be fulfilled, which we will check in the following.
@@ -449,22 +335,21 @@ First, there must be a linear relationship between the x variables and the y var
 
 Third, the residuals should be approximately normally distributed. We proved this graphically with the help of a histogram.
 
-First, we need to set up our model.
+First, we need to set up our model as in equation \@ref(eq:lm1).
 
-\linespread{1}
-
-```r
-model <- lm(cli ~ rent_index + groceries_index + restaurant_price_index 
-            + local_purchasing_power_index + development, data = dataFinished)
+```{=tex}
+\begin{align} 
+  CLI_{\text{\,i}} &= \upalpha + \upbeta_{1} \times Rent~Index_{\text{\,i}} + \upbeta_{2} \times Groceries~Index_{\text{\,i}} + \upbeta_{3} \times Restaurant~Price~Index_{\text{\,i}} + &&\notag\\
+  \phantom{CLI_{\text{\,i}}} & \phantom{{} =  ^l} \upbeta_{4} \times Local~Purchasing~Power~Index_{\text{\,i}} +  \upbeta_{5} \times Development_{\text{\,i}} + \upepsilon_{\text{\,i}} &&\notag\\
+\upepsilon_{i} &\sim N(0, \upsigma^{2})
+  (\#eq:lm1)
+\end{align}
 ```
 
 
+After that, we can create a histogram from our model, see figure \@ref(fig:histogramModel).
 
-\linespread{1}
-
-After that, we can create a histogram from our model.
-
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/histogramModel-1} 
 
@@ -473,42 +358,28 @@ After that, we can create a histogram from our model.
 \caption{Histogram of the multiple linear regression model}(\#fig:histogramModel)
 \end{figure}
 
-From the histogram we can see that the distribution can be considered normally distributed, therefore this condition is also fulfilled.
-Scaling is also given, since the cost of living index is on a scale.
+From the histogram we can see that the distribution can be considered normally distributed, therefore this condition is also fulfilled. Scaling is also given, since the cost of living index is on a scale.
 
-The last condition we checked is that there must be no multicollinearity within the independent variables.
-To check this, we created a correlation matrix. First, we generated a subset from the data in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
+The last condition we checked is that there must be no multicollinearity within the independent variables. To check this, we created a correlation matrix. First, we generated a subset from the data in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
+
+\singlespacing
 
 
-```
-#>                              rent_index groceries_index
-#> rent_index                    1.0000000       0.7674361
-#> groceries_index               0.7674361       1.0000000
-#> restaurant_price_index        0.7523090       0.8518550
-#> local_purchasing_power_index  0.6000432       0.6458339
-#> development                   0.4730879       0.5998356
-#>                              restaurant_price_index
-#> rent_index                                0.7523090
-#> groceries_index                           0.8518550
-#> restaurant_price_index                    1.0000000
-#> local_purchasing_power_index              0.6436926
-#> development                               0.6838520
-#>                              local_purchasing_power_index
-#> rent_index                                      0.6000432
-#> groceries_index                                 0.6458339
-#> restaurant_price_index                          0.6436926
-#> local_purchasing_power_index                    1.0000000
-#> development                                     0.6425433
-#>                              development
-#> rent_index                     0.4730879
-#> groceries_index                0.5998356
-#> restaurant_price_index         0.6838520
-#> local_purchasing_power_index   0.6425433
-#> development                    1.0000000
-```
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\raggedright}X>{\raggedright}X}
+\toprule
+ & RI & GI & RPI & LPPI & Dev\\
+\midrule
+RI &  &  &  &  & \\
+GI & .77 &  &  &  & \\
+RPI & .75 & .85 &  &  & \\
+LPPI & .60 & .65 & .64 &  & \\
+Dev & .47 & .60 & .68 & .64 & \\
+\bottomrule
+\end{tabu}
 
-Since the correlation between restaurant price index and groceries index is
- $0.851855$ > 0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
+\doublespacing
+
+Since the correlation between restaurant price index and groceries index is $0.85$ \> 0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
 
 
 ```
@@ -520,7 +391,7 @@ Since the correlation between restaurant price index and groceries index is
 #>                     2.241055
 ```
 
-Since according to this method none of the values is >10 we have rejected the theory of multicollinearity.
+Since according to this method none of the values is \>10 we have rejected the theory of multicollinearity.
 
 Now that all the assumptions can be accepted, we come to the actual evaluation of the model.
 
@@ -563,6 +434,8 @@ The model makes a significant explanatory contribution, as the p-value is well b
 
 As we can see, according to the p-values, all variables except the classification of development have a significant impact on the cost of living index.
 
+\clearpage
+
 <!--chapter:end:03-results.Rmd-->
 
 
@@ -586,6 +459,9 @@ Furthermore, it must be critically questioned whether the multiple linear regres
 
 Within the report, we conclude that the classification of a country as a developing or industrialized country does not have a significant impact on cli (see chapter \@ref(results)). This is true for our data set. However, some countries are missing from our data set, so we cannot make this statement universally (see chapter \@ref(critical-assessment)).
 
+
+\clearpage
+
 <!--chapter:end:04-discussion.Rmd-->
 
 
@@ -602,7 +478,7 @@ Within the report, we conclude that the classification of a country as a develop
 <!-- # Literaturverzeichnis {-} -->
 
 <div id="refs"></div>
-<!-- \newpage -->
+\clearpage
 
 
 <!--chapter:end:05-references.Rmd-->
@@ -629,6 +505,8 @@ We accept that the HSBA may check the originality of our work using a range of m
 Hamburg, \today
 
 Börge Meyer, Benedikt Kronhardt
+
+\clearpage
 
 <!--chapter:end:06-declaration.Rmd-->
 

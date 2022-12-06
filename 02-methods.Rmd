@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 # Methods
 
 ## Data Description
@@ -18,7 +13,7 @@ countCountries <- countCountries[order(countCountries$country),]
 
 The provided data consists of $`r nrow(dataFinished)`$ different datasets from $`r nrow(countCountries)`$ different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
 
-In Figure \@ref(fig:continentCountdata) can be seen how many datasets are available per region.
+In Figure \@ref(fig:continentCountdata) can be seen how many data sets are available per region.
 
 ```{r}
 #| echo = FALSE,
@@ -28,6 +23,8 @@ In Figure \@ref(fig:continentCountdata) can be seen how many datasets are availa
 #| out.width = "80%",
 #| fig.asp = 0.75,
 #| fig.align = "center",
+#| fig.pos = "H",
+
 ggplot(data = dataFinished, aes(x = region)) +
   geom_bar() +
   ggtitle("Region - Count data") +
@@ -36,7 +33,7 @@ ggplot(data = dataFinished, aes(x = region)) +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 ```
 
-In addition to the overview of datasets by region in figure \@ref(fig:continentCountdata), a world map in figure \@ref(fig:worldMap) has been created to illustrate the countries from which the datasets originate. The data sets from the industrialized countries were marked in blue and those from the emerging and developing countries in red.
+In addition to the overview of datasets by region in figure \@ref(fig:continentCountdata), a world map in figure \@ref(fig:worldMap) has been created to illustrate the countries from which the data sets originate. The data sets from the industrialized countries were marked in blue and those from the emerging and developing countries in red.
 
 ```{r}
 #| echo = FALSE,
@@ -46,6 +43,7 @@ In addition to the overview of datasets by region in figure \@ref(fig:continentC
 #| out.width = "80%",
 #| fig.asp = 0.75,
 #| fig.align = "center",
+#| fig.pos = "H",
 
 
 MapData <- dataFinished
@@ -73,7 +71,7 @@ worldDD <- ggplot(data = MapData, mapping = aes(x = long, y = lat, group = group
   coord_fixed(1.3) +
   geom_polygon(aes(fill = development)) +
   scale_fill_distiller(palette ="RdBu", direction = 1) +
-  guides(fill = FALSE) +
+  guides(fill = "none") +
   plain +
   labs(title = "", x = "Red = Developing Countries, Blue = Industrialized Countries", y = "")
 
@@ -83,7 +81,7 @@ worldDD
 
 ## Exploratory Data Analysis
 
-First of all, we had to check, if there are missing values inside of the data-set. Therefore we used the following code to proof this:
+First of all, we had to check, if there are missing values inside of the data set. Therefore we used the following code to proof this:
 
 
 ```{r}
@@ -99,8 +97,6 @@ To disregard this column, we cut it off. To do this, we used to following R code
 
 
 ```{r}
-#| echo = TRUE,
-#| message = TRUE
 dataFinished <- dataFinished[-2]
 ```
 
@@ -109,8 +105,6 @@ We also truncated the leverage_model_1 and leverage_model_2 columns, since we di
 
 
 ```{r}
-#| echo = TRUE,
-#| message = TRUE
 dataFinished <- dataFinished[-9]
 dataFinished <- dataFinished[-9]
 ```
@@ -126,7 +120,8 @@ To determine if outliers exist within the data set, we chose to draw a boxplot.
 #| fig.cap = "Boxplot of Data to identify outliers",
 #| out.width = "80%",
 #| fig.asp = 0.75,
-#| fig.align = "center"
+#| fig.align = "center",
+#| fig.pos = "H",
 
 dataBoxplot <- dataFinished %>%
   mutate(across(where(is.factor), as.numeric))
@@ -136,3 +131,5 @@ boxplot(dataBoxplot[,c('cost_of_living_plus_rent_index','cli','rent_index','groc
 ```
 
 As can be seen from the figure \@ref(fig:boxplot), there are several outliers within the data set. In order not to distort the result, we decided to keep these outliers and to continue working with them.
+
+\clearpage

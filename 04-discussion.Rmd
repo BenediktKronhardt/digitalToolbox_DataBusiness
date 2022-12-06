@@ -17,3 +17,6 @@ Furthermore, it must be critically questioned whether the multiple linear regres
 ## Answer to the research question
 
 Within the report, we conclude that the classification of a country as a developing or industrialized country does not have a significant impact on cli (see chapter \@ref(results)). This is true for our data set. However, some countries are missing from our data set, so we cannot make this statement universally (see chapter \@ref(critical-assessment)).
+
+
+\clearpage
