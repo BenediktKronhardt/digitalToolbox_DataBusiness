@@ -1,10 +1,9 @@
-# Results {#results}
+# Results - Multiple linear regression {#results}
 
-To determine whether there is a significant difference between developing and developed countries, we decided to run a multiple linear regression. This is to determine whether the classification into a developing country has a significant influence on the cost of living index or not.
+To determine if there was a significant difference between developing and developed countries, multiple linear regression was performed. The purpose is to determine whether or not classification as a developing country has a significant impact on the cost of living index.
 
-## Multiple linear regression
+Within multiple linear regression, the dependent variable (y) is the cost of living index. The independent variables (x) are the rent index, the groceries index, the restaurant price index, the local purchasing power index as well as the development status.
 
-Within multiple linear regression, our dependent variable (y) is the cost of living index. Our independent variables (x) are the rent index, the groceries index, the restaurant price index, the local purchasing power index and the development status.
 
 In order to perform a multiple linear regression, some conditions have to be fulfilled, which we will check in the following.
 
@@ -30,8 +29,6 @@ model <- lm(cli ~ rent_index + groceries_index + restaurant_price_index
 After that, we can create a histogram from our model, see figure \@ref(fig:histogramModel).
 
 ```{r}
-#| echo = FALSE,
-#| warning = FALSE,
 #| label = "histogramModel",
 #| fig.cap = "Histogram of the multiple linear regression model",
 #| out.width = "80%",
@@ -42,15 +39,13 @@ After that, we can create a histogram from our model, see figure \@ref(fig:histo
 hist(residuals(model))
 ```
 
-From the histogram we can see that the distribution can be considered normally distributed, therefore this condition is also fulfilled. Scaling is also given, since the cost of living index is on a scale.
+From the histogram it can be recognized that the distribution can be considered normally distributed, therefore this condition is also fulfilled. Scaling is also given, since the cost of living index is on a scale.
 
-The last condition we checked is that there must be no multicollinearity within the independent variables. To check this, we created a correlation matrix. First, we generated a subset from the data in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
+The last condition that has been checked is that there must be no multicollinearity within the independent variables. To verify this, we created a correlation matrix. First, a subset from the data was generated in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
 
 \singlespacing
 
 ```{r}
-#| echo = FALSE,
-#| warning = FALSE,
 #| label = "correlationMatrix",
 
 subset_cor <- subset(dataFinished, select = c(rent_index, 
@@ -71,26 +66,24 @@ subset_cor %>%
 
 \doublespacing
 
-Since the correlation between restaurant price index and groceries index is $`r round(cor(x=dataFinished$restaurant_price_index, y=dataFinished$groceries_index, method="pearson"), 2)`$ \> 0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
+Since the correlation between restaurant price index and groceries index is $`r round(cor(x=dataFinished$restaurant_price_index, y  = dataFinished$groceries_index, method="pearson"), 2)`$ \> 0.8, this may indicate that there is multicollinearity. To confirm this, an another method was utilized to test for multicollinearity, the method of Variance Inflation Factor values.
 
 ```{r}
-#| echo = FALSE,
-#| warning = FALSE
 vif(model)
 ```
 
-Since according to this method none of the values is \>10 we have rejected the theory of multicollinearity.
+Since according to this method none of the values is \>10 the theory of multicollinearity is therefore rejected.
 
-Now that all the assumptions can be accepted, we come to the actual evaluation of the model.
+Now that all assumptions can be accepted, the evaluation of the model follows.
+
+--> TODO: Output "schön" ausgeben
 
 ```{r}
-#| echo = FALSE,
-#| warning = FALSE
 summary(model)
 ```
 
 The model makes a significant explanatory contribution, as the p-value is well below 0.05, and we can proceed with the interpretation of the further results.
 
-As we can see, according to the p-values, all variables except the classification of development have a significant impact on the cost of living index.
+As indicated by the p-values, all variables except development classification have a significant impact on the cost of living index.
 
 \clearpage

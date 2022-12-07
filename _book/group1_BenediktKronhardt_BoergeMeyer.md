@@ -134,15 +134,14 @@ link-citations: yes
 
 
 # Introduction
-The standard of living became more and more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
+The standard of living became more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
 
 ## Task description
 Our task was to analyze a data set and write a report about it using R, RStudio, RMarkdown and the procedures of literate programming to put together a PDF-manuscript.
-In our team we have received the "cost of living" data set and analyzed it with the research question "Does the classification of a country as a developing or industrialized country have a significant impact on the cost of living index?"
+For this paper, a "cost of living" data set was received and analyzed in order to determine whether the classification as a developing or industrialized country has a significant impact on the Cost of Living Index.
 
 ## Structure
-Our document is divided into five chapters. This chapter is the introduction, where we describe the task and how we imported our dataset, respectively added other datasets. 
-In the chapter "Theoretical Background" the theoretical background of the dataset and the data collection is briefly discussed, before in the methods section the dataset is statistically described, including information on the variables’ distribution, missing values,
+Our document is divided into five chapters. In the following, this chapter explains how the data was processed.The introduction is followed by an explanation of the Cost of Living Index and categorization as developed, emerging and developing countries,before in the methods section the data set is statistically described, including information on the variables’ distribution, missing values,
 categories and the relationships between the variables.
 The results section comprise all necessary calculations, which are then discussed in connection with the research question in the following section ("Discussion").
 
@@ -158,7 +157,7 @@ To be able to work better with the names of the columns and the dataset in gener
 
 To make it easier to split the data by region, we imported a csv file that shows the names of the countries in this world and their corresponding regions.
 
-First we had to import the dataset, which we named "continents". This dataset is from the website "kaggle", named "Country Mapping - ISO, Continent, Region". ^[@continents2]
+First we had to import the data set, which we named "continents". This data set is from the website "kaggle", named "Country Mapping - ISO, Continent, Region". ^[@continents2]
 
 
 
@@ -171,7 +170,7 @@ Since the country Kosovo could not be assigned to a region, this had to be done 
 
 
 
-To assign the different countries in our dataset to either a developing or an industrialized country, we also imported a new csv file, which we named "dd". 
+To assign the different countries in our data set to either a developing or an industrialized country, we also imported a new csv file, which we named "dd". 
 We created this file ourselves, based on data from @ddcountries.
 
 
@@ -180,11 +179,11 @@ To format the category as a double value, we executed the following commands.
 
 
 
-Once this was done, we scanned the dataset for various capitalization errors and corrected them. Also we have renamed the column category to development.
+Once this was done,the data set has been scanned for various capitalization errors and corrected. Also the column Category has been renamed to Development.
 
 
 
-In the end, we were able to perform a left join and thus add the categorization of development countries to our dataset.
+As a result, it was possible to perform a left join and add the categorization of the countries to the provided data set.
 
 
 
@@ -251,47 +250,11 @@ In addition to the overview of datasets by region in figure \@ref(fig:continentC
 
 ## Exploratory Data Analysis
 
-First of all, we had to check, if there are missing values inside of the data set. Therefore we used the following code to proof this:
+First of all, we had to check, if there are missing values inside of the data set.
 
-
-\linespread{1}
-
-```r
-summary(is.na(dataFinished))
-```
-
-
-
-\linespread{1}
-
-```
-#>     city           state          country       
-#>  Mode :logical   Mode :logical   Mode :logical  
-#>  FALSE:511       FALSE:128       FALSE:511      
-#>                  TRUE :383                      
-#>  cost_of_living_plus_rent_index    cli         
-#>  Mode :logical                  Mode :logical  
-#>  FALSE:511                      FALSE:511      
-#>                                                
-#>  rent_index      groceries_index restaurant_price_index
-#>  Mode :logical   Mode :logical   Mode :logical         
-#>  FALSE:511       FALSE:511       FALSE:511             
-#>                                                        
-#>  local_purchasing_power_index leverage_model_1
-#>  Mode :logical                Mode :logical   
-#>  FALSE:511                    FALSE:511       
-#>                                               
-#>  leverage_model_2   region        development    
-#>  Mode :logical    Mode :logical   Mode :logical  
-#>  FALSE:511        FALSE:511       FALSE:511      
-#> 
-```
-
-
-As it can be seen, there were $383$ missing values inside the column "state". 
+There were $383$ missing values inside the column "state". 
 However, since the column has no bearing on our research question, we decided to disregard this column. With the city column we have a more meaningful basis to answer our question.
-To disregard this column, we cut it off. To do this, we used to following R code chunk. Because it is the second column, we can just delete this column.
-
+To disregard this column, we cut it off.
 
 
 
@@ -304,6 +267,7 @@ We also truncated the leverage_model_1 and leverage_model_2 columns, since we di
 
 To determine if outliers exist within the data set, we chose to draw a boxplot.
 
+-->TODO: Achsenbeschriftungen anpassen
 
 \begin{figure}[H]
 
@@ -314,6 +278,10 @@ To determine if outliers exist within the data set, we chose to draw a boxplot.
 \caption{Boxplot of Data to identify outliers}(\#fig:boxplot)
 \end{figure}
 
+```
+#> NULL
+```
+
 As can be seen from the figure \@ref(fig:boxplot), there are several outliers within the data set. In order not to distort the result, we decided to keep these outliers and to continue working with them.
 
 \clearpage
@@ -321,13 +289,12 @@ As can be seen from the figure \@ref(fig:boxplot), there are several outliers wi
 <!--chapter:end:02-methods.Rmd-->
 
 
-# Results {#results}
+# Results - Multiple linear regression {#results}
 
-To determine whether there is a significant difference between developing and developed countries, we decided to run a multiple linear regression. This is to determine whether the classification into a developing country has a significant influence on the cost of living index or not.
+To determine if there was a significant difference between developing and developed countries, multiple linear regression was performed. The purpose is to determine whether or not classification as a developing country has a significant impact on the cost of living index.
 
-## Multiple linear regression
+Within multiple linear regression, the dependent variable (y) is the cost of living index. The independent variables (x) are the rent index, the groceries index, the restaurant price index, the local purchasing power index as well as the development status.
 
-Within multiple linear regression, our dependent variable (y) is the cost of living index. Our independent variables (x) are the rent index, the groceries index, the restaurant price index, the local purchasing power index and the development status.
 
 In order to perform a multiple linear regression, some conditions have to be fulfilled, which we will check in the following.
 
@@ -358,9 +325,9 @@ After that, we can create a histogram from our model, see figure \@ref(fig:histo
 \caption{Histogram of the multiple linear regression model}(\#fig:histogramModel)
 \end{figure}
 
-From the histogram we can see that the distribution can be considered normally distributed, therefore this condition is also fulfilled. Scaling is also given, since the cost of living index is on a scale.
+From the histogram it can be recognized that the distribution can be considered normally distributed, therefore this condition is also fulfilled. Scaling is also given, since the cost of living index is on a scale.
 
-The last condition we checked is that there must be no multicollinearity within the independent variables. To check this, we created a correlation matrix. First, we generated a subset from the data in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
+The last condition that has been checked is that there must be no multicollinearity within the independent variables. To verify this, we created a correlation matrix. First, a subset from the data was generated in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
 
 \singlespacing
 
@@ -379,7 +346,7 @@ Dev & .47 & .60 & .68 & .64 & \\
 
 \doublespacing
 
-Since the correlation between restaurant price index and groceries index is $0.85$ \> 0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
+Since the correlation between restaurant price index and groceries index is $0.85$ \> 0.8, this may indicate that there is multicollinearity. To confirm this, an another method was utilized to test for multicollinearity, the method of Variance Inflation Factor values.
 
 
 ```
@@ -391,9 +358,11 @@ Since the correlation between restaurant price index and groceries index is $0.8
 #>                     2.241055
 ```
 
-Since according to this method none of the values is \>10 we have rejected the theory of multicollinearity.
+Since according to this method none of the values is \>10 the theory of multicollinearity is therefore rejected.
 
-Now that all the assumptions can be accepted, we come to the actual evaluation of the model.
+Now that all assumptions can be accepted, the evaluation of the model follows.
+
+--> TODO: Output "schön" ausgeben
 
 
 ```
@@ -432,7 +401,7 @@ Now that all the assumptions can be accepted, we come to the actual evaluation o
 
 The model makes a significant explanatory contribution, as the p-value is well below 0.05, and we can proceed with the interpretation of the further results.
 
-As we can see, according to the p-values, all variables except the classification of development have a significant impact on the cost of living index.
+As indicated by the p-values, all variables except development classification have a significant impact on the cost of living index.
 
 \clearpage
 

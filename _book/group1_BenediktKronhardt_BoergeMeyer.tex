@@ -94,46 +94,6 @@
 \makeatother
 \usepackage{xcolor}
 \usepackage[top=30mm,bottom=30mm,left=25mm,right=25mm]{geometry}
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -344,19 +304,18 @@
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}
 
-The standard of living became more and more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
+The standard of living became more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
 
 \hypertarget{task-description}{%
 \section{Task description}\label{task-description}}
 
 Our task was to analyze a data set and write a report about it using R, RStudio, RMarkdown and the procedures of literate programming to put together a PDF-manuscript.
-In our team we have received the ``cost of living'' data set and analyzed it with the research question ``Does the classification of a country as a developing or industrialized country have a significant impact on the cost of living index?''
+For this paper, a ``cost of living'' data set was received and analyzed in order to determine whether the classification as a developing or industrialized country has a significant impact on the Cost of Living Index.
 
 \hypertarget{structure}{%
 \section{Structure}\label{structure}}
 
-Our document is divided into five chapters. This chapter is the introduction, where we describe the task and how we imported our dataset, respectively added other datasets.
-In the chapter ``Theoretical Background'' the theoretical background of the dataset and the data collection is briefly discussed, before in the methods section the dataset is statistically described, including information on the variables' distribution, missing values,
+Our document is divided into five chapters. In the following, this chapter explains how the data was processed.The introduction is followed by an explanation of the Cost of Living Index and categorization as developed, emerging and developing countries,before in the methods section the data set is statistically described, including information on the variables' distribution, missing values,
 categories and the relationships between the variables.
 The results section comprise all necessary calculations, which are then discussed in connection with the research question in the following section (``Discussion'').
 
@@ -370,21 +329,21 @@ To be able to work better with the names of the columns and the dataset in gener
 
 To make it easier to split the data by region, we imported a csv file that shows the names of the countries in this world and their corresponding regions.
 
-First we had to import the dataset, which we named ``continents''. This dataset is from the website ``kaggle'', named ``Country Mapping - ISO, Continent, Region''. \footnote{Kaggle, \protect\hyperlink{ref-continents2}{{``Country Mapping - ISO, Continent, Region,''} December 2019, \url{https://www.kaggle.com/datasets/andradaolteanu/country-mapping-iso-continent-region}}.}
+First we had to import the data set, which we named ``continents''. This data set is from the website ``kaggle'', named ``Country Mapping - ISO, Continent, Region''. \footnote{Kaggle, \protect\hyperlink{ref-continents2}{{``Country Mapping - ISO, Continent, Region,''} December 2019, \url{https://www.kaggle.com/datasets/andradaolteanu/country-mapping-iso-continent-region}}.}
 
 To be able to do a join with the raw data, we had to rename the column ``name'' to ``country''. After that, a left join could be performed on the renamed column. Since we only needed the column ``region'', a select for this one column was performed within the join.
 
 Now it was possible to check if a country was not assigned to a region.
 Since the country Kosovo could not be assigned to a region, this had to be done manually.
 
-To assign the different countries in our dataset to either a developing or an industrialized country, we also imported a new csv file, which we named ``dd''.
+To assign the different countries in our data set to either a developing or an industrialized country, we also imported a new csv file, which we named ``dd''.
 We created this file ourselves, based on data from UN\footnote{\protect\hyperlink{ref-ddcountries}{\emph{World Economic Situation and Prospects} (United Nations, 2014)}.}.
 
 To format the category as a double value, we executed the following commands.
 
-Once this was done, we scanned the dataset for various capitalization errors and corrected them. Also we have renamed the column category to development.
+Once this was done,the data set has been scanned for various capitalization errors and corrected. Also the column Category has been renamed to Development.
 
-In the end, we were able to perform a left join and thus add the categorization of development countries to our dataset.
+As a result, it was possible to perform a left join and add the categorization of the countries to the provided data set.
 
 \hypertarget{theoretical-background}{%
 \chapter{Theoretical background}\label{theoretical-background}}
@@ -445,48 +404,17 @@ In addition to the overview of datasets by region in figure \ref{fig:continentCo
 \hypertarget{exploratory-data-analysis}{%
 \section{Exploratory Data Analysis}\label{exploratory-data-analysis}}
 
-First of all, we had to check, if there are missing values inside of the data set. Therefore we used the following code to proof this:
+First of all, we had to check, if there are missing values inside of the data set.
 
-\linespread{1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{summary}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(dataFinished))}
-\end{Highlighting}
-\end{Shaded}
-
-\linespread{1}
-
-\begin{verbatim}
-#>     city           state          country       
-#>  Mode :logical   Mode :logical   Mode :logical  
-#>  FALSE:511       FALSE:128       FALSE:511      
-#>                  TRUE :383                      
-#>  cost_of_living_plus_rent_index    cli         
-#>  Mode :logical                  Mode :logical  
-#>  FALSE:511                      FALSE:511      
-#>                                                
-#>  rent_index      groceries_index restaurant_price_index
-#>  Mode :logical   Mode :logical   Mode :logical         
-#>  FALSE:511       FALSE:511       FALSE:511             
-#>                                                        
-#>  local_purchasing_power_index leverage_model_1
-#>  Mode :logical                Mode :logical   
-#>  FALSE:511                    FALSE:511       
-#>                                               
-#>  leverage_model_2   region        development    
-#>  Mode :logical    Mode :logical   Mode :logical  
-#>  FALSE:511        FALSE:511       FALSE:511      
-#> 
-\end{verbatim}
-
-As it can be seen, there were \(383\) missing values inside the column ``state''.
+There were \(383\) missing values inside the column ``state''.
 However, since the column has no bearing on our research question, we decided to disregard this column. With the city column we have a more meaningful basis to answer our question.
-To disregard this column, we cut it off. To do this, we used to following R code chunk. Because it is the second column, we can just delete this column.
+To disregard this column, we cut it off.
 
 We also truncated the leverage\_model\_1 and leverage\_model\_2 columns, since we did not work with these columns any further.
 
 To determine if outliers exist within the data set, we chose to draw a boxplot.
+
+--\textgreater TODO: Achsenbeschriftungen anpassen
 
 \begin{figure}[H]
 
@@ -497,19 +425,20 @@ To determine if outliers exist within the data set, we chose to draw a boxplot.
 \caption{Boxplot of Data to identify outliers}\label{fig:boxplot}
 \end{figure}
 
+\begin{verbatim}
+#> NULL
+\end{verbatim}
+
 As can be seen from the figure \ref{fig:boxplot}, there are several outliers within the data set. In order not to distort the result, we decided to keep these outliers and to continue working with them.
 
 \clearpage
 
 \hypertarget{results}{%
-\chapter{Results}\label{results}}
+\chapter{Results - Multiple linear regression}\label{results}}
 
-To determine whether there is a significant difference between developing and developed countries, we decided to run a multiple linear regression. This is to determine whether the classification into a developing country has a significant influence on the cost of living index or not.
+To determine if there was a significant difference between developing and developed countries, multiple linear regression was performed. The purpose is to determine whether or not classification as a developing country has a significant impact on the cost of living index.
 
-\hypertarget{multiple-linear-regression}{%
-\section{Multiple linear regression}\label{multiple-linear-regression}}
-
-Within multiple linear regression, our dependent variable (y) is the cost of living index. Our independent variables (x) are the rent index, the groceries index, the restaurant price index, the local purchasing power index and the development status.
+Within multiple linear regression, the dependent variable (y) is the cost of living index. The independent variables (x) are the rent index, the groceries index, the restaurant price index, the local purchasing power index as well as the development status.
 
 In order to perform a multiple linear regression, some conditions have to be fulfilled, which we will check in the following.
 
@@ -537,9 +466,9 @@ After that, we can create a histogram from our model, see figure \ref{fig:histog
 \caption{Histogram of the multiple linear regression model}\label{fig:histogramModel}
 \end{figure}
 
-From the histogram we can see that the distribution can be considered normally distributed, therefore this condition is also fulfilled. Scaling is also given, since the cost of living index is on a scale.
+From the histogram it can be recognized that the distribution can be considered normally distributed, therefore this condition is also fulfilled. Scaling is also given, since the cost of living index is on a scale.
 
-The last condition we checked is that there must be no multicollinearity within the independent variables. To check this, we created a correlation matrix. First, we generated a subset from the data in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
+The last condition that has been checked is that there must be no multicollinearity within the independent variables. To verify this, we created a correlation matrix. First, a subset from the data was generated in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
 
 \singlespacing
 
@@ -557,7 +486,7 @@ Dev & .47 & .60 & .68 & .64 & \\
 
 \doublespacing
 
-Since the correlation between restaurant price index and groceries index is \(0.85\) \textgreater{} 0.8, this may indicate that there is multicollinearity. To confirm this, we used another method to check for multicollinearity, the method of Variance Inflation Factor values.
+Since the correlation between restaurant price index and groceries index is \(0.85\) \textgreater{} 0.8, this may indicate that there is multicollinearity. To confirm this, an another method was utilized to test for multicollinearity, the method of Variance Inflation Factor values.
 
 \begin{verbatim}
 #>                   rent_index              groceries_index 
@@ -568,9 +497,11 @@ Since the correlation between restaurant price index and groceries index is \(0.
 #>                     2.241055
 \end{verbatim}
 
-Since according to this method none of the values is \textgreater10 we have rejected the theory of multicollinearity.
+Since according to this method none of the values is \textgreater10 the theory of multicollinearity is therefore rejected.
 
-Now that all the assumptions can be accepted, we come to the actual evaluation of the model.
+Now that all assumptions can be accepted, the evaluation of the model follows.
+
+--\textgreater{} TODO: Output ``schön'' ausgeben
 
 \begin{verbatim}
 #> 
@@ -608,7 +539,7 @@ Now that all the assumptions can be accepted, we come to the actual evaluation o
 
 The model makes a significant explanatory contribution, as the p-value is well below 0.05, and we can proceed with the interpretation of the further results.
 
-As we can see, according to the p-values, all variables except the classification of development have a significant impact on the cost of living index.
+As indicated by the p-values, all variables except development classification have a significant impact on the cost of living index.
 
 \clearpage
 

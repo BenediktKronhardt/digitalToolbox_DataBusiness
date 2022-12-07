@@ -1,13 +1,12 @@
 # Introduction
-The standard of living became more and more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
+The standard of living became more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
 
 ## Task description
 Our task was to analyze a data set and write a report about it using R, RStudio, RMarkdown and the procedures of literate programming to put together a PDF-manuscript.
-In our team we have received the "cost of living" data set and analyzed it with the research question "Does the classification of a country as a developing or industrialized country have a significant impact on the cost of living index?"
+For this paper, a "cost of living" data set was received and analyzed in order to determine whether the classification as a developing or industrialized country has a significant impact on the Cost of Living Index.
 
 ## Structure
-Our document is divided into five chapters. This chapter is the introduction, where we describe the task and how we imported our dataset, respectively added other datasets. 
-In the chapter "Theoretical Background" the theoretical background of the dataset and the data collection is briefly discussed, before in the methods section the dataset is statistically described, including information on the variables’ distribution, missing values,
+Our document is divided into five chapters. In the following, this chapter explains how the data was processed.The introduction is followed by an explanation of the Cost of Living Index and categorization as developed, emerging and developing countries,before in the methods section the data set is statistically described, including information on the variables’ distribution, missing values,
 categories and the relationships between the variables.
 The results section comprise all necessary calculations, which are then discussed in connection with the research question in the following section ("Discussion").
 
@@ -42,7 +41,7 @@ costOfLiving <- janitor::clean_names(costOfLiving)
 
 To make it easier to split the data by region, we imported a csv file that shows the names of the countries in this world and their corresponding regions.
 
-First we had to import the dataset, which we named "continents". This dataset is from the website "kaggle", named "Country Mapping - ISO, Continent, Region". ^[@continents2]
+First we had to import the data set, which we named "continents". This data set is from the website "kaggle", named "Country Mapping - ISO, Continent, Region". ^[@continents2]
 
 ```{r}
 #| message = FALSE,
@@ -71,7 +70,7 @@ Since the country Kosovo could not be assigned to a region, this had to be done 
 costOfLivingAndContinents[486, 12] <- "Europe"
 ```
 
-To assign the different countries in our dataset to either a developing or an industrialized country, we also imported a new csv file, which we named "dd". 
+To assign the different countries in our data set to either a developing or an industrialized country, we also imported a new csv file, which we named "dd". 
 We created this file ourselves, based on data from @ddcountries.
 
 ```{r}
@@ -94,7 +93,7 @@ dd$category[dd$category == "developing"] <- 0.0
 dd$category <- as.double(dd$category)
 ```
 
-Once this was done, we scanned the dataset for various capitalization errors and corrected them. Also we have renamed the column category to development.
+Once this was done,the data set has been scanned for various capitalization errors and corrected. Also the column Category has been renamed to Development.
 
 ```{r}
 #| message = FALSE,
@@ -109,7 +108,7 @@ dd$country[dd$country == "Kosovo"] <- "Kosovo (Disputed Territory)"
 colnames(dd)[2] <- "development"
 ```
 
-In the end, we were able to perform a left join and thus add the categorization of development countries to our dataset.
+As a result, it was possible to perform a left join and add the categorization of the countries to the provided data set.
 
 ```{r}
 #| message = FALSE,

@@ -82,8 +82,38 @@ worldDD <- ggplot(data = MapData, mapping = aes(x = long, y = lat, group = group
 
 worldDD
 
-boxplot(dataFinished[,c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')])
+dataBoxplot <- dataFinished %>%
+  mutate(across(where(is.factor), as.numeric))
 
+col = c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')
+boxplot(dataBoxplot[,c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')])
+
+
+boxplot(dataFinished[,
+                     c('cost_of_living_plus_rent_index','cli','rent_index'
+                       ,'groceries_index','restaurant_price_index'
+                       ,'local_purchasing_power_index')],
+        names = c("First","Second","Third"))
+
+
+# reproducible example data (borrowed from KevinBlighe's answer)
+x <- dataBoxplot
+# colnames(x) <- paste0('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index'))
+df1 <-data.frame(x)
+
+# convert wide to long
+plotDat <- gather(df1, "x", "y")
+
+# then plot, and rotate labels 90 degrees.
+ggplot(plotDat, aes(x, y)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+
+
+ggplot(data = dataBoxplot, aes(x)) +
+  geom_boxplot()+
+  ggtitle("Boxplot")+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 
 ggplot(data = dataFinished, aes(x = region)) +
   geom_bar() +

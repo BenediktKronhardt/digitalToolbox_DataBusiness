@@ -5,7 +5,6 @@
 ```{r}
 #| message = FALSE,
 #| warning = FALSE,
-#| echo = FALSE
 countCountries <- dataFinished[,3:3] %>% group_by(country)
 countCountries <- countCountries[!duplicated(countCountries),] 
 countCountries <- countCountries[order(countCountries$country),]
@@ -16,7 +15,6 @@ The provided data consists of $`r nrow(dataFinished)`$ different datasets from $
 In Figure \@ref(fig:continentCountdata) can be seen how many data sets are available per region.
 
 ```{r}
-#| echo = FALSE,
 #| warning = FALSE,
 #| label = "continentCountdata",
 #| fig.cap = "Count of Data from different regions",
@@ -36,8 +34,6 @@ ggplot(data = dataFinished, aes(x = region)) +
 In addition to the overview of datasets by region in figure \@ref(fig:continentCountdata), a world map in figure \@ref(fig:worldMap) has been created to illustrate the countries from which the data sets originate. The data sets from the industrialized countries were marked in blue and those from the emerging and developing countries in red.
 
 ```{r}
-#| echo = FALSE,
-#| warning = FALSE,
 #| label = "worldMap",
 #| fig.cap = "Industrialized and developing countries",
 #| out.width = "80%",
@@ -81,20 +77,11 @@ worldDD
 
 ## Exploratory Data Analysis
 
-First of all, we had to check, if there are missing values inside of the data set. Therefore we used the following code to proof this:
+First of all, we had to check, if there are missing values inside of the data set.
 
-
-```{r}
-#| echo = TRUE,
-#| message = TRUE
-summary(is.na(dataFinished))
-```
-
-
-As it can be seen, there were $`r sum(is.na(dataFinished$state))`$ missing values inside the column "state". 
+There were $`r sum(is.na(dataFinished$state))`$ missing values inside the column "state". 
 However, since the column has no bearing on our research question, we decided to disregard this column. With the city column we have a more meaningful basis to answer our question.
-To disregard this column, we cut it off. To do this, we used to following R code chunk. Because it is the second column, we can just delete this column.
-
+To disregard this column, we cut it off.
 
 ```{r}
 dataFinished <- dataFinished[-2]
@@ -112,10 +99,9 @@ dataFinished <- dataFinished[-9]
 
 To determine if outliers exist within the data set, we chose to draw a boxplot.
 
+-->TODO: Achsenbeschriftungen anpassen
 
 ```{r}
-#| echo = FALSE,
-#| warning = FALSE,
 #| label = "boxplot",
 #| fig.cap = "Boxplot of Data to identify outliers",
 #| out.width = "80%",
