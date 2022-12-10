@@ -39,9 +39,10 @@ After that, we can create a histogram from our model, see figure \@ref(fig:histo
 hist(residuals(model))
 ```
 
-From the histogram it can be recognized that the distribution can be considered normally distributed, therefore this condition is also fulfilled. Scaling is also given, since the cost of living index is on a scale.
+The histogram visualizes a distribution can be considered normally distributed, therefore this condition is also fulfilled. Scaling is also given, since the cost of living index is on a scale.
 
-The last condition that has been checked is that there must be no multicollinearity within the independent variables. To verify this, we created a correlation matrix. First, a subset from the data was generated in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
+The last checked condition is that there is no multicollinearity within the independent variables. To verify this, we created a correlation matrix. First, a subset from the data was generated in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
+
 
 \singlespacing
 
@@ -76,10 +77,20 @@ Since according to this method none of the values is \>10 the theory of multicol
 
 Now that all assumptions can be accepted, the evaluation of the model follows.
 
---> TODO: Output "schön" ausgeben
-
 ```{r}
-summary(model)
+
+export_summs(model, digits = 5, error_pos = "right", exp = TRUE,
+             error_format = "[{conf.low}, {conf.high}]",
+             model.names = "Dependent variable: Cost of living index",
+             coefs = c("Intercept" = "(Intercept)",
+                       "Rent" = "rent_index",
+                       "Groceries" = "groceries_index",
+                       "Restaurant Price" = "restaurant_price_index",
+                       "Local Purchasing Power" = "local_purchasing_power_index",
+                       "Development Country" = "development")) %>%
+  huxtable::set_caption('Multiple linear regression model for Cli')
+
+#summary(model)
 ```
 
 The model makes a significant explanatory contribution, as the p-value is well below 0.05, and we can proceed with the interpretation of the further results.

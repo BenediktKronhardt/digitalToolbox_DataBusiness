@@ -55,6 +55,19 @@ vif(model)
 
 #Alle Voraussetzungen durchgegangen, jetzt die eigentliche Auswertung/Interpretation:
 summary(model)
+library(jtools)
+
+export_summs(model, digits = 5, error_pos = "right", exp = TRUE,
+             error_format = "[{conf.low}, {conf.high}]",
+             model.names = "Dependent variable: Cost of living index",
+             coefs = c("Intercept" = "(Intercept)",
+                       "Rent" = "rent_index",
+                       "Groceries" = "groceries_index",
+                       "Restaurant Price" = "restaurant_price_index",
+                       "Local Purchasing Power" = "local_purchasing_power_index",
+                       "Development Country" = "development")) %>%
+  huxtable::set_caption('Multiple linear regression model for Cli')
+
 
 
 #F-Statistik: F(5,505)=4539; p<2,2e-16: Die Signifikanz (p-Value) sollte einen möglichst kleinen Wert haben (<0,05) Wenn das so ist, leistet das Regressionsmodell einen Erklärungsbeitrag.

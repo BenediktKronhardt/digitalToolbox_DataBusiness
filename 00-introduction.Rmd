@@ -25,6 +25,7 @@ library(gpairs)
 library(GGally)
 library(kableExtra)
 library(corrr)
+library(jtools)
 ```
 
 Subsequently, the data had to be read in. This could be initialized with the following command, after the data set was added as a csv file in the folder "02-data".
