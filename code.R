@@ -125,3 +125,42 @@ ggplot(data = dataFinished, aes(x = region)) +
 
 #Summary of the numerical variables in the dataset: (von appendix)
 datasummary_skim(dataFinished, allign="center")
+
+
+dataBoxplot <- dataFinished %>%
+  mutate(across(where(is.factor), as.numeric))
+
+col = c("Cli Plus Rent" = "cost_of_living_plus_rent_index",
+        "Cli" = "cli",
+        "Rent" = "rent_index",
+        "Groceries" = "groceries_index",
+        "Restaurant Price" = "restaurant_price_index",
+        "Local Purchasing Power" = "local_purchasing_power_index")
+        
+boxplot(dataBoxplot[,c("Cli Plus Rent" = "cost_of_living_plus_rent_index",
+                       "Cli" = "cli",
+                       "Rent" = "rent_index",
+                       "Groceries" = "groceries_index",
+                       "Restaurant Price" = "restaurant_price_index",
+                       "Local Purchasing Power" = "local_purchasing_power_index")],
+          names = c("Cli Plus Rent", "Cli", "Rent", "Groceries", "Restaurant Price", "Purchasing Power"))
+
+boxplot(dataBoxplot[,col("Cli Plus Rent" = "cost_of_living_plus_rent_index",
+                       "Cli" = "cli",
+                       "Rent" = "rent_index",
+                       "Groceries" = "groceries_index",
+                       "Restaurant Price" = "restaurant_price_index",
+                       "Local Purchasing Power" = "local_purchasing_power_index")])
+
+CliPlusRent = dataBoxplot$cost_of_living_plus_rent_index
+
+boxplot(CliPlusRent)
+#c('cost_of_living_plus_rent_index','cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')
+
+
+
+dataBoxplot <- dataFinished %>%
+  mutate(across(where(is.factor), as.numeric))
+
+boxplot(dataBoxplot[,c('cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')],names = c("Cli", "Rent", "Groceries", "Restaurant Price", "Purchasing Power"))
+

@@ -90,7 +90,6 @@ export_summs(model, digits = 5, error_pos = "right", exp = TRUE,
                        "Development Country" = "development")) %>%
   huxtable::set_caption('Multiple linear regression model for Cli')
 
-#summary(model)
 ```
 
 The model makes a significant explanatory contribution, as the p-value is well below 0.05, and we can proceed with the interpretation of the further results.

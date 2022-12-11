@@ -222,7 +222,7 @@ To analyze the available data, developing countries were combined with emerging 
 
 
 
-The provided data consists of $511$ different datasets from $110$ different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
+The provided data consists of $511$ different data sets from $110$ different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
 
 In Figure \@ref(fig:continentCountdata) can be seen how many data sets are available per region.
 
@@ -235,7 +235,7 @@ In Figure \@ref(fig:continentCountdata) can be seen how many data sets are avail
 \caption{Count of Data from different regions}(\#fig:continentCountdata)
 \end{figure}
 
-In addition to the overview of datasets by region in figure \@ref(fig:continentCountdata), a world map in figure \@ref(fig:worldMap) has been created to illustrate the countries from which the data sets originate. The data sets from the industrialized countries were marked in blue and those from the emerging and developing countries in red.
+In addition to the overview of data sets by region in figure \@ref(fig:continentCountdata), a world map in figure \@ref(fig:worldMap) has been created to illustrate the countries from which the data sets originate. The data sets from the industrialized countries were marked in blue and those from the emerging and developing countries in red.
 
 \begin{figure}[H]
 
@@ -248,35 +248,31 @@ In addition to the overview of datasets by region in figure \@ref(fig:continentC
 
 ## Exploratory Data Analysis
 
-First of all, we had to check, if there are missing values inside of the data set.
+First it had to be checked whether there are missing values inside of the data set.
 
 There were $383$ missing values inside the column "state". 
-However, since the column has no bearing on our research question, we decided to disregard this column. With the city column we have a more meaningful basis to answer our question.
-To disregard this column, we cut it off.
+However, since the column has no bearing on the research question, it was decided to disregard this column. With the city column there are a more meaningful basis to answer the question.
+To disregard this column, it was cut off.
+
+
+
+Also the leverage_model_1 and leverage_model_2 columns were cut off, since it was not work with these columns any further.
 
 
 
 
-We also truncated the leverage_model_1 and leverage_model_2 columns, since we did not work with these columns any further.
-
-
-
-
-
-To determine if outliers exist within the data set, we chose to draw a boxplot.
-
--->TODO: Achsenbeschriftungen anpassen
+To determine if outliers exist within the data set, a boxplot was drawn.
 
 \begin{figure}[H]
 
-{\centering \includegraphics[width=0.8\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/boxplot-1} 
+{\centering \includegraphics[width=1\linewidth]{group1_BenediktKronhardt_BoergeMeyer_files/figure-latex/boxplot-1} 
 
 }
 
 \caption{Boxplot of Data to identify outliers}(\#fig:boxplot)
 \end{figure}
 
-As can be seen from the figure \@ref(fig:boxplot), there are several outliers within the data set. In order not to distort the result, we decided to keep these outliers and to continue working with them.
+As can be seen from the figure \@ref(fig:boxplot), there are several outliers within the data set. In order not to distort the result, it was decided to keep these outliers and to continue working with them.
 
 \clearpage
 
