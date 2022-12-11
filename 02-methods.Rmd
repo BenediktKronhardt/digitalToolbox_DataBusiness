@@ -105,7 +105,7 @@ To determine if outliers exist within the data set, a boxplot was drawn.
 dataBoxplot <- dataFinished %>%
   mutate(across(where(is.factor), as.numeric))
   
-boxplot(dataBoxplot[,c('cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')],names = c("Cli", "Rent", "Groceries", "Restaurant Price", "Purchasing Power"))
+boxplot(dataBoxplot[,c('cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')],names = c("Cli", "Rent", "Groceries", "Restaurant Price", "Purchasing Power"),cex.axis = 0.6)
 ```
 
 As can be seen from the figure \@ref(fig:boxplot), there are several outliers within the data set. In order not to distort the result, it was decided to keep these outliers and to continue working with them.

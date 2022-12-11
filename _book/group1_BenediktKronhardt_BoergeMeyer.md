@@ -75,7 +75,7 @@ lof: true
 # Page break after the list of figures? Has no effect if documentclass is "book" and book is set to true:
 lof-own-page: false
 # Should a list of tables be included in the document?
-lot: false
+lot: true
 # Page break after the list of tables? Has no effect if documentclass is "book" and book is set to true:
 lot-own-page: true
 # Should the automatic word count be added to the titlepage information?

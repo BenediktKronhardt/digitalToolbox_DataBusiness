@@ -162,5 +162,5 @@ boxplot(CliPlusRent)
 dataBoxplot <- dataFinished %>%
   mutate(across(where(is.factor), as.numeric))
 
-boxplot(dataBoxplot[,c('cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')],names = c("Cli", "Rent", "Groceries", "Restaurant Price", "Purchasing Power"))
+boxplot(dataBoxplot[,c('cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')],names = c("Cli", "Rent", "Groceries", "Restaurant Price", "Purchasing Power"),cex.axis = 0.8)
 
