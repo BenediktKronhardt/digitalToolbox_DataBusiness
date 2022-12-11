@@ -1,0 +1,60 @@
+@Book{Pollak1989,
+  author    = {Robert A. Pollak},
+  publisher = {Oxford University Press},
+  title     = {The Theory of the Cost-Of-Living Index},
+  year      = {1989},
+  isbn      = {9780195058703},
+  pages     = {207},
+}
+
+@Electronic{continents2,
+  author    = {Kaggle},
+  month     = dec,
+  title     = {Country Mapping - ISO, Continent, Region},
+  url       = {https://www.kaggle.com/datasets/andradaolteanu/country-mapping-iso-continent-region},
+  year      = {2019},
+  timestamp = {2022-11-30},
+}
+
+@Book{ddcountries,
+  publisher = {United Nations},
+  title     = {World economic situation and prospects},
+  year      = {2014},
+  isbn      = {9789210541770},
+}
+
+@Electronic{caroline,
+  author = {Caroline Banton},
+  month  = mar,
+  title  = {Cost of Living: Definition, How to Calculate, Index, and Example},
+  url    = {https://www.investopedia.com/terms/c/cost-of-living.asp},
+  year   = {2021},
+}
+
+@Electronic{bpd,
+  author       = {BPB},
+  month        = jun,
+  organization = {Bundeszentrale für politische Bildung},
+  title        = {Industrieländer},
+  url          = {https://www.bpb.de/kurz-knapp/lexika/lexikon-der-wirtschaft/19720/industrielaender/},
+  year         = {2021},
+  timestamp    = {2022-11-30},
+}
+
+@Electronic{bmz,
+  author       = {BMZ},
+  organization = {Bundesamt für wirtschaftliche Zusammenarbeit und Entwicklung},
+  title        = {Schwellenland},
+  url          = {https://www.bmz.de/de/service/lexikon/schwellenland-14810},
+  timestamp    = {2022-11-30},
+}
+
+@Electronic{bmzentwicklung,
+  author       = {BMZ},
+  organization = {Bundesamt für wirtschaftliche Zusammenarbeit und Entwicklung},
+  title        = {Entwicklungsland},
+  url          = {https://www.bmz.de/de/service/lexikon/entwicklungsland-14308},
+  timestamp    = {2022-11-30},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

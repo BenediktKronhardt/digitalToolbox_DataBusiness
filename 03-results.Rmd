@@ -1,0 +1,99 @@
+# Results - Multiple linear regression {#results}
+
+To determine if there was a significant difference between developing and developed countries, multiple linear regression was performed. The purpose is to determine whether or not classification as a developing country has a significant impact on the cost of living index.
+
+Within multiple linear regression, the dependent variable (y) is the cost of living index. The independent variables (x) are the rent index, the groceries index, the restaurant price index, the local purchasing power index as well as the development status.
+
+
+In order to perform a multiple linear regression, some conditions have to be fulfilled, which we will check in the following.
+
+First, there must be a linear relationship between the x variables and the y variable. Also, the y variable must be metrically scaled, which is given.
+
+Third, the residuals should be approximately normally distributed. We proved this graphically with the help of a histogram.
+
+First, we need to set up our model as in equation \@ref(eq:lm1).
+
+```{=tex}
+\begin{align} 
+  CLI_{\text{\,i}} &= \upalpha + \upbeta_{1} \times Rent~Index_{\text{\,i}} + \upbeta_{2} \times Groceries~Index_{\text{\,i}} + \upbeta_{3} \times Restaurant~Price~Index_{\text{\,i}} + &&\notag\\
+  \phantom{CLI_{\text{\,i}}} & \phantom{{} =  ^l} \upbeta_{4} \times Local~Purchasing~Power~Index_{\text{\,i}} +  \upbeta_{5} \times Development_{\text{\,i}} + \upepsilon_{\text{\,i}} &&\notag\\
+\upepsilon_{i} &\sim N(0, \upsigma^{2})
+  (\#eq:lm1)
+\end{align}
+```
+```{r}
+model <- lm(cli ~ rent_index + groceries_index + restaurant_price_index 
+            + local_purchasing_power_index + development, data = dataFinished)
+```
+
+After that, we can create a histogram from our model, see figure \@ref(fig:histogramModel).
+
+```{r}
+#| label = "histogramModel",
+#| fig.cap = "Histogram of the multiple linear regression model",
+#| out.width = "80%",
+#| fig.asp = 0.75,
+#| fig.align = "center",
+#| fig.pos = "H",
+
+hist(residuals(model))
+```
+
+The histogram visualizes a distribution can be considered normally distributed, therefore this condition is also fulfilled. Scaling is also given, since the cost of living index is on a scale.
+
+The last checked condition is that there is no multicollinearity within the independent variables. To verify this, we created a correlation matrix. First, a subset from the data was generated in which the variables to be tested are stored. Then we created the correlation matrix from this subset and worked with the pearson method.
+
+
+\singlespacing
+
+```{r}
+#| label = "correlationMatrix",
+
+subset_cor <- subset(dataFinished, select = c(rent_index, 
+                                              groceries_index, 
+                                              restaurant_price_index, 
+                                              local_purchasing_power_index, 
+                                              development))
+names(subset_cor) <- c("RI", "GI", "RPI", "LPPI", "Dev")
+subset_cor %>% 
+  correlate() %>% 
+  shave() %>% 
+  fashion() %>% 
+  kbl(booktabs = TRUE, digits = 2,
+      col.names = c("", "RI", "GI", "RPI", "LPPI", "Dev")) %>% 
+  kable_styling(latex_options = c("HOLD_position"), 
+                full_width = TRUE)
+```
+
+\doublespacing
+
+Since the correlation between restaurant price index and groceries index is $`r round(cor(x=dataFinished$restaurant_price_index, y  = dataFinished$groceries_index, method="pearson"), 2)`$ \> 0.8, this may indicate that there is multicollinearity. To confirm this, an another method was utilized to test for multicollinearity, the method of Variance Inflation Factor values.
+
+```{r}
+vif(model)
+```
+
+Since according to this method none of the values is \>10 the theory of multicollinearity is therefore rejected.
+
+Now that all assumptions can be accepted, the evaluation of the model follows.
+
+```{r}
+
+export_summs(model, digits = 5, error_pos = "right", exp = TRUE,
+             error_format = "[{conf.low}, {conf.high}]",
+             model.names = "Dependent variable: Cost of living index",
+             coefs = c("Intercept" = "(Intercept)",
+                       "Rent" = "rent_index",
+                       "Groceries" = "groceries_index",
+                       "Restaurant Price" = "restaurant_price_index",
+                       "Local Purchasing Power" = "local_purchasing_power_index",
+                       "Development Country" = "development")) %>%
+  huxtable::set_caption('Multiple linear regression model for Cli')
+
+```
+
+The model makes a significant explanatory contribution, as the p-value is well below 0.05, and we can proceed with the interpretation of the further results.
+
+As indicated by the p-values, all variables except development classification have a significant impact on the cost of living index.
+
+\clearpage

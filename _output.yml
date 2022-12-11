@@ -9,6 +9,6 @@ bookdown::pdf_book:
   number_sections: yes
   # citation_package: biblatex
   citation_package: default
-  pandoc_args: [ "--csl", "./00-template/chicago-author-date.csl" ]
+  pandoc_args: [ "--csl", "./00-template/chicago-fullnote-bibliography-16th-edition.csl" ]
   keep_tex: yes
   keep_md: yes

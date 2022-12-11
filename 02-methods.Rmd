@@ -1,0 +1,113 @@
+# Methods
+
+## Data Description
+
+```{r}
+countCountries <- dataFinished[,3:3] %>% group_by(country)
+countCountries <- countCountries[!duplicated(countCountries),] 
+countCountries <- countCountries[order(countCountries$country),]
+```
+
+The provided data consists of $`r nrow(dataFinished)`$ different data sets from $`r nrow(countCountries)`$ different states. The data was set up into City, State, Country, Cost of Living Plus Rent Index, CLI, Rent Index, Groceries Index, Restaurant Index, Local Purchasing Power Index, Leverage Model 1 and Leverage Model 2 attributes.
+
+In Figure \@ref(fig:continentCountdata) can be seen how many data sets are available per region.
+
+```{r}
+#| label = "continentCountdata",
+#| fig.cap = "Count of Data from different regions",
+#| out.width = "80%",
+#| fig.asp = 0.75,
+#| fig.align = "center",
+#| fig.pos = "H",
+
+ggplot(data = dataFinished, aes(x = region)) +
+  geom_bar() +
+  ggtitle("Region - Count data") +
+  xlab("Regions") +
+  ylab("Number of Data") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+```
+
+In addition to the overview of data sets by region in figure \@ref(fig:continentCountdata), a world map in figure \@ref(fig:worldMap) has been created to illustrate the countries from which the data sets originate. The data sets from the industrialized countries were marked in blue and those from the emerging and developing countries in red.
+
+```{r}
+#| label = "worldMap",
+#| fig.cap = "Industrialized and developing countries",
+#| out.width = "80%",
+#| fig.asp = 0.75,
+#| fig.align = "center",
+#| fig.pos = "H",
+
+
+MapData <- dataFinished
+#selecting attributes (country, development)
+MapData <- MapData %>% select(3,13)
+colnames(MapData)[1] <- "region"
+MapData <- distinct(MapData)
+#merge data
+world <- map_data("world")
+MapData$region[MapData$region == "United States"] <- "USA"
+MapData$region[MapData$region == "United Kingdom"] <- "UK"
+MapData <- left_join(MapData, world, by="region")
+
+plain <- theme(
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  panel.border = element_blank(),
+  panel.grid = element_blank(),
+  panel.background = element_rect(fill = "white"),
+  plot.title = element_text(hjust = 0.5)
+)
+worldDD <- ggplot(data = MapData, mapping = aes(x = long, y = lat, group = group)) +
+  borders("world", fill="grey90",colour="grey") + 
+  coord_fixed(1.3) +
+  geom_polygon(aes(fill = development)) +
+  scale_fill_distiller(palette ="RdBu", direction = 1) +
+  guides(fill = "none") +
+  plain +
+  labs(title = "", x = "Red = Developing Countries, Blue = Industrialized Countries", y = "")
+
+worldDD
+
+```
+
+## Exploratory Data Analysis
+
+First it had to be checked whether there are missing values inside of the data set.
+
+There were $`r sum(is.na(dataFinished$state))`$ missing values inside the column "state". 
+However, since the column has no bearing on the research question, it was decided to disregard this column. With the city column there are a more meaningful basis to answer the question.
+To disregard this column, it was cut off.
+
+```{r}
+dataFinished <- dataFinished[-2]
+```
+
+Also the leverage_model_1 and leverage_model_2 columns were cut off, since it was not work with these columns any further.
+
+```{r}
+dataFinished <- dataFinished[-9]
+dataFinished <- dataFinished[-9]
+```
+
+
+To determine if outliers exist within the data set, a boxplot was drawn.
+
+```{r}
+#| label = "boxplot",
+#| fig.cap = "Boxplot of Data to identify outliers",
+#| out.width = "100%",
+#| fig.asp = 0.75,
+#| fig.align = "center",
+#| fig.pos = "H",
+
+dataBoxplot <- dataFinished %>%
+  mutate(across(where(is.factor), as.numeric))
+  
+boxplot(dataBoxplot[,c('cli','rent_index','groceries_index','restaurant_price_index','local_purchasing_power_index')],names = c("Cli", "Rent", "Groceries", "Restaurant Price", "Purchasing Power"),cex.axis = 0.6)
+```
+
+As can be seen from the figure \@ref(fig:boxplot), there are several outliers within the data set. In order not to distort the result, it was decided to keep these outliers and to continue working with them.
+
+\clearpage

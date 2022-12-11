@@ -1,8 +1,15 @@
 book_filename: "group1_BenediktKronhardt_BoergeMeyer"
-
 new_session: false
 before_chapter_script: _common.R
 delete_merged_file: true
 language:
   ui:
     chapter_name: "Chapter "
+    rmd_files: ["index.Rmd",
+      "00-introduction.Rmd",
+      "01-theoretical-background.Rmd",
+      "02-methods.Rmd",
+      "03-results.Rmd",
+      "04-discussion.Rmd",
+      "05-references.Rmd",
+      "06-declaration.Rmd"]
