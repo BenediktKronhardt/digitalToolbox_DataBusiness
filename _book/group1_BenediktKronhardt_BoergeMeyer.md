@@ -137,32 +137,28 @@ link-citations: yes
 The standard of living became more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
 
 ## Task description
-Our task was to analyze a data set and write a report about it using R, RStudio, RMarkdown and the procedures of literate programming to put together a PDF-manuscript.
+The objective was to analyze a data set and write a report about it using R, RStudio, RMarkdown and the procedures of literate programming to put together a PDF-manuscript.
 For this paper, a "cost of living" data set was received and analyzed in order to determine whether the classification as a developing or industrialized country has a significant impact on the Cost of Living Index.
 
 ## Structure
-Our document is divided into five chapters. In the following, this chapter explains how the data was processed.The introduction is followed by an explanation of the Cost of Living Index and categorization as developed, emerging and developing countries,before in the methods section the data set is statistically described, including information on the variables’ distribution, missing values,
+The document is divided into five chapters. In the following, this chapter explains how the data was processed. The introduction is followed by an explanation of the Cost of Living Index and categorization as developed, emerging and developing countries, before in the methods section the data set is statistically described, including information on the variables’ distribution, missing values,
 categories and the relationships between the variables.
-The results section comprise all necessary calculations, which are then discussed in connection with the research question in the following section ("Discussion").
+The results section comprise all necessary calculations, which are then discussed in connection with the research question in the following section.
 
 ## Setup
-After the required libraries, which will be worked with in the following, were installed, the libraries still had to be imported in order to be able to use them.
 
 
 
-Subsequently, the data had to be read in. This could be initialized with the following command, after the data set was added as a csv file in the folder "02-data".
-To be able to work better with the names of the columns and the dataset in general, the command "janitor::clean_names" was executed.  With this, for example, the spaces were removed and the names were all written in small letters.
+Subsequently, the data had to be read in.
 
 
 
-To make it easier to split the data by region, we imported a csv file that shows the names of the countries in this world and their corresponding regions.
-
-First we had to import the data set, which we named "continents". This data set is from the website "kaggle", named "Country Mapping - ISO, Continent, Region". ^[@continents2]
-
+To make it easier to split the data by region, a data set was imported that shows the names of the countries in this world and their corresponding regions.
+This data set was received from the website "kaggle", named "Country Mapping - ISO, Continent, Region". ^[@continents2]
 
 
-To be able to do a join with the raw data, we had to rename the column "name" to "country". After that, a left join could be performed on the renamed column. Since we only needed the column "region", a select for this one column was performed within the join.
 
+To be able to do a join with the raw data, the column "name" had to be renamed to "country". After that, a left join could be performed on the renamed column. 
 
 
 Now it was possible to check if a country was not assigned to a region. 
@@ -170,12 +166,11 @@ Since the country Kosovo could not be assigned to a region, this had to be done 
 
 
 
-To assign the different countries in our data set to either a developing or an industrialized country, we also imported a new csv file, which we named "dd". 
+To assign the different countries in the data set to either a developing or an industrialized country, another data set was imported.
 We created this file ourselves, based on data from @ddcountries.
 
 
 
-To format the category as a double value, we executed the following commands.
 
 
 
@@ -208,7 +203,7 @@ A country that is in the process of becoming an industrialized country is called
 
 The third category is developing countries, which are associated with poor food supply, high poverty, poor health care and educational opportunities. In association with the characteristics, such countries have an overall low standard of living and a preponderance of labor in agriculture and external economic difficulties.[@bmzentwicklung]
 
-To analyze the available data, developing countries were combined with emerging economies and contrasted with developed countries.
+To analyze the available data, developing were combined with emerging countries and contrasted with developed countries.
 
 \clearpage
 
@@ -304,7 +299,7 @@ First, we need to set up our model as in equation \@ref(eq:lm1).
 ```
 
 
-After that, we can create a histogram from our model, see figure \@ref(fig:histogramModel).
+After that, a histogram can be created, see figure \@ref(fig:histogramModel).
 
 \begin{figure}[H]
 
@@ -312,7 +307,7 @@ After that, we can create a histogram from our model, see figure \@ref(fig:histo
 
 }
 
-\caption{Histogram of the multiple linear regression model}(\#fig:histogramModel)
+\caption{Histogram of the residuals from the multiple linear regression model}(\#fig:histogramModel)
 \end{figure}
 
 The histogram visualizes a distribution can be considered normally distributed, therefore this condition is also fulfilled. Scaling is also given, since the cost of living index is on a scale.
@@ -338,6 +333,8 @@ Dev & .47 & .60 & .68 & .64 & \\
 \doublespacing
 
 Since the correlation between restaurant price index and groceries index is $0.85$ \> 0.8, this may indicate that there is multicollinearity. To confirm this, an another method was utilized to test for multicollinearity, the method of Variance Inflation Factor values.
+
+\clearpage
 
 
 ```
@@ -469,7 +466,7 @@ As indicated by the p-values, all variables except development classification ha
 
 ## Critical assessment of the data {#critical-assessment}
 
-The objective of this study was to determine to what degree the status as an industrialized or developing country has an influence on the Cost of Living Index.
+The objective of this study was to determine if the status as an industrialized or developing country has an influence on the Cost of Living Index.
 
 The critical review allows first of all to scrutinize the available data. Most of the data sets that were used as a basis for this work did not include all existing countries. In addition, it must be mentioned that a large number of African countries in particular are not included in the initial data. This could have biased the results of the work (see figure \@ref(fig:worldMap)).
 
