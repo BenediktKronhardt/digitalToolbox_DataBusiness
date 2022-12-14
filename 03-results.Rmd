@@ -26,11 +26,11 @@ model <- lm(cli ~ rent_index + groceries_index + restaurant_price_index
             + local_purchasing_power_index + development, data = dataFinished)
 ```
 
-After that, we can create a histogram from our model, see figure \@ref(fig:histogramModel).
+After that, a histogram can be created, see figure \@ref(fig:histogramModel).
 
 ```{r}
 #| label = "histogramModel",
-#| fig.cap = "Histogram of the multiple linear regression model",
+#| fig.cap = "Histogram of the residuals from the multiple linear regression model",
 #| out.width = "80%",
 #| fig.asp = 0.75,
 #| fig.align = "center",
@@ -68,6 +68,8 @@ subset_cor %>%
 \doublespacing
 
 Since the correlation between restaurant price index and groceries index is $`r round(cor(x=dataFinished$restaurant_price_index, y  = dataFinished$groceries_index, method="pearson"), 2)`$ \> 0.8, this may indicate that there is multicollinearity. To confirm this, an another method was utilized to test for multicollinearity, the method of Variance Inflation Factor values.
+
+\clearpage
 
 ```{r}
 vif(model)

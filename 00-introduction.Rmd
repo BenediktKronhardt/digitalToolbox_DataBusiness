@@ -2,16 +2,15 @@
 The standard of living became more important for the world population. But every standard of living comes at a price. How high the standard of living is in a country can be analyzed and compared between countries with the help of the cost of living index.
 
 ## Task description
-Our task was to analyze a data set and write a report about it using R, RStudio, RMarkdown and the procedures of literate programming to put together a PDF-manuscript.
+The objective was to analyze a data set and write a report about it using R, RStudio, RMarkdown and the procedures of literate programming to put together a PDF-manuscript.
 For this paper, a "cost of living" data set was received and analyzed in order to determine whether the classification as a developing or industrialized country has a significant impact on the Cost of Living Index.
 
 ## Structure
-Our document is divided into five chapters. In the following, this chapter explains how the data was processed.The introduction is followed by an explanation of the Cost of Living Index and categorization as developed, emerging and developing countries,before in the methods section the data set is statistically described, including information on the variables’ distribution, missing values,
+The document is divided into five chapters. In the following, this chapter explains how the data was processed. The introduction is followed by an explanation of the Cost of Living Index and categorization as developed, emerging and developing countries, before in the methods section the data set is statistically described, including information on the variables’ distribution, missing values,
 categories and the relationships between the variables.
-The results section comprise all necessary calculations, which are then discussed in connection with the research question in the following section ("Discussion").
+The results section comprise all necessary calculations, which are then discussed in connection with the research question in the following section.
 
 ## Setup
-After the required libraries, which will be worked with in the following, were installed, the libraries still had to be imported in order to be able to use them.
 
 ```{r}
 #| message = FALSE,
@@ -28,8 +27,7 @@ library(corrr)
 library(jtools)
 ```
 
-Subsequently, the data had to be read in. This could be initialized with the following command, after the data set was added as a csv file in the folder "02-data".
-To be able to work better with the names of the columns and the dataset in general, the command "janitor::clean_names" was executed.  With this, for example, the spaces were removed and the names were all written in small letters.
+Subsequently, the data had to be read in.
 
 ```{r}
 #| message = FALSE,
@@ -40,9 +38,8 @@ costOfLiving <- read_delim("02-data/cost-of-living-2017.csv",
 costOfLiving <- janitor::clean_names(costOfLiving)
 ```
 
-To make it easier to split the data by region, we imported a csv file that shows the names of the countries in this world and their corresponding regions.
-
-First we had to import the data set, which we named "continents". This data set is from the website "kaggle", named "Country Mapping - ISO, Continent, Region". ^[@continents2]
+To make it easier to split the data by region, a data set was imported that shows the names of the countries in this world and their corresponding regions.
+This data set was received from the website "kaggle", named "Country Mapping - ISO, Continent, Region". ^[@continents2]
 
 ```{r}
 #| message = FALSE,
@@ -52,8 +49,7 @@ continents <- read_csv("02-data/continents2.csv")
 continents <- janitor::clean_names(continents)
 ```
 
-To be able to do a join with the raw data, we had to rename the column "name" to "country". After that, a left join could be performed on the renamed column. Since we only needed the column "region", a select for this one column was performed within the join.
-
+To be able to do a join with the raw data, the column "name" had to be renamed to "country". After that, a left join could be performed on the renamed column. 
 ```{r}
 #| message = FALSE,
 #| warning = FALSE
@@ -71,7 +67,7 @@ Since the country Kosovo could not be assigned to a region, this had to be done 
 costOfLivingAndContinents[486, 12] <- "Europe"
 ```
 
-To assign the different countries in our data set to either a developing or an industrialized country, we also imported a new csv file, which we named "dd". 
+To assign the different countries in the data set to either a developing or an industrialized country, another data set was imported.
 We created this file ourselves, based on data from @ddcountries.
 
 ```{r}
@@ -84,7 +80,6 @@ dd <- read_delim("02-data/developed_and_developing_countries.csv",
 dd <- janitor::clean_names(dd)
 ```
 
-To format the category as a double value, we executed the following commands.
 
 ```{r}
 #| message = FALSE,
